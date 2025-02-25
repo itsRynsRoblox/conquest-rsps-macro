@@ -12783,3 +12783,179 @@ Configuration settings loaded successfully 00:00
 ==Ryn's Conquest Macro v1.1==
   Start Time: [12h.34m.52s]
 Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.39m.05s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.39m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.41m.27s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.44m.22s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.45m.44s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.46m.38s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.47m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.48m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.50m.35s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.51m.02s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.52m.47s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.55m.24s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.58m.20s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.58m.36s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.58m.51s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.59m.01s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [12h.59m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.00m.25s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.00m.38s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.05m.26s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.08m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.08m.36s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.08m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.10m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.11m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.11m.43s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.12m.31s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.12m.46s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.13m.10s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.13m.42s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.13m.54s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.14m.19s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.15m.06s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.15m.14s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.15m.26s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.16m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.16m.27s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.16m.35s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.16m.44s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.17m.02s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.17m.11s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.17m.19s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.17m.26s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.1==
+  Start Time: [13h.24m.32s]
+Configuration settings loaded successfully 00:00

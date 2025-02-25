@@ -10,65 +10,41 @@ InitializeMacro() {
     StartSelectedMode()
 }
 
-CheckForXp() {
-    ; Check for lobby text
-    if (ok := FindText(&X, &Y, 322, 195, 505, 276, 0, 0, Spawn)) {
-        return true
-    }
-    return false
-}
-
-
-UpgradeUnits() {
-    if CheckForXp() {
-        AddToLog("Stage ended during upgrades, proceeding to results")
-        StartSelectedMode()
-        return
-    }
-}
-
 FarmBoss() {
     global BossDropDown
-    
-    ; Get current map and act
     currentBoss := BossDropDown.Text
-
     AddToLog("Starting " currentBoss)
-
     RestartStage()
 }
 
 FarmMonster() {
     global MonsterDropDown
-    
-    ; Get current map and act
-    currentMonster := BossDropDown.Text
-
+    currentMonster := MonsterDropDown.Text
     AddToLog("Starting " currentMonster)
-
     RestartStage()
 }
 
 MinigameMode() {
     global RaidDropdown
-    ; Get current map and act
     currentMinigame := RaidDropdown.Text
-    AddToLog("Starting " currentMinigame)
+    AddToLog("Starting " currentMinigame " minigame")
     HandleMinigame()
 }
 
 
 Fight() {
-    global PrayerPosition, ProtectionPrayer, BuffPrayer, LoadoutPosition
+    global PrayerPosition, ProtectionPrayer, BuffPrayer, LoadoutPosition, FoodPosition
     global lastBankedTime
     currentPrayerSlot := PrayerPosition.Text
     currentPrayer := ProtectionPrayer.Text
     currentBuffPrayer := BuffPrayer.Text
+    currentFoodSlot := FoodPosition.Text
     currentLoadout := LoadoutPosition.Text
     timeElapsed := A_TickCount - lastBankedTime
     while !(ok := CheckForHealthBarNoFindText()) {
-        AFKDetection()
+        CheckForAFKDetection()
         CheckForDisconnect()
+        RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
         Sleep(1500)
 
@@ -92,60 +68,27 @@ Fight() {
     }
 }
 
-Fight1() {
-    global PrayerPosition
+StartMoonBossFight() {
+    global PrayerPosition, FoodPosition
     currentPrayerSlot := PrayerPosition.Text
-    while !(ok := CheckForHealthBar()) {
+    currentFoodSlot := FoodPosition.Text
+    while !(ok := CheckForHealthBarNoFindText()) {
         while !(ok := FindText(&X, &Y, 720-150000, 88-150000, 720+150000, 88+150000, 0, 0, BlueMoonMinimap)) {
             Sleep 2500
         }
-        AFKDetection()
+        CheckForAFKDetection()
+        RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
-        FightBlueMoon()
+        FightMoonBoss()
     }
 }
 
-FightBlueMoon() {
-    ; Kill Minion #1
-    FixClick(412, 392)
-    WaitForNoHealthBar()
-
-    ; Kill Minion #2
-    FixClick(254, 240)
-    WaitForNoHealthBar()
-
-    ; Kill Minion #3
-    FixClick(570, 242)
-    WaitForNoHealthBar()
-
-    ; Attack Boss
-    FixClick(417, 233)
-    WaitForNoHealthBar()
-}
-
-WaitForNoHealthBar() {
-    Sleep 3500
-    Loop {
-        if !(ok := FindText(&X, &Y, 6, 66, 130, 89, 0, 0, HealthBarNew)) {
-            Break  ; Exit loop when HP bar is gone
-        }
-        Sleep 1500  ; Check every 1.5 seconds
-    }
-}
-
-AFKDetection() {
-    afkChecks := Map(
-        "Cooking", AFKCooking,
-        "Smithing", AFKSmithing,
-        "Farming", AFKFarming
-    )
-    
-    for name, afkText in afkChecks {
-        if FindText(&X, &Y, 0, 465, 513, 632, 0, 0, afkText) {
-            AddToLog("Found " name " AFK Check")
-            FixClick(X, Y)  ; Click immediately after detecting the AFK check
-            return true
-        }
+FightMoonBoss() {
+    ; Kill Minions and Boss
+    MinionCoords := [[412, 392], [254, 240], [570, 242], [417, 233]]  ; Coordinates for the minions and boss
+    for index, coords in MinionCoords {
+        FixClick(coords[1], coords[2])
+        WaitForNoHealthBar()
     }
 }
 
@@ -158,7 +101,7 @@ RestartStage() {
             switch ModeDropdown.Text {
                 case "Bosses":
                     if (BossDropDown.Text = "Blue Moon") {
-                        Fight1()
+                        StartMoonBossFight()
                     } else {
                         Fight()
                     }
@@ -196,19 +139,6 @@ CheckForDisconnect() {
     }
 }
 
-CheckInCombat() {
-    loop {
-        Sleep(200)
-        ; Check for health bar
-        if (ok := FindText(&X, &Y, 0, 34, 138, 98, 0, 0, HealthBar)) {
-            AddToLog("Found Health Bar - In Combat")
-            Sleep(1000)
-            break
-        }
-        RestartStage()
-    }
-}
-
 StartSelectedMode() {
     global lastBankedTime
 
@@ -218,22 +148,11 @@ StartSelectedMode() {
         FarmBoss()
     }
     if (ModeDropdown.Text = "Monsters") {
-        FarmBoss()
+        FarmMonster()
     }
     if (ModeDropdown.Text = "Minigames") {
         MinigameMode()
     }
-}
-
-FormatStageTime(ms) {
-    seconds := Floor(ms / 1000)
-    minutes := Floor(seconds / 60)
-    hours := Floor(minutes / 60)
-    
-    minutes := Mod(minutes, 60)
-    seconds := Mod(seconds, 60)
-    
-    return Format("{:02}:{:02}:{:02}", hours, minutes, seconds)
 }
 
 ValidateMode() {
@@ -246,92 +165,6 @@ ValidateMode() {
         return false
     }
     return true
-}
-
-GetNavKeys() {
-    return StrSplit(FileExist("Settings\UINavigation.txt") ? FileRead("Settings\UINavigation.txt", "UTF-8") : "\,#,}", ",")
-}
-
-GenerateRandomPoints() {
-    points := []
-    gridSize := 40  ; Minimum spacing between units
-    
-    ; Center point coordinates
-    centerX := 408
-    centerY := 320
-    
-    ; Define placement area boundaries (adjust these as needed)
-    minX := centerX - 180  ; Left boundary
-    maxX := centerX + 180  ; Right boundary
-    minY := centerY - 140  ; Top boundary
-    maxY := centerY + 140  ; Bottom boundary
-    
-    ; Generate 40 random points
-    Loop 40 {
-        ; Generate random coordinates
-        x := Random(minX, maxX)
-        y := Random(minY, maxY)
-        
-        ; Check if point is too close to existing points
-        tooClose := false
-        for existingPoint in points {
-            ; Calculate distance to existing point
-            distance := Sqrt((x - existingPoint.x)**2 + (y - existingPoint.y)**2)
-            if (distance < gridSize) {
-                tooClose := true
-                break
-            }
-        }
-        
-        ; If point is not too close to others, add it
-        if (!tooClose)
-            points.Push({x: x, y: y})
-    }
-    
-    ; Always add center point last (so it's used last)
-    points.Push({x: centerX, y: centerY})
-    
-    return points
-}
-
-GenerateGridPoints() {
-    points := []
-    gridSize := 40  ; Space between points
-    squaresPerSide := 7  ; How many points per row/column (odd number recommended)
-    
-    ; Center point coordinates
-    centerX := 408
-    centerY := 320
-    
-    ; Calculate starting position for top-left point of the grid
-    startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
-    startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
-    
-    ; Generate grid points row by row
-    Loop squaresPerSide {
-        currentRow := A_Index
-        y := startY + ((currentRow - 1) * gridSize)
-        
-        ; Generate each point in the current row
-        Loop squaresPerSide {
-            x := startX + ((A_Index - 1) * gridSize)
-            points.Push({x: x, y: y})
-        }
-    }
-    
-    return points
-}
-
-ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
-    while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || 
-           textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
-        if (offsetX != 0 || offsetY != 0) {
-            FixClick(X + offsetX, Y + offsetY)  
-        } else {
-            FixClick(x, y) 
-        }
-        Sleep(1000)
-    }
 }
 
 BankTimer() {
@@ -348,14 +181,6 @@ BankTimer() {
     } else {
         return 60000
     }
-}
-
-CheckForInactive() {
-    ; Check for lobby text
-    if (ok := FindText(&X, &Y, 391, 31, 446, 54, 0, 0, InactiveWave)) {
-        return true
-    }
-    return false
 }
 
 
@@ -398,12 +223,12 @@ HandleMinigame() {
                 Sleep(1500)
             } else {
                 AddToLog("🔄 Transitioning between waves, wave not yet complete...")
-                AFKDetection()
+                CheckForAFKDetection()
                 CheckForDisconnect()
                 RestorePrayerIfNeeded(currentPrayerSlot)
             }
         } else {
-            AFKDetection()
+            CheckForAFKDetection()
             CheckForDisconnect()
             RestorePrayerIfNeeded(currentPrayerSlot)
         }

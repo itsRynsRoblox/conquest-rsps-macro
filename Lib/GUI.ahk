@@ -61,16 +61,16 @@ setupOutputFile()
 aaMainUI.BackColor := uiTheme[2]
 global Webhookdiverter := aaMainUI.Add("Edit", "x0 y0 w1 h1 +Hidden", "") ; diversion
 uiBorders.Push(aaMainUI.Add("Text", "x0 y0 w1364 h1 +Background" uiTheme[3]))  ;Top line
-uiBorders.Push(aaMainUI.Add("Text", "x0 y0 w1 h697 +Background" uiTheme[3]))   ;Left line
+uiBorders.Push(aaMainUI.Add("Text", "x0 y0 w1 h707 +Background" uiTheme[3]))   ;Left line
 uiBorders.Push(aaMainUI.Add("Text", "x1363 y0 w1 h630 +Background" uiTheme[3])) ;Right line
-uiBorders.Push(aaMainUI.Add("Text", "x1363 y0 w1 h697 +Background" uiTheme[3])) ;Second Right line
+uiBorders.Push(aaMainUI.Add("Text", "x1363 y0 w1 h707 +Background" uiTheme[3])) ;Second Right line
 uiBackgrounds.Push(aaMainUI.Add("Text", "x3 y3 w1360 h27 +Background" uiTheme[2])) ;Title Top
 uiBorders.Push(aaMainUI.Add("Text", "x0 y30 w1363 h1 +Background" uiTheme[3])) ;Title bottom
 uiBorders.Push(aaMainUI.Add("Text", "x803 y100 w560 h1 +Background" uiTheme[3])) ;Mode bottom
 uiBorders.Push(aaMainUI.Add("Text", "x803 y150 w560 h1 +Background" uiTheme[3])) ;Process bottom
 uiBorders.Push(aaMainUI.Add("Text", "x803 y550 w560 h1 +Background" uiTheme[3])) ;Process bottom
-uiBorders.Push(aaMainUI.Add("Text", "x802 y30 w1 h667 +Background" uiTheme[3])) ;Game Right
-uiBorders.Push(aaMainUI.Add("Text", "x0 y697 w1364 h1 +Background" uiTheme[3], "")) ;Game second bottom
+uiBorders.Push(aaMainUI.Add("Text", "x802 y30 w1 h677 +Background" uiTheme[3])) ;Game Right
+uiBorders.Push(aaMainUI.Add("Text", "x0 y707 w1364 h1 +Background" uiTheme[3], "")) ;Game second bottom
 
 global gameHolder := aaMainUI.Add("Text", "x3 y33 w797 h597 +Background" uiTheme[5], "") ;Game window box
 global exitButton := aaMainUI.Add("Picture", "x1330 y1 w32 h32 +BackgroundTrans", Exitbutton) ;Exit image
@@ -137,36 +137,36 @@ ShowSettingsGUI(*) {
 }
 aaMainUI.SetFont("s9")
 
-coords := getGuiCoords()
-
-
 placementSaveText := aaMainUI.Add("Text", "x210 y642 w80 h20 +Center", "Save Config")
 placementSaveBtn := aaMainUI.Add("Button", "x211 y662 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 
-BankSettingsText := aaMainUI.Add("Text", "x1032 y560 w115 h20 +Center", "Auto Bank")
-global AutoBankBox := aaMainUI.Add("Checkbox", "x1042 y580 cffffff Checked", "Enabled")
+AutoPrayerText := aaMainUI.Add("Text", "x840 y560 w115 h20 +Center", "Auto Prayer")
+global AutoPrayerBox := aaMainUI.Add("Checkbox", "x850 y580 cffffff Checked +Center", "Enabled")
 
-BankDelayText := aaMainUI.Add("Text", "x1032 y610 w115 h20 +Center", "Timer")
-BankDelay := aaMainUI.Add("DropDownList", "x1042 y630 w100 Choose1 +Center", ["1 minute", "3 minutes", "5 minutes", "10 minutes", "15 minutes"])
+ProtectionPrayerText := aaMainUI.Add("Text", "x970 y560 w115 h20 +Center", "Protection Prayer")
+global ProtectionPrayer := aaMainUI.Add("DropDownList", "x980 y580 w100 Choose1 +Center", ["Magic", "Melee", "Ranged"])
 
-AutoPrayerText := aaMainUI.Add("Text", Format("x{} y{} w115 h20 +Center", coords["FirstBoxText"].x, coords["FirstBoxText"].y), "Auto Prayer")
-global AutoPrayerBox := aaMainUI.Add("Checkbox", "x875 y580 cffffff Checked +Center", "Enabled")
+BuffPrayerText := aaMainUI.Add("Text", "x1100 y560 w115 h20 +Center", "Buff Prayer")
+global BuffPrayer := aaMainUI.Add("DropDownList", "x1110 y580 w100 Choose1 +Center", ["Augury", "Piety", "Rigour"])
 
-ProtectionPrayerText := aaMainUI.Add("Text", "x868 y600 w115 h20 +Center", "Protection Prayer")
-ProtectionPrayer := aaMainUI.Add("DropDownList", "x875 y620 w100 Choose1 +Center", ["Magic", "Melee", "Ranged"])
+PrayerText := aaMainUI.Add("Text", "x1230 y560 w115 h20 +Center", "Potion Slot")
+global PrayerPosition := aaMainUI.Add("DropDownList", "x1240 y580 w100 Choose1 +Center", ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"])
 
-BuffPrayerText := aaMainUI.Add("Text", "x865 y650 w115 h20 +Center", "Buff Prayer")
-BuffPrayer := aaMainUI.Add("DropDownList", "x875 y670 w100 Choose1 +Center", ["Augury", "Piety", "Rigour"])
+BankSettingsText := aaMainUI.Add("Text", "x840 y610 w115 h20 +Center", "Auto Bank")
+global AutoBankBox := aaMainUI.Add("Checkbox", "x850 y630 cffffff Checked", "Enabled")
 
-PrayerText := aaMainUI.Add("Text", "x1193 y560 w115 h20 +Center", "Renewal Slot")
-PrayerPosition := aaMainUI.Add("DropDownList", "x1205 y580 w100 Choose1 +Center", ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"])
+BankDelayText := aaMainUI.Add("Text", "x970 y610 w115 h20 +Center", "Timer")
+global BankDelay := aaMainUI.Add("DropDownList", "x980 y630 w100 Choose1 +Center", ["1 minute", "3 minutes", "5 minutes", "10 minutes", "15 minutes"])
 
-LoadoutPositionText := aaMainUI.Add("Text", "x1193 y610 w115 h20 +Center", "Loadout Slot")
-LoadoutPosition := aaMainUI.Add("DropDownList", "x1205 y630 w100 Choose1 +Center", ["1", "2", "3"])
+LoadoutPositionText := aaMainUI.Add("Text", "x1100 y610 w115 h20 +Center", "Loadout Slot")
+global LoadoutPosition := aaMainUI.Add("DropDownList", "x1110 y630 w100 Choose1 +Center", ["1", "2", "3"])
 
-FoodPositionText := aaMainUI.Add("Text", "x1193 y610 w115 h20 +Center Hidden", "Food Slot")
-FoodPosition := aaMainUI.Add("DropDownList", "x1205 y630 w100 Choose1 +Center Hidden", ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"])
+AutoFoodText := aaMainUI.Add("Text", "x840 y660 w115 h20 +Center", "Auto Food")
+global AutoFoodBox := aaMainUI.Add("Checkbox", "x850 y680 cffffff +Center", "Enabled")
+
+FoodPositionText := aaMainUI.Add("Text", "x970 y660 w115 h20 +Center", "Food Slot")
+global FoodPosition := aaMainUI.Add("DropDownList", "x980 y680 w100 Choose1 +Center", ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"])
 
 Hotkeytext := aaMainUI.Add("Text", "x807 y35 w200 h30", "F1: Position Window")
 Hotkeytext2 := aaMainUI.Add("Text", "x807 y50 w200 h30", "F2: Start Macro")
@@ -205,7 +205,7 @@ aaMainUI.SetFont("s8 c" uiTheme[6])
 ; Mode selection dropdown
 
 readInSettings()
-aaMainUI.Show("w1366 h700")
+aaMainUI.Show("w1366 h710")
 WinMove(0, 0,,, "ahk_id " aaMainUIHwnd)
 forceWindowSize()  ; Initial force size and position
 SetTimer(checkWindowSize, 600000)  ; Check every 10 minutes

@@ -233,30 +233,6 @@ CheckForHealthBarNoFindText() {
     return false
 }
 
-
-DetectNumber(x, y, w, h) {
-    AddToLog("Checking for numbers...")
-    result := OCR.FromRect(x, y, w, h)
-    Loop 10 {
-        try {
-            result := OCR.FromRect(x, y, w, h)
-
-            if result {
-                number := Trim(StrSplit(result.Text, "`n")[1])
-
-                if RegExMatch(number, "^\d+$") { ; Ensure only number
-                    AddToLog("Found number: " number)
-                    return true
-                }
-            }
-        }
-        AddToLog("OCR Attempt: " (result ? result.Text : "No result"))
-        Sleep(300)  
-    }
-    AddToLog("Could not detect valid number")
-    return false
-}
-
 GetColorForMob(color) {
     switch color {
         case "Sarachnis": return 0x391411
@@ -336,19 +312,54 @@ RestorePrayerIfNeeded(PrayerPosition) {
     }
 }
 
-UseFood() {
-    if (DetectNumber(596, 87, 618, 101)) {
-        FixClick(773, 530)
-        Sleep 200
+RestoreHealthIfNeeded(FoodPosition) {
+    foundX := foundY := 0
+    if (AutoFoodBox.Value) {
+        if (PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFFFF00, 3) ; First color check
+            || PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFCA607, 3)) { ; Second color check
+            clickCoords := ClickCoordsForFood(FoodPosition)
+            AddToLog("Detected low health, restoring...")
+            FixClick(700, 560) ; Open Inventory
+            Sleep(500)
+            FixClick(clickCoords.x, clickCoords.y) ; Click on prayer potion
+            Sleep 500
+            FixClick(700, 560) ; Close Inventory
+            Sleep(500)
+        }
     }
 }
 
-OpenGithub() {
-    Run("https://github.com/itsRynsRoblox?tab=repositories")
-}
-
-OpenDiscord() {
-    Run("https://discord.gg/6DWgB9XMTV")
+ClickCoordsForFood(FoodPosition) {
+    switch FoodPosition {
+        case "1": return { x: 635, y: 290 }
+        case "2": return { x: 685, y: 290 }
+        case "3": return { x: 735, y: 290 }
+        case "4": return { x: 785, y: 290 }
+        case "5": return { x: 635, y: 330 }
+        case "6": return { x: 685, y: 330 }
+        case "7": return { x: 735, y: 330 }
+        case "8": return { x: 785, y: 330 }
+        case "9": return { x: 635, y: 370 }
+        case "10": return { x: 685, y: 370 }
+        case "11": return { x: 735, y: 370 }
+        case "12": return { x: 785, y: 370 }
+        case "13": return { x: 635, y: 410 }
+        case "14": return { x: 685, y: 410 }
+        case "15": return { x: 735, y: 410 }
+        case "16": return { x: 785, y: 410 }
+        case "17": return { x: 635, y: 450 }
+        case "18": return { x: 685, y: 450 }
+        case "19": return { x: 735, y: 450 }
+        case "20": return { x: 785, y: 450 }
+        case "21": return { x: 635, y: 490 }
+        case "22": return { x: 685, y: 490 }
+        case "23": return { x: 735, y: 490 }
+        case "24": return { x: 785, y: 490 }
+        case "25": return { x: 635, y: 530 }
+        case "26": return { x: 685, y: 530 }
+        case "27": return { x: 735, y: 530 }
+        case "28": return { x: 785, y: 530 }
+    }
 }
 
 BankItems(LoadoutPosition) {
@@ -432,4 +443,71 @@ CheckForFrozenFragment() {
         return true
     }
     return false
+}
+
+CheckInCombat() {
+    loop {
+        Sleep(200)
+        ; Check for health bar
+        if (ok := FindText(&X, &Y, 0, 34, 138, 98, 0, 0, HealthBar)) {
+            AddToLog("Found Health Bar - In Combat")
+            Sleep(1000)
+            break
+        }
+        RestartStage()
+    }
+}
+
+CheckForInactive() {
+    ; Check for lobby text
+    if (ok := FindText(&X, &Y, 391, 31, 446, 54, 0, 0, InactiveWave)) {
+        return true
+    }
+    return false
+}
+
+ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
+    while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || 
+           textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
+        if (offsetX != 0 || offsetY != 0) {
+            FixClick(X + offsetX, Y + offsetY)  
+        } else {
+            FixClick(x, y) 
+        }
+        Sleep(1000)
+    }
+}
+
+WaitForNoHealthBar() {
+    Sleep 500
+    Loop {
+        if !(ok := CheckForHealthBarNoFindText()) {
+            Break  ; Exit loop when HP bar is gone
+        }
+        Sleep 1500  ; Check every 1.5 seconds
+    }
+}
+
+CheckForAFKDetection() {
+    afkChecks := Map(
+        "Cooking", AFKCooking,
+        "Smithing", AFKSmithing,
+        "Farming", AFKFarming
+    )
+    
+    for name, afkText in afkChecks {
+        if FindText(&X, &Y, 0, 465, 513, 632, 0, 0, afkText) {
+            AddToLog("Found " name " AFK Check")
+            FixClick(X, Y)  ; Click immediately after detecting the AFK check
+            return true
+        }
+    }
+}
+
+OpenGithub() {
+    Run("https://github.com/itsRynsRoblox?tab=repositories")
+}
+
+OpenDiscord() {
+    Run("https://discord.gg/6DWgB9XMTV")
 }
