@@ -10,24 +10,47 @@ InitializeMacro() {
     StartSelectedMode()
 }
 
-FarmBoss() {
-    global BossDropDown
-    currentBoss := BossDropDown.Text
-    AddToLog("Starting " currentBoss)
-    RestartStage()
+StartSelectedMode() {
+    global lastBankedTime
+
+    lastBankedTime := A_TickCount ; Starts Timer
+
+    mode := ModeDropdown.Text
+    AddToLog("Starting " . mode)
+
+    ; Dispatch to corresponding function based on mode
+    if (mode = "Bosses") {
+        StartKilling("Bosses")
+    }
+    else if (mode = "Monsters") {
+        StartKilling("Monsters")
+    }
+    else if (mode = "Minigames") {
+        MinigameMode()
+    }
+    else if (mode = "Slayer") {
+        StartSlayer()
+    }
 }
 
-FarmMonster() {
-    global MonsterDropDown
-    currentMonster := MonsterDropDown.Text
-    AddToLog("Starting " currentMonster)
+StartKilling(mode) {
+    global BossDropDown, MonsterDropDown
+    ; Select entity based on the mode
+    if (mode = "Bosses") {
+        currentEntity := BossDropDown.Text
+        AddToLog("Starting " . currentEntity)
+    }
+    else if (mode = "Monsters") {
+        currentEntity := MonsterDropDown.Text
+        AddToLog("Starting " . currentEntity)
+    }
     RestartStage()
 }
 
 MinigameMode() {
-    global RaidDropdown
-    currentMinigame := RaidDropdown.Text
-    AddToLog("Starting " currentMinigame " minigame")
+    global MinigameDropDown
+    currentMinigame := MinigameDropDown.Text
+    AddToLog("Starting " . currentMinigame . " minigame")
     HandleMinigame()
 }
 
@@ -73,7 +96,7 @@ StartMoonBossFight() {
     currentPrayerSlot := PrayerPosition.Text
     currentFoodSlot := FoodPosition.Text
     while !(ok := CheckForHealthBarNoFindText()) {
-        while !(ok := FindText(&X, &Y, 720-150000, 88-150000, 720+150000, 88+150000, 0, 0, BlueMoonMinimap)) {
+        while !(ok := FindText(&X, &Y, 584, 31, 803, 208, 0, 0, BlueMoonMinimap)) { ;720-150000, 88-150000, 720+150000, 88+150000
             Sleep 2500
         }
         CheckForAFKDetection()
@@ -112,52 +135,9 @@ RestartStage() {
     }
 }
 
-CheckSpawn() {
-    loop {
-        Sleep 1000
-        if (ok := FindText(&X, &Y, 322, 195, 505, 276, 0, 0, Spawn)) {
-            break
-        }
-    }
-    AddToLog("Found in spawn, restarting selected mode")
-    return StartSelectedMode()
-}
-
-CheckForDisconnect() {
-    global ProtectionPrayer, BuffPrayer
-    currentPrayer := ProtectionPrayer.Text
-    currentBuffPrayer := BuffPrayer.Text
-    if (ok := FindText(&X, &Y, 211, 492, 444, 550, 0, 0, Login)) {
-        Sleep(500)
-        AddToLog("Disconnect/Server Shutdown detected, restarting selected mode")
-        ClickUntilGone(0, 0, 211, 492, 444, 550, Login, 0, 0)
-        Sleep(1000)
-        ReactivatePrayers(currentPrayer, currentBuffPrayer)
-        Sleep(1000)
-        StartSelectedMode()
-        return true
-    }
-}
-
-StartSelectedMode() {
-    global lastBankedTime
-
-    lastBankedTime := A_TickCount ; Starts Timer
-
-    if (ModeDropdown.Text = "Bosses") {
-        FarmBoss()
-    }
-    if (ModeDropdown.Text = "Monsters") {
-        FarmMonster()
-    }
-    if (ModeDropdown.Text = "Minigames") {
-        MinigameMode()
-    }
-}
-
 ValidateMode() {
     if (ModeDropdown.Text = "") {
-        AddToLog("Please select a gamemode before starting the macro!")
+        AddToLog("Please select a mode before starting the macro!")
         return false
     }
     if (!confirmClicked) {
@@ -168,59 +148,45 @@ ValidateMode() {
 }
 
 BankTimer() {
-    if BankDelay.Text = "1 minute" {
-        return 60000
-    } else if BankDelay.Text = "3 minutes" {
-        return 180000
-    } else if BankDelay.Text = "5 minutes" {
-        return 300000
-    } else if BankDelay.Text = "10 minutes" {
-        return 600000
-    } else if BankDelay.Text = "15 minutes" {
-        return 900000
-    } else {
-        return 60000
+    switch BankDelay.Text {
+        case "1 minute":
+            return 60000
+        case "3 minutes":
+            return 180000
+        case "5 minutes":
+            return 300000
+        case "10 minutes":
+            return 600000
+        case "15 minutes":
+            return 900000
+        default:
+            return 60000  ; Default to 1 minute if no match
     }
 }
 
 
 HandleMinigame() {
-    global RaidDropdown
+    global MinigameDropDown
     global PrayerPosition, ProtectionPrayer, BuffPrayer, LoadoutPosition
     currentLoadout := LoadoutPosition.Text
     currentPrayerSlot := PrayerPosition.Text
     currentPrayer := ProtectionPrayer.Text
     currentBuffPrayer := BuffPrayer.Text
+    FixCamera()
     Loop {
         Sleep(1000)
-        ; Check for Inactive Wave Screen
         if CheckForInactive() {
             AddToLog("🕒 Inactive wave timer detected, verifying wave completion...")
             Sleep(2000)
+            
             if CheckForInactive() {
                 AddToLog("🌊 Wave timer still inactive, initiating next wave...")
-                Sleep(500)
-    
+
                 if (AutoBankBox.Value) {
-                    AddToLog("💰 Preparing for the next wave by banking items...")
-                    BankItems(currentLoadout)
-                    ReactivatePrayers(currentPrayer, currentBuffPrayer)
+                    PrepareForNextWave(currentLoadout, currentPrayer, currentBuffPrayer)
                 }
-    
-                FixClick(420, 200) ; Click Totem
-                Sleep(1500)
 
-                FixClick(295, 405) ; Click Prestige
-                Sleep(1500)
-
-                FixClick(485, 120) ; Close Interface Prestige
-                Sleep(1500)
-
-                FixClick(420, 200) ; Click Totem
-                Sleep(1500)
-
-                SendInput("{1}")
-                Sleep(1500)
+                InitiateNextWave()
             } else {
                 AddToLog("🔄 Transitioning between waves, wave not yet complete...")
                 CheckForAFKDetection()
@@ -232,5 +198,30 @@ HandleMinigame() {
             CheckForDisconnect()
             RestorePrayerIfNeeded(currentPrayerSlot)
         }
+    }
+}
+
+PrepareForNextWave(currentLoadout, currentPrayer, currentBuffPrayer) {
+    AddToLog("💰 Preparing for the next wave by banking items...")
+    BankItems(currentLoadout)
+    ReactivatePrayers(currentPrayer, currentBuffPrayer)
+}
+
+InitiateNextWave() {
+    ; Sequence of clicks to start the next wave
+    ClickSequence([
+        [410, 300], ; Click Totem
+        [295, 405], ; Click Prestige
+        [485, 120], ; Close Interface Prestige
+        [410, 300]  ; Click Totem again
+    ])
+    SendInput("{1}")
+    Sleep(1500)
+}
+
+ClickSequence(coordsArray) {
+    for index, coords in coordsArray {
+        FixClick(coords[1], coords[2])
+        Sleep(1500) ; Sleep between each click
     }
 }

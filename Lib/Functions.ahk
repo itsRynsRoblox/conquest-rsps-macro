@@ -12,7 +12,19 @@ F3:: {
     Reload()
 }
 F4:: {
-    CheckForFrozenFragment
+    ;DetectSlayerTask()
+    TogglePause()
+}
+
+TogglePause(*) {
+    Pause -1
+    if (A_IsPaused) {
+        AddToLog("Macro Paused")
+        Sleep(1000)
+    } else {
+        AddToLog("Macro Resumed")
+        Sleep(1000)
+    }
 }
  
  ;Minimizes the UI
@@ -49,7 +61,8 @@ F4:: {
     ; Hide all dropdowns first
     BossDropDown.Visible := false
     MonsterDropDown.Visible := false
-    RaidDropdown.Visible := false
+    MinigameDropDown.Visible := false
+    SlayerDropDown.Visible := false
     
     if (selected = "Bosses") {
         BossDropDown.Visible := true
@@ -58,32 +71,11 @@ F4:: {
         MonsterDropDown.Visible := true
         mode := "Monsters"
     } else if (selected = "Minigames") {
-        RaidDropdown.Visible := true
+        MinigameDropDown.Visible := true
         mode := "Minigames"
-    }
-}
-
-OnBossChange(*) {
-    if (BossDropDown.Text != "") {
-
-    } else {
-
-    }
-}
-
-OnMonsterChange(*) {
-    if (MonsterDropDown.Text != "") {
-
-    } else {
-
-    }
-}
-
-OnRaidChange(*) {
-    if (RaidDropdown.Text != "") {
-
-    } else {
-
+    } else if (selected = "Slayer") {
+        SlayerDropDown.Visible := true
+        mode := "Slayer"
     }
 }
 
@@ -115,7 +107,8 @@ OnConfirmClick(*) {
     ModeDropdown.Visible := false
     BossDropDown.Visible := false
     MonsterDropDown.Visible := false
-    RaidDropdown.Visible := false
+    MinigameDropDown.Visible := false
+    SlayerDropDown.Visible := false
     ConfirmButton.Visible := false
     modeSelectionGroup.Visible := false
     Hotkeytext.Visible := true
@@ -130,6 +123,13 @@ FixClick(x, y, LR := "Left") {
     MouseMove(1, 0, , "R")
     MouseClick(LR, -1, 0, , , , "R")
     Sleep(50)
+}
+
+FixClickWithSleep(x, y, timer, LR := "Left") {
+    MouseMove(x, y)
+    MouseMove(1, 0, , "R")
+    MouseClick(LR, -1, 0, , , , "R")
+    Sleep(timer)
 }
 
 GetWindowCenter(WinTitle) {
@@ -182,6 +182,27 @@ FindAndClickMobs(targetColors, searchArea := [61, 73, 538, 389]) {
     }
 }
 
+FindAndClickMobsWithVerify(targetColors, searchArea := [61, 73, 538, 389], verifyColor := 0xFFFF0000) {
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+
+    for color in targetColors {
+        if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
+            MouseMove(foundX, foundY)
+            Sleep (700)
+            ; Perform secondary search for verification color in a wider area
+            if (PixelSearch(&verifyX, &verifyY, foundX - 25, foundY - 25, foundX + 25, foundY + 25, verifyColor, 2)) {
+                FixClick(foundX, foundY, "Left")
+                AddToLog("Mob found and verified! Clicked at: X" foundX " Y" foundY)
+                return true
+            } else {
+                AddToLog("Color match found, but verification color not detected. Skipping click.")
+            }
+        }
+    }
+
+    return false  ; No valid mob found
+}
+
 FindAndClickImage(imagePath, searchArea := [0, 0, A_ScreenWidth, A_ScreenHeight]) {
 
     AddToLog(imagePath)
@@ -192,7 +213,7 @@ FindAndClickImage(imagePath, searchArea := [0, 0, A_ScreenWidth, A_ScreenHeight]
     ; Perform the image search
     if (ImageSearch(&foundX, &foundY, x1, y1, x2, y2, imagePath)) {
         ; Image found, click on the detected coordinates
-        FixClick(foundX, foundY, "Right")
+        FixClick(foundX, foundY, "Left")
         AddToLog("Image found and clicked at: X" foundX " Y" foundY)
         return true
     }
@@ -243,21 +264,26 @@ GetColorForMob(color) {
         case "Magma Beasts" : return 0x2D1003
         case "Elysian Nagau" : return 0x324649 ;return 0x11B0BC\
         case "Spectral Nagau" : return 0x5322B6
+        case "Arcane Nagau": return 0xC25A09
     }
 }
 
 GetColorsForMob(mobName) {
     colors := Map(
-        "Sarachnis", [0x391411, 0x000000],
-        "Electric Wyrm", [0x0C0F1D, 0x000000],
-        "Electric Demon", [0x0C203E, 0x0C203E], ;0x77760D / 0x6A690C
-        "Tormented Demons", [0x985450, 0x8D5805],
+        "Electric Demon", [0x0C203E, 0x0C203E],
         "Tekton", [0xDF7210, 0x282424],
+        "Arcane Nagua", [0xC05708, 0xC05708],
+        "Elysian Nagua", [0x324649, 0x11B0BC],
+        "Spectral Nagua", [0x5322B6, 0x34255E],
+        "Vanguards", [0xDD5009, 0xDD5009],
+        "Electric Wyrm", [0x0C0F1D, 0x0C0F1D],
+        "Magma Beast", [0x2D1003, 0x2D1003],
+        "Sarachnis", [0x391411, 0x391411],
+        "Galvek", [0x55120E, 0x55120E],
+        "Tormented Demon", [0x985450, 0x8D5805],
         "Snow Imps", [0x1F54A6, 0x000000],
-        "Vanguards", [0xDD5009, 0x000000],
-        "Magma Beasts", [0x2D1003, 0x000000],
-        "Elysian Nagau", [0x324649, 0x11B0BC],
-        "Spectral Nagau", [0x5322B6, 0x34255E]
+        "Shadow Corp", [0x7D8682, 0x7D8682], ;0x79827D/0x838D88/0x535A57
+        "Night Beast", [0x3D7175, 0x3D7175]
     )
     return colors.Has(mobName) ? colors[mobName] : [0x000000, 0x000000]  ; Default fallback
 }
@@ -369,7 +395,7 @@ BankItems(LoadoutPosition) {
     CheckForFrozenFragment()
     FixClick(700, 580) ; Close Inventory
     Sleep(500)
-    Send("{Backspace}::bank") ; Open Bank
+    Send("^b") ; Sends Control + B
     Sleep(1000)
     SendInput("{Enter}")
     Sleep(1500)
@@ -466,6 +492,7 @@ CheckForInactive() {
     return false
 }
 
+
 ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX:=0, offsetY:=0, textToFind2:="") {
     while (ok := FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind) || 
            textToFind2 && FindText(&X, &Y, searchX1, searchY1, searchX2, searchY2, 0, 0, textToFind2)) {
@@ -502,6 +529,37 @@ CheckForAFKDetection() {
             return true
         }
     }
+}
+
+CheckIfInSpawn() {
+    loop {
+        Sleep 1000
+        if (ok := FindText(&X, &Y, 322, 195, 505, 276, 0, 0, Spawn)) {
+            break
+        }
+    }
+    AddToLog("Found in spawn, restarting selected mode")
+    return StartSelectedMode()
+}
+
+CheckForDisconnect() {
+    global ProtectionPrayer, BuffPrayer
+    currentPrayer := ProtectionPrayer.Text
+    currentBuffPrayer := BuffPrayer.Text
+    if (ok := FindText(&X, &Y, 211, 492, 444, 550, 0, 0, Login)) {
+        Sleep(500)
+        AddToLog("Disconnect/Server Shutdown detected, restarting selected mode")
+        ClickUntilGone(0, 0, 211, 492, 444, 550, Login, 0, 0)
+        Sleep(1000)
+        ReactivatePrayers(currentPrayer, currentBuffPrayer)
+        Sleep(1000)
+        StartSelectedMode()
+        return true
+    }
+}
+
+CloseChat() {
+    FixClickWithSleep(40, 620, 1000)
 }
 
 OpenGithub() {

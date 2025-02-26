@@ -80,7 +80,7 @@ SaveSettings(*) {
         } else if (mode = "Monsters") {
             content .= "Monster=" MonsterDropDown.Text
         } else if (mode = "Minigames") {
-            content .= "Game=" RaidDropdown.Text
+            content .= "Game=" MinigameDropDown.Text
         }
 
         content .= "`n`n[AutoBanking]"
@@ -109,41 +109,5 @@ SaveSettings(*) {
 
         FileAppend(content, settingsFile)
         AddToLog("Configuration settings saved successfully")
-    }
-}
-
-LoadSettings() {
-    global UnitData, mode
-    try {
-        settingsFile := A_ScriptDir "\Settings\Configuration.txt"
-        if !FileExist(settingsFile) {
-            return
-        }
-
-        content := FileRead(settingsFile)
-        sections := StrSplit(content, "`n`n")
-        
-        for section in sections {
-            if (InStr(section, "Index=")) {
-                lines := StrSplit(section, "`n")
-                
-                for line in lines {
-                    if line = "" {
-                        continue
-                    }
-                    
-                    parts := StrSplit(line, "=")
-                    if (parts[1] = "Index") {
-                        index := parts[2]
-                    } else if (index && UnitData.Has(Integer(index))) {
-                        switch parts[1] {
-                            case "Enabled": UnitData[index].Enabled.Value := parts[2]
-                            case "Placement": UnitData[index].PlacementBox.Value := parts[2]
-                        }
-                    }
-                }
-            }
-        }
-        AddToLog("Auto settings loaded successfully")
     }
 }

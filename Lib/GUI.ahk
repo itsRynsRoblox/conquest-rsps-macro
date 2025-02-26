@@ -5,7 +5,7 @@
 
 ; Basic Application Info
 global aaTitle := "Ryn's Conquest Macro "
-global version := "v1.1"
+global version := "v1.2"
 global gameID := "ahk_exe Java.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
@@ -180,22 +180,21 @@ DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")
 aaMainUI.SetFont("Bold s10 c" uiTheme[6])
-global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Bosses", "Monsters", "Minigames"])
-global BossDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Blue Moon", "Electric Demon"])
-global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Electric Wyrm", "Elysian Nagau", "Magma Beasts", "Sarachnis", "Spectral Nagau", "Snow Imps","Tormented Demons", "Vanguards"])
-global RaidDropdown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Doomcore"])
+global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Bosses", "Monsters", "Minigames", "Slayer"])
+global BossDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Blue Moon", "Electric Demon", "Tekton"])
+global SlayerDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Easy", "Medium", "Hard", "Elite"])
+global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Arcane Nagua", "Electric Wyrm", "Elysian Nagua", "Magma Beasts", "Sarachnis", "Spectral Nagua", "Snow Imps","Tormented Demons", "Vanguards"])
+global MinigameDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Doomcore"])
 global ConfirmButton := aaMainUI.Add("Button", "x1218 y53 w80 h25", "Confirm")
 
 BossDropDown.Visible := false
 MonsterDropDown.Visible := false
-RaidDropdown.Visible := false
+MinigameDropDown.Visible := false
+SlayerDropDown.Visible := false
 Hotkeytext.Visible := false
 Hotkeytext2.Visible := false
 Hotkeytext3.Visible := false
 ModeDropdown.OnEvent("Change", OnModeChange)
-BossDropDown.OnEvent("Change", OnBossChange)
-MonsterDropDown.OnEvent("Change", OnMonsterChange)
-RaidDropdown.OnEvent("Change", OnRaidChange)
 ConfirmButton.OnEvent("Click", OnConfirmClick)
 ;------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI------MAIN UI
 ;------UNIT CONFIGURATION------UNIT CONFIGURATION------UNIT CONFIGURATION/------UNIT CONFIGURATION/------UNIT CONFIGURATION/------UNIT CONFIGURATION/
