@@ -22,6 +22,9 @@ StartSelectedMode() {
     if (mode = "Bosses") {
         StartKilling("Bosses")
     }
+    else if (mode = "AFK") {
+        StartAFK()
+    }
     else if (mode = "Monsters") {
         StartKilling("Monsters")
     }
@@ -47,6 +50,15 @@ StartKilling(mode) {
     RestartStage()
 }
 
+StartAFK() {
+    global PrayerPosition
+    currentPrayerSlot := PrayerPosition.Text
+    Loop {
+        Sleep(1000)
+        RestorePrayerIfNeeded(currentPrayerSlot)
+    }
+}
+
 MinigameMode() {
     global MinigameDropDown
     currentMinigame := MinigameDropDown.Text
@@ -70,14 +82,15 @@ Fight() {
         RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
         Sleep(1500)
-
-        if (timeElapsed >= BankTimer()) {
-            AddToLog("Bank Timer Reached - Banking Items...")
-            lastBankedTime := A_TickCount
-            BankItems(currentLoadout)
-            AddToLog("Waiting " BankDelay.Text " until banking again.")
-            ReactivatePrayers(currentPrayer, currentBuffPrayer)
-            Sleep(1500)
+        if (AutoBankBox.Value) {
+            if (timeElapsed >= BankTimer()) {
+                AddToLog("Bank Timer Reached - Banking Items...")
+                lastBankedTime := A_TickCount
+                BankItems(currentLoadout)
+                AddToLog("Waiting " BankDelay.Text " until banking again.")
+                ReactivatePrayers(currentPrayer, currentBuffPrayer)
+                Sleep(1500)
+            }
         }
         if (ModeDropdown.Text = "Bosses") {
             FindandClickMobs(GetColorsForMob(BossDropDown.Text))

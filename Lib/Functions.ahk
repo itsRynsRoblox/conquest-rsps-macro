@@ -12,8 +12,8 @@ F3:: {
     Reload()
 }
 F4:: {
-    ;DetectSlayerTask()
-    TogglePause()
+    CheckForSpawn()
+    ;TogglePause()
 }
 
 TogglePause(*) {
@@ -276,14 +276,18 @@ GetColorsForMob(mobName) {
         "Elysian Nagua", [0x324649, 0x11B0BC],
         "Spectral Nagua", [0x5322B6, 0x34255E],
         "Vanguards", [0xDD5009, 0xDD5009],
-        "Electric Wyrm", [0x0C0F1D, 0x0C0F1D],
+        "Electric Wyrm", [0x171D38, 0x171D38],
         "Magma Beast", [0x2D1003, 0x2D1003],
-        "Sarachnis", [0x391411, 0x391411],
+        "Sarachnis", [0x812925, 0x6E221E], ;0x391411
         "Galvek", [0x55120E, 0x55120E],
         "Tormented Demon", [0x985450, 0x8D5805],
         "Snow Imps", [0x1F54A6, 0x000000],
-        "Shadow Corp", [0x7D8682, 0x7D8682], ;0x79827D/0x838D88/0x535A57
-        "Night Beast", [0x3D7175, 0x3D7175]
+        "Shadow Corp", [0x6D7570, 0x6D7570], ;0x79827D/0x838D88/0x535A57
+        "Abyssal Kurask", [0x3D5B1D, 0x2E4316],
+        "Fury Drake", [0x171414, 0xB30F06], ; Body / Red Glow
+        "Night Beast", [0x1A1A26, 0x3D7175], ;Back / Glow Under
+        "Shadow Nihil", [0x402E56, 0x402E56],
+        "Pyrelord", [0xFF6332, 0xCB9139] ; Body / Ground Circle
     )
     return colors.Has(mobName) ? colors[mobName] : [0x000000, 0x000000]  ; Default fallback
 }
@@ -328,12 +332,12 @@ RestorePrayerIfNeeded(PrayerPosition) {
             || PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFCA607, 3)) { ; Second color check
             clickCoords := ClickCoordsForPrayerPotion(PrayerPosition)
             AddToLog("Detected low prayer, restoring...")
-            FixClick(700, 560) ; Open Inventory
+            CheckAndOpenPanelIfNeeded("Inventory")
             Sleep(500)
             FixClick(clickCoords.x, clickCoords.y) ; Click on prayer potion
             Sleep 500
-            FixClick(700, 560) ; Close Inventory
-            Sleep(500)
+            ;FixClick(700, 560) ; Close Inventory
+            ;Sleep(500)
         }
     }
 }
@@ -345,7 +349,7 @@ RestoreHealthIfNeeded(FoodPosition) {
             || PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFCA607, 3)) { ; Second color check
             clickCoords := ClickCoordsForFood(FoodPosition)
             AddToLog("Detected low health, restoring...")
-            FixClick(700, 560) ; Open Inventory
+            CheckAndOpenPanelIfNeeded("Inventory")
             Sleep(500)
             FixClick(clickCoords.x, clickCoords.y) ; Click on prayer potion
             Sleep 500
@@ -389,16 +393,13 @@ ClickCoordsForFood(FoodPosition) {
 }
 
 BankItems(LoadoutPosition) {
-    FixClick(700, 580) ; Open Inventory
+    CheckAndOpenPanelIfNeeded("Inventory")
     Sleep(500)
     AddToLog("Checking for Frozen Fragments...")
     CheckForFrozenFragment()
-    FixClick(700, 580) ; Close Inventory
     Sleep(500)
     Send("^b") ; Sends Control + B
     Sleep(1000)
-    SendInput("{Enter}")
-    Sleep(1500)
     FixClick(525, 150) ; Click Preset
     Sleep(1000)
     LoadPreset(LoadoutPosition) ; Click Selected Preset
@@ -424,23 +425,28 @@ ClickCoordsForLoadout(LoadoutPosition) {
 }
 
 ReactivatePrayers(ProtectionPrayer, BuffPrayer) {
-    if (AutoPrayerBox.Value) {
-        AddToLog("Reactivating prayers...")
-        curretPrayer := ClickCoordsForPrayer(ProtectionPrayer)
-        curretBuffPrayer := ClickCoordsForBuffPrayer(BuffPrayer)
+    if (!AutoPrayerBox.Value) 
+        return  ; Exit if AutoPrayer is not enabled
     
-        FixClick(760, 580) ; Click Prayers
-        Sleep(1000)
-    
-        FixClick(curretPrayer.x, curretPrayer.y)
-        Sleep(1000)
-    
-        FixClick(curretBuffPrayer.x, curretBuffPrayer.y)
-        Sleep(1000)
-    
-        FixClick(760, 580) ; Click Prayers to close
-        Sleep(1000)
-    }
+    AddToLog("Reactivating prayers...")
+
+    curretPrayer := ClickCoordsForPrayer(ProtectionPrayer)
+    curretBuffPrayer := ClickCoordsForBuffPrayer(BuffPrayer)
+
+    ; Open PrayerTab if not already open
+    CheckAndOpenPanelIfNeeded("PrayerTab")
+    Sleep(1000)
+
+    ; Click the prayers
+    ActivatePrayerIfInactive(ProtectionPrayer)
+    Sleep(1000)
+
+    ActivatePrayerIfInactive(BuffPrayer)
+    Sleep(1000)
+
+    ; Close PrayerTab
+    FixClick(760, 580)
+    Sleep 1000
 }
 
 ClickCoordsForPrayer(ProtectionPrayer) {
@@ -484,9 +490,26 @@ CheckInCombat() {
     }
 }
 
+CheckForSpawn() {
+    ; Check for spawn booths
+    if (ok := FindText(&X, &Y, 186, 177, 231, 230, 0, 0, InformationBooth)) {
+        AddToLog("Found in spawn, restarting...")
+        return true
+    }
+    return false
+}
+
 CheckForInactive() {
-    ; Check for lobby text
+    ; Check for inactive wave text
     if (ok := FindText(&X, &Y, 391, 31, 446, 54, 0, 0, InactiveWave)) {
+        return true
+    }
+    return false
+}
+
+CheckIfAlreadyUnderAttack() {
+    ; Check for under attack text
+    if (ok := FindText(&X, &Y, 9, 573, 493, 590, 0, 0, UnderAttack)) {
         return true
     }
     return false
@@ -560,6 +583,77 @@ CheckForDisconnect() {
 
 CloseChat() {
     FixClickWithSleep(40, 620, 1000)
+}
+
+CheckAndOpenPanelIfNeeded(panel) {
+    Panels := Map()
+    Panels["PlayerPanel"] := { coords: [642, 563, 673, 595], clickCoords: [660, 580] }
+    Panels["PrayerTab"] := { coords: [742, 563, 771, 594], clickCoords: [760, 580] }
+    Panels["Inventory"] := { coords: [675, 564, 706, 594], clickCoords: [700, 580] }
+
+    if !Panels.Has(panel) {
+        AddToLog("Error: Couldn't find panel with that name...")
+        Return false  ; Invalid panel name
+    }
+
+    x1 := Panels[panel].coords[1], y1 := Panels[panel].coords[2], x2 := Panels[panel].coords[3], y2 := Panels[panel].coords[4]
+
+    ; Check if the panel is open
+    if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, 0x441812, 0)) {
+        Sleep 100
+        if (debugMessages) {
+            AddToLog(panel " is already open...")
+        }
+        Return true  ; Panel is already open
+    }
+
+    ; If not open, attempt to open it
+    if Panels[panel].HasOwnProp("clickCoords") {
+        if (debugMessages) {
+            AddToLog("Opening " panel "...")
+        }
+        xClick := Panels[panel].clickCoords[1], yClick := Panels[panel].clickCoords[2]
+        FixClick(xClick, yClick)
+        Sleep 300
+        Return true
+    }
+
+    Return false
+}
+
+ActivatePrayerIfInactive(prayer) {
+    Prayers := Map()
+    Prayers["Magic"] := { coords: [655, 429, 677, 455], clickCoords : [670, 440] }
+    Prayers["Augory"] := { coords: [690, 470, 719, 493], clickCoords : [710, 480] }
+
+    Prayers["Melee"] := { coords: [730, 429, 753, 454], clickCoords : [750, 440] }
+    Prayers["Piety"] := { coords: [614, 470, 651, 492], clickCoords : [640, 480] }
+
+    Prayers["Ranged"] := { coords: [695, 433, 713, 453], clickCoords : [710, 440] }
+    Prayers["Rigour"] := { coords: [652, 469, 686, 497], clickCoords : [670, 480] }
+
+    if !Prayers.Has(prayer) {
+        AddToLog("Error: Couldn't find prayer with that name...")
+        Return false  ; Invalid prayer name
+    }
+
+    x1 := Prayers[prayer].coords[1], y1 := Prayers[prayer].coords[2], x2 := Prayers[prayer].coords[3], y2 := Prayers[prayer].coords[4]
+
+    ; Check if the prayer is active
+    if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, 0xB7A36D, 0)) {
+        Sleep 100
+        AddToLog("Prayer is already active")
+        Return true  ; Prayer is already active
+    }
+
+    ; If not open, attempt to open it
+    if Prayers[prayer].HasOwnProp("clickCoords") {
+        xClick := Prayers[prayer].clickCoords[1], yClick := Prayers[prayer].clickCoords[2]
+        FixClick(xClick, yClick)
+        Sleep 300
+        Return true
+    }
+    Return false
 }
 
 OpenGithub() {

@@ -6,7 +6,7 @@ Banking=1
 
 
 [AutoPrayer]
-Praying=0
+Praying=1
 
 
 [BankDelay]
@@ -18,7 +18,7 @@ FoodSlot=1
 
 
 [LoadoutSlot]
-LoadoutSlot=3
+LoadoutSlot=1
 
 
 [PrayerPosition]
@@ -30,4 +30,4 @@ Prayer=2
 
 
 [BuffPrayer]
-Buff=2
+Buff=3

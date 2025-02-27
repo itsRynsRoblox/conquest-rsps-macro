@@ -1,30 +1,37 @@
 #Requires AutoHotkey v2.0
 
 StartSlayer() {
+    global LoadoutPosition
+    currentLoadout := LoadoutPosition.Text
     FixCamera() ; Fixes Camera Angle
     Sleep(1000)
-    OpenPlayerPanel()
-    currentTask := DetectSlayerTask()
+    AddToLog("💰 Preparing for the task by banking items...")
+    BankItems(currentLoadout)
+    Sleep(1000)
+    CheckAndOpenPanelIfNeeded("PlayerPanel")
+    Sleep(1000)
     if (CheckForNoSlayerTask()) {
         TeleportToSlayerMaster()
+        Sleep(4500)
         GetTask()
     }
+    Sleep(1000)
+    currentTask := DetectSlayerTask()
     TeleportToSlayerTask(currentTask)
     if (currentTask != "no task found") {
         HandleMovement(currentTask)
     }
+    ActivatePrayerForTask(currentTask)
     StartSlayerCombat(currentTask)
 }
 
 GetTask() {
-    AddToLog("Attemping to get a slayer task...")
-    FixClick(400, 275, "Right") ; Right Click Slayer Master
+    AddToLog("Attemping to get a " SlayerDropDown.Text " task...")
+    FixClick(405, 305, "Right") ; Right Click Slayer Master
     Sleep(1000)
-    FixClick(390, 315)
+    FixClick(390, 345)
     Sleep(1000)
     SendInput(GetKeyForTask()) ; Choose Slayer Task
-    Sleep(1000)
-    FixClick(660, 580)  ; Close Player Panel to force text update
     Sleep(1000)
 }
 
@@ -38,7 +45,7 @@ GetKeyForTask() {
 }
 
 FixCamera() {
-    CloseChat()
+    ;CloseChat()
     FixClick(650, 50) ; Face North Minimap
     Sleep(1000)
     MouseMove(600, 50)
@@ -62,11 +69,11 @@ FixCamera() {
 
 TeleportToSlayerMaster() {
     AddToLog("Attemping to teleport to the slayer master...")
-    OpenPlayerPanel()
+    CheckAndOpenPanelIfNeeded("PlayerPanel")
+    Sleep(200)
     FixClick(645, 495) ; Teleport To Slayer Master
     Sleep (1000)
     SendInput("{1}")
-    Sleep(2500)
 }
 
 TeleportToSlayerTask(currentTask) {
@@ -75,8 +82,6 @@ TeleportToSlayerTask(currentTask) {
     FixClick(785, 190) ; Open Teleports
     Sleep (1000)
     FixClick(155, 150) ; Click Monsters
-    Sleep (1000)
-    FixClick(135, 205) ; Click so can scroll down list
     Sleep (1000)
     if (SlayerDropDown.Text = "Hard") {
         if (currentTask = "Galvek" or currentTask = "Tormented Demon") {
@@ -88,10 +93,8 @@ TeleportToSlayerTask(currentTask) {
         }
     }
     if (SlayerDropDown.Text = "Elite") {
-        Loop 10 {
-            SendInput("{WheelDown}") ; Scroll To Elite Monsters
-            Sleep(150)
-        }
+        FixClick(225, 385)
+        Sleep (1000)
     }
     FixClick(taskCoords.x, taskCoords.y)
     Sleep(1000)
@@ -99,9 +102,19 @@ TeleportToSlayerTask(currentTask) {
     Sleep(2500)
 }
 
+GetNewInstance(TaskName) {
+    Send("::newroom{Enter}")
+    Sleep(4500)
+    if (TaskName != "Pyrelord") {
+        Send("::newroom{Enter}")
+        Sleep(4500)
+    }
+}
+
 CheckForNoSlayerTask() {
     ; Check for completed slayer task
-    OpenPlayerPanel()
+    CheckAndOpenPanelIfNeeded("PlayerPanel")
+    Sleep(1000)
     if (ok := FindText(&X, &Y, 661, 427, 742, 456, 0, 0, NoSlayerTask)) {
         Sleep(500)
         return true
@@ -117,20 +130,35 @@ ClickCoordsForSlayerTask(SlayerTask) {
         case "Vanguards" : return { x: 135, y: 305 }
         case "Electric Wyrm" : return { x: 135, y: 335 }
         case "Magma Beast" : return { x: 135, y: 365 }
-        case "Sarachnis" : return { x: 135, y: 375 }
+        case "Sarachnis" : return { x: 135, y: 400 }
         case "Galvek" : return { x: 135, y: 370 }
         case "Tormented Demon" : return { x: 135, y: 400 }
         case "Shadow Corp": return { x: 135, y: 205 }
-        case "Abyssal Kurasks": return { x: 135, y: 235 }
-        case "Night Beasts": return { x: 135, y: 265 }
+        case "Abyssal Kurask": return { x: 135, y: 235 }
+        case "Night Beast": return { x: 135, y: 265 }
+        case "Fury Drake" : return { x: 135, y: 305 }
+        case "Shadow Nihil" : return { x: 135, y: 335 }
+        case "Pyrelord" : return { x: 135, y: 365 }
     }
 }
 
 DetectSlayerTask() {
     slayerTasks := Map(
+        "Arcane Nagua", ArcaneNagua,
+        "Spectral Nagua", SpectralNagua,
+        "Elysian Nagua", ElysianNagua,
+        "Vanguards", Vanguards,
+        "Electric Wyrm", ElectricWyrm,
         "Magma Beast", MagmaBeast,
+        "Sarachnis", Sarachnis,
+        "Galvek", Galvek,
         "Tormented Demon", TormentedDemon,
-        "Shadow Corp", ShadowCorp
+        "Shadow Corp", ShadowCorp,
+        "Abyssal Kurask", AbyssalKurask,
+        "Fury Drake", FuryDrake,
+        "Night Beast", NightBeast,
+        "Shadow Nihil", ShadowNihil,
+        "Pyrelord", Pyrelord
     )
     for taskName, pattern in slayerTasks {
         if (ok := FindText(&X, &Y, 612, 426, 799, 457, 0, 0, pattern)) {
@@ -143,31 +171,10 @@ DetectSlayerTask() {
     
 }
 
-OpenPlayerPanel() {
-    if !CheckIfPlayerPanelOpen() {
-        ; If player panel is not found, open it
-        Sleep(500)
-        FixClick(660, 580)  ; Click to open Player Panel
-        Sleep(1500)
-    }
-}
-
-CheckIfPlayerPanelOpen() {
-    searchArea := [642, 563, 673, 595]
-    ; Extract the search area boundaries
-    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
-
-    ; Perform the pixel search
-    if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, 0x441812, 0)) {
-        Sleep (100)
-        return true
-    }
-    return false
-}
-
 HandleMovement(TaskName) {
     AddToLog("Executing Movement for: " TaskName)
-    
+    Sleep(2000)
+    GetNewInstance(TaskName)
     switch TaskName {
         case "Arcane Nagua":
             MoveForArcaneNagua()
@@ -184,11 +191,19 @@ HandleMovement(TaskName) {
         case "Galvek":
             MoveForGalvek()
         case "Tormented Demon":
-            MoveForTormentedDemons()    
+            MoveForTormentedDemons()
         case "Shadow Corp":
             MoveForShadowCorps()
         case "Night Beast":
             MoveForNightBeast()
+        case "Abyssal Kurask":
+            MoveForAbyssalKurask()
+        case "Fury Drake":
+            MoveForFuryDrake()
+        case "Shadow Nihil":
+            MoveForShadowNihil()
+        case "Pyrelord":
+            MoveForPyrelord()     
     }
 }
 
@@ -202,10 +217,10 @@ MoveForShadowCorps() {
 MoveForNightBeast() {
     Fixclick(742, 180, "Left")
     Sleep (10000)
-    Fixclick(767, 170, "Left")
-    Sleep (7000)
-    Fixclick(790, 95, "Left")
-    Sleep (7000)
+    ;Fixclick(767, 170, "Left")
+    ;Sleep (7000)
+    ;Fixclick(790, 95, "Left")
+    ;Sleep (7000)
 }
 
 MoveForArcaneNagua() {
@@ -248,14 +263,34 @@ MoveForSarachnis() {
 }
 
 MoveForGalvek() {
-    Fixclick(750, 75 "Left")
+    Fixclick(750, 75, "Left")
     Sleep (5500)
 }
 
 MoveForTormentedDemons() {
-    Fixclick(790, 115 "Left")
+    Fixclick(790, 115, "Left")
     Sleep (5500)
 }
+
+MoveForAbyssalKurask() {
+
+}
+
+MoveForFuryDrake() {
+    Fixclick(680, 60, "Left")
+    Sleep (5500)
+}
+
+MoveForShadowNihil() {
+    Fixclick(750, 100, "Left")
+    Sleep (5500)
+}
+
+MoveForPyrelord() {
+    Fixclick(775, 110, "Left")
+    Sleep (5500)
+}
+
 
 StartSlayerCombat(TaskName) {
     loop {
@@ -266,34 +301,80 @@ StartSlayerCombat(TaskName) {
     }
 }
 
+ActivatePrayerForTask(TaskName) {
+    global BuffPrayer
+    neededPrayer := GetProtectionPrayerType(TaskName)
+    currentBuffPrayer := BuffPrayer.Text
+    if (neededPrayer != "Unknown") {
+        ReactivatePrayers(neededPrayer, currentBuffPrayer)
+    }
+}
+
+GetProtectionPrayerType(TaskName) {
+    switch TaskName {
+        case "Arcane Nagua":
+            return "Melee"
+        case "Elysian Nagua":
+            return "Melee"
+        case "Spectral Nagua":
+            return "Melee"
+        case "Vanguards":
+            return "Magic"
+        case "Electric Wyrm":
+            return "Magic"    
+        case "Sarachnis":
+            return "Melee"  
+        case "Magma Beast":
+            return "Melee"
+        case "Galvek":
+            return "Melee"
+        case "Tormented Demon":
+            return "Melee"
+        case "Shadow Corp":
+            return "Magic"    
+        case "Night Beast":
+            return "Ranged"
+        case "Fury Drake":
+            return "Magic"  
+        case "Abyssal Kurask":
+            return "Melee"
+        case "Shadow Nihil":
+            return "Magic"
+        case "Pyrelord":
+            return "Melee"    
+    
+        default:
+            return "Unknown"
+    }
+}
+
 KillSlayerMonsters(TaskName) {
     global PrayerPosition, ProtectionPrayer, BuffPrayer, LoadoutPosition, FoodPosition
     global lastBankedTime
+
     currentPrayerSlot := PrayerPosition.Text
-    currentPrayer := ProtectionPrayer.Text
-    currentBuffPrayer := BuffPrayer.Text
     currentFoodSlot := FoodPosition.Text
-    currentLoadout := LoadoutPosition.Text
-    timeElapsed := A_TickCount - lastBankedTime
+
     while !(ok := CheckForHealthBarNoFindText()) {
         CheckForAFKDetection()
         CheckForDisconnect()
+        if (CheckForSpawn()) {
+            return StartSlayer()
+        }
         if (CheckForNoSlayerTask()) {
+            AddToLog("Slayer task finished, restarting...")
             return StartSlayer()
         }
         RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
-        Sleep(1500)
-
-        if (timeElapsed >= BankTimer()) {
-            AddToLog("Bank Timer Reached - Banking Items...")
-            lastBankedTime := A_TickCount
-            BankItems(currentLoadout)
-            AddToLog("Waiting " BankDelay.Text " until banking again.")
-            Sleep(1500)
+        if (CheckIfAlreadyUnderAttack()) {
+            FixClick(410, 335) ; Click Under yourself
+            return true
         }
-        FindAndClickMobsWithVerify(GetColorsForMob(TaskName))
-        Sleep(1500)
+        if (FindAndClickMobsWithVerify(GetColorsForMob(TaskName))) {
+            Sleep(1500)  ; Give time to engage
+        }
+        Sleep(500)  ; Prevent excessive looping
         break
     }
 }

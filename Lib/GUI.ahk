@@ -180,10 +180,10 @@ DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 ;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT;--------------MODE SELECT
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")
 aaMainUI.SetFont("Bold s10 c" uiTheme[6])
-global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["Bosses", "Monsters", "Minigames", "Slayer"])
+global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["AFK", "Bosses", "Monsters", "Minigames", "Slayer"])
 global BossDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Blue Moon", "Electric Demon", "Tekton"])
-global SlayerDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Easy", "Medium", "Hard", "Elite"])
-global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Arcane Nagua", "Electric Wyrm", "Elysian Nagua", "Magma Beasts", "Sarachnis", "Spectral Nagua", "Snow Imps","Tormented Demons", "Vanguards"])
+global SlayerDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Hard", "Elite"])
+global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Arcane Nagua", "Electric Wyrm", "Elysian Nagua", "Magma Beast", "Sarachnis", "Spectral Nagua", "Snow Imps","Tormented Demon", "Vanguards"])
 global MinigameDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Doomcore"])
 global ConfirmButton := aaMainUI.Add("Button", "x1218 y53 w80 h25", "Confirm")
 
