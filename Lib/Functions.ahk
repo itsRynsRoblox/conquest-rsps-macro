@@ -12,7 +12,7 @@ F3:: {
     Reload()
 }
 F4:: {
-    CheckForSpawn()
+    FixClick(220, 210)
     ;TogglePause()
 }
 
@@ -156,6 +156,15 @@ FindAndClickColor(targetColor, searchArea := [0, 0, GetWindowCenter(gameID).Widt
     }
 }
 
+LookForFireball(targetColor := 0x7B3306, searchArea := [61, 73, 538, 389]) {
+    ; Extract the search area boundaries
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+    if (ok :=  PixelSearch(&foundX, &foundY, x1, y1, x2, y2, targetColor, 1)) {
+        MoveBackAndForth()
+        return true
+    }
+}
+
 FindAndClickMob(targetColor, searchArea := [61, 73, 538, 389]) {
     ; Extract the search area boundaries
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
@@ -182,7 +191,7 @@ FindAndClickMobs(targetColors, searchArea := [61, 73, 538, 389]) {
     }
 }
 
-FindAndClickMobsWithVerify(targetColors, searchArea := [61, 73, 538, 389], verifyColor := 0xFFFF0000) {
+FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000) {
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
 
     for color in targetColors {
@@ -191,6 +200,9 @@ FindAndClickMobsWithVerify(targetColors, searchArea := [61, 73, 538, 389], verif
             Sleep (700)
             ; Perform secondary search for verification color in a wider area
             if (PixelSearch(&verifyX, &verifyY, foundX - 25, foundY - 25, foundX + 25, foundY + 25, verifyColor, 2)) {
+                global SuccessfulX, SuccessfulY  ; Allow storing the found position
+                SuccessfulX := foundX
+                SuccessfulY := foundY
                 FixClick(foundX, foundY, "Left")
                 AddToLog("Mob found and verified! Clicked at: X" foundX " Y" foundY)
                 return true
@@ -287,7 +299,9 @@ GetColorsForMob(mobName) {
         "Fury Drake", [0x171414, 0xB30F06], ; Body / Red Glow
         "Night Beast", [0x1A1A26, 0x3D7175], ;Back / Glow Under
         "Shadow Nihil", [0x402E56, 0x402E56],
-        "Pyrelord", [0xFF6332, 0xCB9139] ; Body / Ground Circle
+        "Pyrelord", [0xFF6332, 0xCB9139], ; Body / Ground Circle
+        "Wyvern", [0x545F54, 0x4477AD], ; Zorkath Minion (0x545F54) 0x4A4241
+        "Zorkath", [0x44AF78, 0x221E1E]
     )
     return colors.Has(mobName) ? colors[mobName] : [0x000000, 0x000000]  ; Default fallback
 }
@@ -529,7 +543,7 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
 }
 
 WaitForNoHealthBar() {
-    Sleep 500
+    Sleep 1000
     Loop {
         if !(ok := CheckForHealthBarNoFindText()) {
             Break  ; Exit loop when HP bar is gone
@@ -654,6 +668,201 @@ ActivatePrayerIfInactive(prayer) {
         Return true
     }
     Return false
+}
+
+MoveBackAndForth() {
+    global SuccessfulX, SuccessfulY
+    baseX := 400
+    baseY := 335
+
+    offsetX := 100  ; Distance to move right
+    ; Move to the right and click
+    FixClick(baseX + offsetX, baseY)
+    Sleep(2000)  ; Wait for the movement to complete and ensure the click registers
+
+    ; Move back to the left and click
+    FixClick(baseX - offsetX + 25, baseY)
+    Sleep(2000)  ; Wait for the movement to complete and ensure the click registers
+}
+
+CheckForRedOutline(coords) {
+    if (PixelSearch(&verifyX, &verifyY, coords[1] - 25, coords[2] - 25, coords[1] + 25, coords[2] + 25, 0xFFFF0000, 2)) {
+        return true
+    }
+}
+
+CheckForMinionAndAttack() {
+    MinionCoords := [[275, 190], [575, 190]]  ; Coordinates for the minions
+    for index, coords in MinionCoords {
+        MouseMove(coords[1], coords[2])
+        Sleep(500)
+        if (CheckForRedOutline(coords)) {
+            AddToLog("The wyvern emerges from the shadows, eager for battle.")  
+            FixClick(coords[1], coords[2])
+            WaitForNoHealthBar()
+        } else {
+            AddToLog("The wyvern has vanished into the void... Awaiting its return.")
+            Sleep (1000)
+        }
+    }
+
+}
+
+CheckForZorkathThenAttack() {
+    BossCoords := [[430, 105]]  ; Coordinates for the boss
+    for index, coords in BossCoords {
+        MouseMove(coords[1], coords[2])
+        Sleep(500)
+        if (CheckForRedOutline(coords)) {
+            AddToLog("The air grows heavy... Zorkath has returned.")  
+            FixClick(coords[1], coords[2])
+            WaitForNoHealthBar()
+        } else {
+            AddToLog("Zorkath has vanished... but such darkness never stays away for long.")
+            Sleep (1000)
+        }
+    }
+}
+
+CheckForBossThenAttack(currentBoss) {
+    BossCoords := [GetCoordsForBoss(currentBoss)]
+    for index, coords in BossCoords {
+        MouseMove(coords[1], coords[2])
+        Sleep(500)
+        if (CheckForRedOutline(coords)) {
+            AddToLog("The air grows heavy..." currentBoss " has returned.")  
+            FixClick(coords[1], coords[2])
+            WaitForNoHealthBar()
+        } else {
+            AddToLog(currentBoss " has vanished... but such darkness never stays away for long.")
+            Sleep (1000)
+        }
+    }
+}
+
+CheckForMinionsThenAttack(currentBoss) {
+    MinionCoords := GetMinionCoordsForBoss(currentBoss)
+    
+    ; Only proceed if MinionCoords contains data
+    if (MinionCoords.Length = 0) 
+        return
+
+    for index, coords in MinionCoords {
+        MouseMove(coords[1], coords[2])
+        Sleep(500)
+        if (CheckForRedOutline(coords)) {
+            FixClick(coords[1], coords[2])
+            WaitForNoHealthBar()
+        } else {
+            Sleep(1000)
+        }
+    }
+}
+
+GetMinionCoordsForBoss(currentBoss) {
+    switch currentBoss {
+        case "Zorkath":
+            return [[275, 190], [575, 190]]
+        case "Blue Moon":
+            return [[415, 415], [190, 210], [630, 210]]
+        case "Eclipse Moon":
+            return [[408, 452], [232, 295], [565, 296], [408, 167]]      
+    }
+    return []  ; Return an empty array if no minions exist for this boss
+}
+
+GetCoordsForBoss(currentBoss) {
+    switch currentBoss {
+        case "Blue Moon":
+            return [420, 200]
+        case "Eclipse Moon":
+            return [416, 283]    
+        case "Tekton":
+            return [400, 265]
+        case "Zorkath":
+            return [430, 105]
+        case "Electric Demon":
+            return [360, 450]
+        case "Polar Pup":
+            return [270, 250]
+    }
+    return []  ; Return an empty array if no coords exist for this boss
+}
+
+TeleportToBoss(currentBoss) {
+    AddToLog("Attempting to teleport to " currentBoss "...")
+    bossCoords := ClickCoordsForBoss(currentBoss)
+    FixClick(785, 190) ; Open Teleports
+    Sleep (1000)
+    FixClick(255, 150) ; Click Bosses
+    Sleep (1000)
+
+    bossList := ["Electric Demon", "Magma Cerberus", "Araxxor", "Zorkath", "Yama", "Azzandra", "Polar Pup"]
+    if bossList.Has(currentBoss) {
+        FixClick(220, 380)
+    } else {
+        FixClick(220, 210)
+    }
+    Sleep(1000)
+    FixClick(bossCoords.x, bossCoords.y)
+    Sleep(1000)
+    FixClick(350, 290) ; Click Teleport
+    Sleep(2500)
+}
+
+ClickCoordsForBoss(currentBoss) {
+    switch currentBoss {
+        case "Blood Moon" : return { x: 135, y: 205 }
+        case "Blue Moon" : return { x: 135, y: 235 }
+        case "Eclipse Moon" : return { x: 135, y: 265 }
+        case "Tekton" : return { x: 135, y: 305 }
+        case "Electric Demon" : return { x: 135, y: 205 }
+        case "Magma Cerberus": return { x: 135, y: 235 }
+        case "Araxxor": return { x: 135, y: 265 }
+        case "Zorkath": return { x: 135, y: 305 }
+        case "Yama" : return { x: 135, y: 335 }
+        case "Azzandra" : return { x: 135, y: 365 }
+        case "Polar Pup" : return { x: 135, y: 400 }
+    }
+}
+
+HandleBossMovement(currentBoss) {
+    AddToLog("Executing Movement for: " currentBoss)
+    Sleep(2000)
+
+    switch currentBoss {
+        case "Eclipse Moon":
+            MoveForMoonBosses()
+        case "Electric Demon":
+            MoveForElectricDemon()
+        case "Polar Pup":
+            MoveForPolarPup()
+    }
+
+}
+
+MoveForPolarPup() {
+    FixClick(710, 115) ; Click Teleport
+    Sleep(2500)
+}
+
+MoveForMoonBosses() {
+    FixClick(408, 286)
+    Sleep(2500)
+}
+
+MoveForElectricDemon() {
+    Loop 20 {
+        Send "{DOWN Down}"
+        Sleep 50
+    }
+    Send "{DOWN Up}"
+    Sleep (50)
+    ; Zoom in smoothly
+    Loop 5 {
+        Send "{WheelUp}"
+        Sleep 50
+    }
 }
 
 OpenGithub() {

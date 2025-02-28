@@ -3,6 +3,8 @@
 global macroStartTime := A_TickCount
 global stageStartTime := A_TickCount
 
+global SuccessfulX := 0, SuccessfulY := 0  ; Store initial coordinates
+
 InitializeMacro() {
     if (!ValidateMode()) {
         return
@@ -16,10 +18,10 @@ StartSelectedMode() {
     lastBankedTime := A_TickCount ; Starts Timer
 
     mode := ModeDropdown.Text
-    AddToLog("Starting " . mode)
 
     ; Dispatch to corresponding function based on mode
     if (mode = "Bosses") {
+        FixCamera()
         StartKilling("Bosses")
     }
     else if (mode = "AFK") {
@@ -42,6 +44,10 @@ StartKilling(mode) {
     if (mode = "Bosses") {
         currentEntity := BossDropDown.Text
         AddToLog("Starting " . currentEntity)
+        if (currentEntity = "Polar Pup") {
+            TeleportToBoss(currentEntity)
+            HandleBossMovement(currentEntity)
+        }
     }
     else if (mode = "Monsters") {
         currentEntity := MonsterDropDown.Text
@@ -92,10 +98,6 @@ Fight() {
                 Sleep(1500)
             }
         }
-        if (ModeDropdown.Text = "Bosses") {
-            FindandClickMobs(GetColorsForMob(BossDropDown.Text))
-            Sleep(1500)
-        }
         if (ModeDropdown.Text = "Monsters") {
             FindandClickMobs(GetColorsForMob(MonsterDropDown.Text))
             Sleep(1500)
@@ -121,10 +123,71 @@ StartMoonBossFight() {
 
 FightMoonBoss() {
     ; Kill Minions and Boss
-    MinionCoords := [[412, 392], [254, 240], [570, 242], [417, 233]]  ; Coordinates for the minions and boss
+    MinionCoords := [[405, 460], [180, 255], [640, 250], [417, 233]]  ; Coordinates for the minions and boss
     for index, coords in MinionCoords {
-        FixClick(coords[1], coords[2])
-        WaitForNoHealthBar()
+        MouseMove(coords[1], coords[2])
+        Sleep(500)
+        if (CheckForRedOutline(coords)) {
+            FixClick(coords[1], coords[2])
+            WaitForNoHealthBar()
+        } else {
+            Sleep (1000)
+        }
+    }
+}
+
+FightBoss() {
+    global PrayerPosition, ProtectionPrayer, BuffPrayer, LoadoutPosition, FoodPosition
+    global lastBankedTime
+    currentPrayerSlot := PrayerPosition.Text
+    currentPrayer := ProtectionPrayer.Text
+    currentBuffPrayer := BuffPrayer.Text
+    currentFoodSlot := FoodPosition.Text
+    currentLoadout := LoadoutPosition.Text
+    timeElapsed := A_TickCount - lastBankedTime
+
+    while !(ok := CheckForHealthBarNoFindText()) {
+        if (BossDropDown.Text = "Blue Moon") {
+            while !(ok := FindText(&X, &Y, 584, 31, 803, 208, 0, 0, BlueMoonMinimap)) { ;720-150000, 88-150000, 720+150000, 88+150000
+                CheckForAFKDetection()
+                MoveBackAndForth()
+                Sleep 2500
+            }
+        }
+        if (BossDropDown.Text = "Eclipse Moon") {
+            while !(ok := FindText(&X, &Y, 673, 50, 777, 157, 0, 0, EclipseMoonMinimap)) { ;720-150000, 88-150000, 720+150000, 88+150000
+                CheckForAFKDetection()
+                MoveBackAndForth()
+                Sleep 2500
+            }
+        }
+        if (AutoBankBox.Value) {
+            if (timeElapsed >= BankTimer()) {
+                AddToLog("Bank Timer Reached - Banking Items...")
+                lastBankedTime := A_TickCount
+                BankItems(currentLoadout)
+                AddToLog("Waiting " BankDelay.Text " until banking again.")
+                ReactivatePrayers(currentPrayer, currentBuffPrayer)
+                Sleep(1500)
+            }
+        }
+        CheckForAFKDetection()
+        CheckForDisconnect()
+        RestoreHealthIfNeeded(currentFoodSlot)
+        RestorePrayerIfNeeded(currentPrayerSlot)
+        CheckForMinionsThenAttack(BossDropDown.Text)
+        CheckForBossThenAttack(BossDropDown.Text)
+        break
+    }
+
+    Sleep (2000)
+
+    if (BossDropDown.Text = "Zorkath") {
+        ; Loop while health bar is present
+        while (CheckForHealthBarNoFindText()) {
+            LookForFireball()
+            Sleep 100
+        }
     }
 }
 
@@ -136,11 +199,17 @@ RestartStage() {
 
             switch ModeDropdown.Text {
                 case "Bosses":
-                    if (BossDropDown.Text = "Blue Moon") {
-                        StartMoonBossFight()
-                    } else {
-                        Fight()
+                    if (usingBossMovement) {
+                        TeleportToBoss(BossDropDown.Text)
+                        HandleBossMovement(BossDropDown.Text)
                     }
+                    if (BossDropDown.Text = "Eclipse Moon") {
+                        Send("^h") ; Sends Control + B
+                        Sleep(4000)
+                        TeleportToBoss(BossDropDown.Text)
+                        HandleBossMovement(BossDropDown.Text)
+                    }
+                    FightBoss()
                 default:
                     Fight()
             }

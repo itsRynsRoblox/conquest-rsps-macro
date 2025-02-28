@@ -2,3 +2,4 @@
 
 global testingF4 := false
 global debugMessages := false
+global usingBossMovement := false

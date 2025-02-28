@@ -12959,3 +12959,1723 @@ Configuration settings loaded successfully 00:00
 ==Ryn's Conquest Macro v1.1==
   Start Time: [13h.24m.32s]
 Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.42m.23s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.48m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.48m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.50m.23s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.50m.32s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.50m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.50m.53s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.51m.21s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.51m.32s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.51m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.52m.00s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.52m.09s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.52m.22s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.52m.28s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.52m.38s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.52m.49s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.53m.07s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.55m.44s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.56m.05s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.56m.29s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.56m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.57m.28s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X425 Y94 00:14
+Mob found and verified! Clicked at: X350 Y180 00:24
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.57m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.58m.37s]
+Configuration settings loaded successfully 00:00
+Color match found, but verification color not detected. Skipping click. 00:10
+Mob found and verified! Clicked at: X445 Y177 00:15
+Mob found and verified! Clicked at: X386 Y234 00:21
+Color match found, but verification color not detected. Skipping click. 00:34
+Mob found and verified! Clicked at: X468 Y172 00:35
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [14h.59m.17s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.02m.40s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X419 Y228 00:21
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.03m.20s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.06m.31s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X410 Y161 00:04
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.08m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.09m.09s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.09m.42s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.09m.57s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.10m.56s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X374 Y152 00:02
+Mob found and verified! Clicked at: X426 Y158 00:08
+Mob found and verified! Clicked at: X419 Y154 00:14
+Color match found, but verification color not detected. Skipping click. 00:19
+Color match found, but verification color not detected. Skipping click. 00:20
+Mob found and verified! Clicked at: X383 Y181 00:26
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.11m.24s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.15m.52s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X425 Y174 00:17
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.16m.38s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.17m.09s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y152 00:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.17m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.18m.36s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X399 Y149 00:22
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.19m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.19m.29s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.20m.14s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X417 Y121 00:17
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.23m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.23m.58s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X399 Y151 00:17
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.24m.47s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.25m.00s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X399 Y172 00:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.26m.31s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.28m.03s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X399 Y170 00:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.28m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.29m.01s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X399 Y139 00:14
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.29m.26s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.29m.47s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X397 Y143 00:17
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.30m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.31m.10s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y89 00:02
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.31m.32s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.33m.05s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y92 00:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.33m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.34m.22s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y89 00:12
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.34m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.36m.14s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.37m.43s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y92 00:03
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.37m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.39m.15s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X421 Y89 00:13
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.39m.54s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.41m.16s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y89 00:11
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.41m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.45m.21s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y93 00:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.46m.44s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.47m.16s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y90 00:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.47m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.49m.28s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X399 Y90 00:14
+Fireball incoming... 00:35
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.50m.42s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.51m.07s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y93 00:18
+Fireball incoming... 00:39
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.52m.38s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.55m.00s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y89 00:12
+Fireball incoming... 00:21
+Fireball detected! 00:21
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.56m.27s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.57m.25s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y90 00:14
+Fireball incoming... 00:35
+Fireball detected! 00:35
+Fireball incoming... 01:35
+Fireball detected! 01:35
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [15h.59m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.02m.35s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X275 Y157 00:02
+Mob found and verified! Clicked at: X400 Y89 00:11
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.02m.47s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.03m.46s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.04m.32s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X400 Y89 00:22
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.05m.02s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.05m.06s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.06m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.06m.34s]
+Configuration settings loaded successfully 00:00
+Color match found, but verification color not detected. Skipping click. 00:11
+Color match found, but verification color not detected. Skipping click. 00:12
+Mob found and verified! Clicked at: X576 Y153 00:14
+Mob found and verified! Clicked at: X400 Y89 00:24
+Fireball detected! 00:33
+Fireball detected! 00:57
+Fireball detected! 01:10
+Fireball detected! 01:22
+Fireball detected! 01:34
+Fireball detected! 01:46
+Fireball detected! 01:59
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.09m.30s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.11m.21s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X276 Y137 00:09
+Mob found and verified! Clicked at: X566 Y155 00:17
+Mob found and verified! Clicked at: X403 Y90 00:24
+Fireball detected! 01:09
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.23m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.25m.38s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:10
+Please make sure your Runelite resolution is 816 x 638 00:10
+Starting Bosses 00:10
+Starting Zorkath 00:11
+Color match found, but verification color not detected. Skipping click. 00:12
+Mob found and verified! Clicked at: X309 Y144 00:13
+Color match found, but verification color not detected. Skipping click. 00:24
+Mob found and verified! Clicked at: X424 Y90 00:26
+Fireball detected! 00:34
+Mob found and verified! Clicked at: X448 Y88 00:52
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.26m.32s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.28m.35s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:20
+Please make sure your Runelite resolution is 816 x 638 00:20
+Starting Bosses 00:21
+Starting Zorkath 00:21
+Mob found and verified! Clicked at: X400 Y93 00:23
+Fireball detected! 00:44
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.29m.34s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.32m.08s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:03
+Please make sure your Runelite resolution is 816 x 638 00:03
+Starting Bosses 00:17
+Starting Zorkath 00:17
+Color match found, but verification color not detected. Skipping click. 00:18
+Mob found and verified! Clicked at: X274 Y146 00:20
+Mob found and verified! Clicked at: X581 Y130 00:32
+Mob found and verified! Clicked at: X400 Y76 00:43
+Detected low prayer, restoring... 01:39
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.33m.57s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.34m.16s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:03
+Please make sure your Runelite resolution is 816 x 638 00:03
+Starting Bosses 00:04
+Starting Zorkath 00:04
+Mob found and verified! Clicked at: X259 Y132 00:05
+Mob found and verified! Clicked at: X575 Y120 00:15
+Color match found, but verification color not detected. Skipping click. 00:16
+Mob found and verified! Clicked at: X378 Y153 00:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.35m.22s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.37m.50s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:24
+Please make sure your Runelite resolution is 816 x 638 00:24
+Starting Bosses 00:25
+Starting Zorkath 00:25
+Mob found and verified! Clicked at: X239 Y185 00:26
+Color match found, but verification color not detected. Skipping click. 00:37
+Color match found, but verification color not detected. Skipping click. 00:38
+Color match found, but verification color not detected. Skipping click. 00:39
+Mob found and verified! Clicked at: X563 Y186 00:40
+Mob found and verified! Clicked at: X372 Y118 00:48
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.39m.03s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.40m.13s]
+Configuration settings loaded successfully 00:00
+Mob found and verified! Clicked at: X399 Y76 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:16
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:17
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:18
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:19
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:20
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:21
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:22
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:23
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:24
+Looking for fireball 00:25
+Looking for fireball 00:25
+Looking for fireball 00:25
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.40m.55s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.42m.24s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:15
+Please make sure your Runelite resolution is 816 x 638 00:15
+Starting Bosses 00:16
+Starting Zorkath 00:16
+Color match found, but verification color not detected. Skipping click. 00:17
+Mob found and verified! Clicked at: X583 Y142 00:18
+Mob found and verified! Clicked at: X277 Y146 00:28
+Mob found and verified! Clicked at: X399 Y76 00:35
+Detected low prayer, restoring... 00:58
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.43m.23s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.45m.06s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:12
+Please make sure your Runelite resolution is 816 x 638 00:12
+Starting Bosses 00:16
+Starting Zorkath 00:16
+Mob found and verified! Clicked at: X400 Y76 00:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.46m.13s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.50m.54s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:10
+Please make sure your Runelite resolution is 816 x 638 00:10
+Starting Bosses 00:10
+Starting Zorkath 00:10
+Mob found and verified! Clicked at: X399 Y76 00:13
+Looking for fireball 00:13
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.51m.26s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.51m.54s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:07
+Please make sure your Runelite resolution is 816 x 638 00:07
+Starting Bosses 00:14
+Starting Zorkath 00:14
+Mob found and verified! Clicked at: X400 Y76 00:17
+Looking for fireball 00:17
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.52m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.53m.15s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Bosses 00:16
+Starting Zorkath 00:16
+Mob found and verified! Clicked at: X401 Y76 00:19
+Looking for fireball 00:19
+Looking for fireball 00:52
+Looking for fireball 00:53
+Looking for fireball 00:55
+Looking for fireball 00:57
+Looking for fireball 00:59
+Looking for fireball 01:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.54m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.54m.47s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:05
+Please make sure your Runelite resolution is 816 x 638 00:05
+Starting Bosses 00:06
+Starting Zorkath 00:06
+Detected low prayer, restoring... 00:06
+Mob found and verified! Clicked at: X265 Y140 00:09
+Mob found and verified! Clicked at: X581 Y143 00:14
+Mob found and verified! Clicked at: X400 Y76 00:20
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.55m.21s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.56m.48s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Bosses 00:05
+Starting Zorkath 00:05
+Color match found, but verification color not detected. Skipping click. 00:06
+Color match found, but verification color not detected. Skipping click. 00:07
+Color match found, but verification color not detected. Skipping click. 00:08
+Mob found and verified! Clicked at: X240 Y88 00:09
+Color match found, but verification color not detected. Skipping click. 00:11
+Color match found, but verification color not detected. Skipping click. 00:12
+Mob found and verified! Clicked at: X389 Y35 00:17
+Color match found, but verification color not detected. Skipping click. 00:18
+Color match found, but verification color not detected. Skipping click. 00:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.57m.17s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.59m.06s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:04
+Please make sure your Runelite resolution is 816 x 638 00:05
+Starting Bosses 00:18
+Starting Zorkath 00:18
+Mob found and verified! Clicked at: X587 Y166 00:19
+Color match found, but verification color not detected. Skipping click. 00:20
+Color match found, but verification color not detected. Skipping click. 00:21
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [16h.59m.29s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:03
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Bosses 00:04
+Starting Zorkath 00:04
+Color match found, but verification color not detected. Skipping click. 00:05
+Mob found and verified! Clicked at: X586 Y246 00:06
+Color match found, but verification color not detected. Skipping click. 00:07
+Color match found, but verification color not detected. Skipping click. 00:08
+Mob found and verified! Clicked at: X392 Y172 00:15
+Color match found, but verification color not detected. Skipping click. 00:18
+Mob found and verified! Clicked at: X402 Y300 00:19
+Looking for fireball 00:19
+Detected low prayer, restoring... 02:15
+Mob found and verified! Clicked at: X349 Y233 02:31
+Mob found and verified! Clicked at: X489 Y144 02:42
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.02m.48s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.03m.18s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:07
+Please make sure your Runelite resolution is 816 x 638 00:07
+Starting Bosses 00:15
+Starting Zorkath 00:15
+Color match found, but verification color not detected. Skipping click. 00:16
+Mob found and verified! Clicked at: X567 Y133 00:17
+Color match found, but verification color not detected. Skipping click. 00:18
+Color match found, but verification color not detected. Skipping click. 00:19
+Mob found and verified! Clicked at: X401 Y76 00:24
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.03m.57s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.04m.16s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Bosses 00:17
+Starting Zorkath 00:17
+Mob found and verified! Clicked at: X399 Y76 00:20
+Looking for fireball 00:22
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.05m.53s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.05m.59s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Bosses 00:04
+Starting Zorkath 00:04
+Detected low prayer, restoring... 00:14
+Color match found, but verification color not detected. Skipping click. 00:22
+Mob found and verified! Clicked at: X395 Y78 00:30
+Looking for fireball 00:33
+Detected low prayer, restoring... 01:57
+Color match found, but verification color not detected. Skipping click. 02:22
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.08m.24s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.09m.15s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:17
+Please make sure your Runelite resolution is 816 x 638 00:17
+Starting Bosses 00:18
+Starting Zorkath 00:18
+Mob found and verified! Clicked at: X399 Y76 00:20
+Detected low prayer, restoring... 01:35
+Color match found, but verification color not detected. Skipping click. 01:43
+Mob found and verified! Clicked at: X455 Y77 01:47
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.11m.09s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.28m.19s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:07
+Please make sure your Runelite resolution is 816 x 638 00:07
+Starting Bosses 00:11
+Starting Zorkath 00:11
+Color match found, but verification color not detected. Skipping click. 00:12
+Mob found and verified! Clicked at: X578 Y147 00:13
+Color match found, but verification color not detected. Skipping click. 00:20
+Mob found and verified! Clicked at: X259 Y122 00:21
+Mob found and verified! Clicked at: X399 Y77 00:32
+Detected low prayer, restoring... 02:11
+Color match found, but verification color not detected. Skipping click. 02:19
+Mob found and verified! Clicked at: X459 Y143 02:23
+Mob found and verified! Clicked at: X571 Y72 02:30
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.31m.03s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.32m.20s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.34m.46s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.35m.25s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.35m.31s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.35m.41s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.35m.54s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.36m.14s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.37m.03s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.37m.30s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.37m.39s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.37m.59s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.38m.13s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.38m.23s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.38m.37s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.38m.45s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.38m.53s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.39m.59s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:14
+Please make sure your Runelite resolution is 816 x 638 00:14
+Starting Bosses 00:15
+Starting Zorkath 00:15
+Color match found, but verification color not detected. Skipping click. 00:16
+Mob found and verified! Clicked at: X400 Y90 00:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.40m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.40m.49s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:15
+Please make sure your Runelite resolution is 816 x 638 00:15
+Starting Bosses 00:16
+Starting Zorkath 00:16
+Color match found, but verification color not detected. Skipping click. 00:17
+Mob found and verified! Clicked at: X552 Y180 00:18
+Mob found and verified! Clicked at: X400 Y93 00:28
+Detected low prayer, restoring... 01:47
+Color match found, but verification color not detected. Skipping click. 02:05
+Mob found and verified! Clicked at: X568 Y133 02:06
+Mob found and verified! Clicked at: X279 Y153 02:12
+Mob found and verified! Clicked at: X412 Y103 02:21
+Detected low prayer, restoring... 03:28
+Mob found and verified! Clicked at: X563 Y151 03:46
+Mob found and verified! Clicked at: X267 Y158 03:55
+Mob found and verified! Clicked at: X409 Y91 04:02
+Detected low prayer, restoring... 04:58
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.46m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.57m.13s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Bosses 00:05
+Starting Zorkath 00:05
+Color match found, but verification color not detected. Skipping click. 00:06
+Mob found and verified! Clicked at: X568 Y133 00:07
+Color match found, but verification color not detected. Skipping click. 00:08
+Color match found, but verification color not detected. Skipping click. 00:09
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.57m.23s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.58m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.59m.33s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [17h.59m.51s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.00m.21s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.02m.12s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:06
+Please make sure your Runelite resolution is 816 x 638 00:06
+Starting Bosses 00:07
+Starting Zorkath 00:07
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.02m.28s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.02m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.03m.23s]
+Configuration settings loaded successfully 00:00
+Selected Zorkath 00:26
+Please make sure your Runelite resolution is 816 x 638 00:26
+Starting Bosses 00:27
+Starting Zorkath 00:27
+Wyvern is not there... 00:27
+Wyvern is not there... 00:29
+Wyvern is not there... 01:46
+Wyvern is not there... 01:48
+Zorkath is not there... 01:50
+Detected low prayer, restoring... 01:53
+Wyvern is not there... 01:55
+Wyvern is not there... 01:57
+Zorkath is not there... 01:59
+Detected low prayer, restoring... 03:52
+Wyvern is not there... 03:55
+Wyvern is not there... 03:56
+Zorkath is not there... 03:58
+Wyvern is not there... 04:02
+Wyvern is not there... 04:03
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.07m.27s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.10m.11s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.21m.53s]
+Configuration settings loaded successfully 00:00
+Selected Electric Demon 00:11
+Please make sure your Runelite resolution is 816 x 638 00:11
+Starting Bosses 00:12
+Starting Electric Demon 00:12
+Attempting to teleport to Electric Demon... 00:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.22m.20s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.22m.47s]
+Configuration settings loaded successfully 00:00
+Selected Electric Demon 00:08
+Please make sure your Runelite resolution is 816 x 638 00:08
+Starting Bosses 00:08
+Starting Electric Demon 00:08
+Attempting to teleport to Electric Demon... 00:14
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.23m.08s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.24m.43s]
+Configuration settings loaded successfully 00:00
+Selected Electric Demon 00:09
+Please make sure your Runelite resolution is 816 x 638 00:09
+Starting Bosses 00:09
+Starting Electric Demon 00:09
+Attempting to teleport to Electric Demon... 00:15
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.25m.05s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.25m.50s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.25m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.26m.19s]
+Configuration settings loaded successfully 00:00
+Selected Electric Demon 00:03
+Please make sure your Runelite resolution is 816 x 638 00:03
+Starting Bosses 00:04
+Starting Electric Demon 00:04
+Attempting to teleport to Electric Demon... 00:10
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.26m.38s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.28m.21s]
+Configuration settings loaded successfully 00:00
+Selected Electric Demon 00:08
+Please make sure your Runelite resolution is 816 x 638 00:08
+Starting Bosses 00:09
+Starting Electric Demon 00:09
+Attempting to teleport to Electric Demon... 00:14
+Mob found and clicked at: X408 Y320 with color: 794686 00:24
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.28m.47s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.37m.27s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.37m.47s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.38m.43s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.39m.35s]
+Configuration settings loaded successfully 00:00
+Selected Electric Demon 00:03
+Please make sure your Runelite resolution is 816 x 638 00:03
+Starting Bosses 00:04
+Starting Electric Demon 00:04
+Mob found and clicked at: X412 Y281 with color: 794686 00:12
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.40m.28s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.48m.10s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.49m.41s]
+Configuration settings loaded successfully 00:00
+Selected Electric Demon 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Electric Demon 00:10
+The air grows heavy...Electric Demon has returned. 00:12
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.49m.58s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.53m.00s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:03
+Please make sure your Runelite resolution is 816 x 638 00:04
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.53m.10s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:06
+Please make sure your Runelite resolution is 816 x 638 00:06
+Starting Blue Moon 00:12
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.53m.43s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.54m.38s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:03
+Please make sure your Runelite resolution is 816 x 638 00:03
+Starting Blue Moon 00:10
+Detected low prayer, restoring... 00:10
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [18h.55m.55s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.05m.20s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:13
+Please make sure your Runelite resolution is 816 x 638 00:13
+Starting Blue Moon 00:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.05m.48s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.07m.20s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:06
+Please make sure your Runelite resolution is 816 x 638 00:06
+Starting Blue Moon 00:13
+Detected low prayer, restoring... 00:13
+Blue Moon has vanished... but such darkness never stays away for long. 00:26
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.07m.48s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.08m.13s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:05
+Please make sure your Runelite resolution is 816 x 638 00:05
+Starting Blue Moon 00:12
+The air grows heavy...Blue Moon has returned. 00:17
+Detected low prayer, restoring... 00:38
+Blue Moon has vanished... but such darkness never stays away for long. 00:45
+The air grows heavy...Blue Moon has returned. 00:58
+Blue Moon has vanished... but such darkness never stays away for long. 01:21
+The air grows heavy...Blue Moon has returned. 01:29
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.10m.15s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.12m.02s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:06
+Please make sure your Runelite resolution is 816 x 638 00:06
+Starting Blue Moon 00:12
+Blue Moon has vanished... but such darkness never stays away for long. 00:27
+Detected low prayer, restoring... 01:05
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.13m.12s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:17
+Please make sure your Runelite resolution is 816 x 638 00:17
+Starting Blue Moon 00:24
+The air grows heavy...Blue Moon has returned. 00:35
+Detected low prayer, restoring... 01:09
+The air grows heavy...Blue Moon has returned. 01:26
+Blue Moon has vanished... but such darkness never stays away for long. 02:04
+Detected low prayer, restoring... 02:07
+Blue Moon has vanished... but such darkness never stays away for long. 02:14
+Blue Moon has vanished... but such darkness never stays away for long. 02:23
+Blue Moon has vanished... but such darkness never stays away for long. 02:32
+Blue Moon has vanished... but such darkness never stays away for long. 02:41
+Blue Moon has vanished... but such darkness never stays away for long. 02:50
+Blue Moon has vanished... but such darkness never stays away for long. 02:58
+Detected low prayer, restoring... 03:02
+Blue Moon has vanished... but such darkness never stays away for long. 03:09
+Blue Moon has vanished... but such darkness never stays away for long. 03:18
+Blue Moon has vanished... but such darkness never stays away for long. 03:26
+Blue Moon has vanished... but such darkness never stays away for long. 03:35
+Blue Moon has vanished... but such darkness never stays away for long. 03:44
+Blue Moon has vanished... but such darkness never stays away for long. 03:53
+Detected low prayer, restoring... 03:56
+Blue Moon has vanished... but such darkness never stays away for long. 04:03
+Blue Moon has vanished... but such darkness never stays away for long. 04:46
+Blue Moon has vanished... but such darkness never stays away for long. 04:55
+Detected low prayer, restoring... 04:58
+Blue Moon has vanished... but such darkness never stays away for long. 05:06
+Blue Moon has vanished... but such darkness never stays away for long. 05:14
+Blue Moon has vanished... but such darkness never stays away for long. 05:23
+Blue Moon has vanished... but such darkness never stays away for long. 05:32
+Blue Moon has vanished... but such darkness never stays away for long. 05:41
+Blue Moon has vanished... but such darkness never stays away for long. 05:50
+Detected low prayer, restoring... 05:53
+Blue Moon has vanished... but such darkness never stays away for long. 06:00
+Blue Moon has vanished... but such darkness never stays away for long. 06:09
+Blue Moon has vanished... but such darkness never stays away for long. 06:18
+Blue Moon has vanished... but such darkness never stays away for long. 06:26
+Blue Moon has vanished... but such darkness never stays away for long. 06:35
+Blue Moon has vanished... but such darkness never stays away for long. 06:44
+Detected low prayer, restoring... 07:22
+Blue Moon has vanished... but such darkness never stays away for long. 07:29
+Blue Moon has vanished... but such darkness never stays away for long. 07:38
+Blue Moon has vanished... but such darkness never stays away for long. 07:47
+Blue Moon has vanished... but such darkness never stays away for long. 07:56
+Blue Moon has vanished... but such darkness never stays away for long. 08:05
+Blue Moon has vanished... but such darkness never stays away for long. 08:14
+Detected low prayer, restoring... 08:17
+Blue Moon has vanished... but such darkness never stays away for long. 08:24
+Blue Moon has vanished... but such darkness never stays away for long. 08:33
+Blue Moon has vanished... but such darkness never stays away for long. 08:42
+Blue Moon has vanished... but such darkness never stays away for long. 08:50
+Blue Moon has vanished... but such darkness never stays away for long. 08:59
+Blue Moon has vanished... but such darkness never stays away for long. 09:08
+Detected low prayer, restoring... 09:11
+Blue Moon has vanished... but such darkness never stays away for long. 09:18
+Blue Moon has vanished... but such darkness never stays away for long. 09:27
+Blue Moon has vanished... but such darkness never stays away for long. 10:05
+Detected low prayer, restoring... 10:08
+Blue Moon has vanished... but such darkness never stays away for long. 10:15
+Blue Moon has vanished... but such darkness never stays away for long. 10:24
+Blue Moon has vanished... but such darkness never stays away for long. 10:33
+Blue Moon has vanished... but such darkness never stays away for long. 10:41
+Blue Moon has vanished... but such darkness never stays away for long. 10:50
+Blue Moon has vanished... but such darkness never stays away for long. 10:59
+Detected low prayer, restoring... 11:02
+Blue Moon has vanished... but such darkness never stays away for long. 11:09
+Blue Moon has vanished... but such darkness never stays away for long. 11:18
+Blue Moon has vanished... but such darkness never stays away for long. 11:27
+Blue Moon has vanished... but such darkness never stays away for long. 11:36
+Blue Moon has vanished... but such darkness never stays away for long. 11:45
+Blue Moon has vanished... but such darkness never stays away for long. 11:54
+Blue Moon has vanished... but such darkness never stays away for long. 12:02
+Detected low prayer, restoring... 12:36
+Blue Moon has vanished... but such darkness never stays away for long. 12:44
+Blue Moon has vanished... but such darkness never stays away for long. 12:52
+Blue Moon has vanished... but such darkness never stays away for long. 13:01
+Blue Moon has vanished... but such darkness never stays away for long. 13:10
+Blue Moon has vanished... but such darkness never stays away for long. 13:19
+Blue Moon has vanished... but such darkness never stays away for long. 13:28
+Detected low prayer, restoring... 13:31
+Blue Moon has vanished... but such darkness never stays away for long. 13:38
+Blue Moon has vanished... but such darkness never stays away for long. 13:47
+Blue Moon has vanished... but such darkness never stays away for long. 13:56
+Blue Moon has vanished... but such darkness never stays away for long. 14:04
+Blue Moon has vanished... but such darkness never stays away for long. 14:13
+Blue Moon has vanished... but such darkness never stays away for long. 14:22
+Detected low prayer, restoring... 14:25
+Blue Moon has vanished... but such darkness never stays away for long. 14:32
+Blue Moon has vanished... but such darkness never stays away for long. 14:41
+Blue Moon has vanished... but such darkness never stays away for long. 15:20
+Detected low prayer, restoring... 15:23
+Blue Moon has vanished... but such darkness never stays away for long. 15:31
+Blue Moon has vanished... but such darkness never stays away for long. 15:39
+Blue Moon has vanished... but such darkness never stays away for long. 15:48
+Blue Moon has vanished... but such darkness never stays away for long. 15:57
+Blue Moon has vanished... but such darkness never stays away for long. 16:06
+Blue Moon has vanished... but such darkness never stays away for long. 16:15
+Detected low prayer, restoring... 16:18
+Blue Moon has vanished... but such darkness never stays away for long. 16:25
+Blue Moon has vanished... but such darkness never stays away for long. 16:34
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.29m.47s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.34m.47s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:03
+Please make sure your Runelite resolution is 816 x 638 00:03
+Starting Blue Moon 00:10
+The air grows heavy...Blue Moon has returned. 00:24
+Detected low prayer, restoring... 01:04
+The air grows heavy...Blue Moon has returned. 01:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.36m.52s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.37m.55s]
+Configuration settings loaded successfully 00:00
+Selected Blue Moon 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Blue Moon 00:11
+The air grows heavy...Blue Moon has returned. 00:21
+The air grows heavy...Blue Moon has returned. 01:10
+Detected low prayer, restoring... 01:46
+The air grows heavy...Blue Moon has returned. 01:58
+The air grows heavy...Blue Moon has returned. 02:41
+Detected low prayer, restoring... 03:16
+The air grows heavy...Blue Moon has returned. 03:33
+Detected low prayer, restoring... 04:12
+The air grows heavy...Blue Moon has returned. 04:23
+The air grows heavy...Blue Moon has returned. 05:06
+Detected low prayer, restoring... 05:48
+The air grows heavy...Blue Moon has returned. 06:02
+The air grows heavy...Blue Moon has returned. 06:45
+Detected low prayer, restoring... 07:38
+The air grows heavy...Blue Moon has returned. 07:50
+The air grows heavy...Blue Moon has returned. 08:40
+Detected low prayer, restoring... 09:18
+The air grows heavy...Blue Moon has returned. 09:29
+The air grows heavy...Blue Moon has returned. 10:21
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [19h.48m.43s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.08m.11s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.08m.32s]
+Configuration settings loaded successfully 00:00
+Selected Polar Pup 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Polar Pup 00:11
+Attempting to teleport to Polar Pup... 00:11
+Executing Movement for: Polar Pup 00:19
+Polar Pup has vanished... but such darkness never stays away for long. 00:25
+Attempting to teleport to Polar Pup... 00:28
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.09m.04s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.10m.05s]
+Configuration settings loaded successfully 00:00
+Selected Polar Pup 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Polar Pup 00:10
+Attempting to teleport to Polar Pup... 00:10
+Executing Movement for: Polar Pup 00:18
+Polar Pup has vanished... but such darkness never stays away for long. 00:24
+Polar Pup has vanished... but such darkness never stays away for long. 00:28
+Polar Pup has vanished... but such darkness never stays away for long. 00:31
+Polar Pup has vanished... but such darkness never stays away for long. 00:35
+Polar Pup has vanished... but such darkness never stays away for long. 00:39
+Polar Pup has vanished... but such darkness never stays away for long. 00:43
+Polar Pup has vanished... but such darkness never stays away for long. 00:46
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.10m.54s]
+Configuration settings loaded successfully 00:00
+Selected Polar Pup 01:29
+Please make sure your Runelite resolution is 816 x 638 01:29
+Starting Polar Pup 01:36
+Attempting to teleport to Polar Pup... 01:36
+Executing Movement for: Polar Pup 01:44
+Polar Pup has vanished... but such darkness never stays away for long. 01:49
+Polar Pup has vanished... but such darkness never stays away for long. 01:53
+Polar Pup has vanished... but such darkness never stays away for long. 01:57
+Polar Pup has vanished... but such darkness never stays away for long. 02:00
+Polar Pup has vanished... but such darkness never stays away for long. 02:04
+Polar Pup has vanished... but such darkness never stays away for long. 02:08
+Polar Pup has vanished... but such darkness never stays away for long. 02:11
+Polar Pup has vanished... but such darkness never stays away for long. 02:15
+Polar Pup has vanished... but such darkness never stays away for long. 02:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.13m.16s]
+Configuration settings loaded successfully 00:00
+Selected Polar Pup 00:08
+Please make sure your Runelite resolution is 816 x 638 00:09
+Starting Polar Pup 00:15
+Attempting to teleport to Polar Pup... 00:15
+Executing Movement for: Polar Pup 00:23
+Polar Pup has vanished... but such darkness never stays away for long. 00:28
+Polar Pup has vanished... but such darkness never stays away for long. 00:32
+Polar Pup has vanished... but such darkness never stays away for long. 00:36
+Polar Pup has vanished... but such darkness never stays away for long. 00:39
+Polar Pup has vanished... but such darkness never stays away for long. 00:43
+Polar Pup has vanished... but such darkness never stays away for long. 00:47
+Polar Pup has vanished... but such darkness never stays away for long. 00:50
+Polar Pup has vanished... but such darkness never stays away for long. 00:54
+Detected low prayer, restoring... 00:57
+Polar Pup has vanished... but such darkness never stays away for long. 00:59
+Polar Pup has vanished... but such darkness never stays away for long. 01:03
+Polar Pup has vanished... but such darkness never stays away for long. 01:07
+Polar Pup has vanished... but such darkness never stays away for long. 01:10
+Polar Pup has vanished... but such darkness never stays away for long. 01:14
+Polar Pup has vanished... but such darkness never stays away for long. 01:18
+Polar Pup has vanished... but such darkness never stays away for long. 01:21
+Polar Pup has vanished... but such darkness never stays away for long. 01:25
+Polar Pup has vanished... but such darkness never stays away for long. 01:29
+Polar Pup has vanished... but such darkness never stays away for long. 01:33
+Polar Pup has vanished... but such darkness never stays away for long. 01:36
+Polar Pup has vanished... but such darkness never stays away for long. 01:40
+Polar Pup has vanished... but such darkness never stays away for long. 01:44
+Polar Pup has vanished... but such darkness never stays away for long. 01:47
+Polar Pup has vanished... but such darkness never stays away for long. 01:51
+Detected low prayer, restoring... 01:54
+Polar Pup has vanished... but such darkness never stays away for long. 01:56
+Polar Pup has vanished... but such darkness never stays away for long. 02:00
+Polar Pup has vanished... but such darkness never stays away for long. 02:04
+Polar Pup has vanished... but such darkness never stays away for long. 02:07
+Polar Pup has vanished... but such darkness never stays away for long. 02:11
+Polar Pup has vanished... but such darkness never stays away for long. 02:15
+Polar Pup has vanished... but such darkness never stays away for long. 02:18
+Polar Pup has vanished... but such darkness never stays away for long. 02:22
+Polar Pup has vanished... but such darkness never stays away for long. 02:26
+Polar Pup has vanished... but such darkness never stays away for long. 02:29
+Polar Pup has vanished... but such darkness never stays away for long. 02:33
+Polar Pup has vanished... but such darkness never stays away for long. 02:37
+Polar Pup has vanished... but such darkness never stays away for long. 02:40
+Polar Pup has vanished... but such darkness never stays away for long. 02:44
+Polar Pup has vanished... but such darkness never stays away for long. 02:48
+Detected low prayer, restoring... 02:51
+Polar Pup has vanished... but such darkness never stays away for long. 02:53
+Polar Pup has vanished... but such darkness never stays away for long. 02:57
+Polar Pup has vanished... but such darkness never stays away for long. 03:00
+Polar Pup has vanished... but such darkness never stays away for long. 03:04
+Polar Pup has vanished... but such darkness never stays away for long. 03:08
+Polar Pup has vanished... but such darkness never stays away for long. 03:12
+The air grows heavy...Polar Pup has returned. 03:15
+Polar Pup has vanished... but such darkness never stays away for long. 03:28
+Polar Pup has vanished... but such darkness never stays away for long. 03:32
+Polar Pup has vanished... but such darkness never stays away for long. 03:36
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.16m.53s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.25m.44s]
+Configuration settings loaded successfully 00:00
+Selected Polar Pup 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Polar Pup 00:10
+Attempting to teleport to Polar Pup... 00:10
+Executing Movement for: Polar Pup 00:18
+Polar Pup has vanished... but such darkness never stays away for long. 00:24
+Detected low prayer, restoring... 00:27
+Polar Pup has vanished... but such darkness never stays away for long. 00:29
+Polar Pup has vanished... but such darkness never stays away for long. 00:33
+Polar Pup has vanished... but such darkness never stays away for long. 00:37
+Polar Pup has vanished... but such darkness never stays away for long. 00:40
+Polar Pup has vanished... but such darkness never stays away for long. 00:44
+Polar Pup has vanished... but such darkness never stays away for long. 00:48
+Polar Pup has vanished... but such darkness never stays away for long. 00:51
+Polar Pup has vanished... but such darkness never stays away for long. 00:55
+Polar Pup has vanished... but such darkness never stays away for long. 00:59
+Polar Pup has vanished... but such darkness never stays away for long. 01:02
+Polar Pup has vanished... but such darkness never stays away for long. 01:06
+The air grows heavy...Polar Pup has returned. 01:10
+Detected low prayer, restoring... 01:21
+Polar Pup has vanished... but such darkness never stays away for long. 01:23
+Polar Pup has vanished... but such darkness never stays away for long. 01:27
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [20h.27m.12s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.01m.26s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.08m.13s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.08m.28s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.08m.35s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:06
+Please make sure your Runelite resolution is 816 x 638 00:06
+Starting Eclipse Moon 00:13
+Eclipse Moon has vanished... but such darkness never stays away for long. 00:20
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.08m.56s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.09m.19s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Eclipse Moon 00:11
+Attempting to teleport to Eclipse Moon... 00:11
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.09m.36s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.10m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.10m.24s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Eclipse Moon 00:12
+Attempting to teleport to Eclipse Moon... 00:12
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.10m.40s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.11m.53s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Eclipse Moon 00:11
+Attempting to teleport to Eclipse Moon... 00:11
+Executing Movement for: Eclipse Moon 00:19
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.12m.18s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.13m.07s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:06
+Please make sure your Runelite resolution is 816 x 638 00:06
+Starting Eclipse Moon 00:13
+Attempting to teleport to Eclipse Moon... 00:13
+Executing Movement for: Eclipse Moon 00:21
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.13m.32s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Eclipse Moon 00:11
+Attempting to teleport to Eclipse Moon... 00:12
+Executing Movement for: Eclipse Moon 00:20
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.13m.59s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.14m.32s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:06
+Please make sure your Runelite resolution is 816 x 638 00:06
+Starting Eclipse Moon 00:21
+Attempting to teleport to Eclipse Moon... 00:21
+Executing Movement for: Eclipse Moon 00:29
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.15m.24s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.15m.49s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:07
+Please make sure your Runelite resolution is 816 x 638 00:08
+Starting Eclipse Moon 00:19
+Attempting to teleport to Eclipse Moon... 00:19
+Executing Movement for: Eclipse Moon 00:27
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.16m.34s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.16m.58s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:07
+Please make sure your Runelite resolution is 816 x 638 00:07
+Starting Eclipse Moon 00:14
+Attempting to teleport to Eclipse Moon... 00:14
+Executing Movement for: Eclipse Moon 00:22
+Detected low prayer, restoring... 00:27
+Eclipse Moon has vanished... but such darkness never stays away for long. 00:44
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.17m.44s]
+Configuration settings loaded successfully 00:00
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.18m.31s]
+Configuration settings loaded successfully 00:00
+Selected Eclipse Moon 00:05
+Please make sure your Runelite resolution is 816 x 638 00:05
+Starting Eclipse Moon 00:12
+Attempting to teleport to Eclipse Moon... 00:12
+Executing Movement for: Eclipse Moon 00:20
+The air grows heavy...Eclipse Moon has returned. 00:41
+Attempting to teleport to Eclipse Moon... 01:06
+Executing Movement for: Eclipse Moon 01:14
+Detected low prayer, restoring... 01:18
+
+==Ryn's Conquest Macro v1.2==
+  Start Time: [21h.19m.51s]
+Configuration settings loaded successfully 00:00

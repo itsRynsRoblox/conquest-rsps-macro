@@ -55,15 +55,27 @@ FixCamera() {
         Send "{UP Down}"
         Sleep 50
     }
+    Send "{UP Up}"
+    Sleep (50)
     ; Zoom in smoothly
     Loop 30 {
         Send "{WheelUp}"
         Sleep 50
     }
-    ; Zoom back out smoothly
-    Loop 10 {
-        Send "{WheelDown}"
-        Sleep 50
+    if (ModeDropdown.Text = "Bosses") {
+        if (BossDropDown.Text = "Eclipse Moon") {
+            ; Zoom back out to max
+            Loop 30 {
+                Send "{WheelDown}"
+                Sleep 50
+            }
+        }
+    } else {
+        ; Zoom back out smoothly
+        Loop 10 {
+            Send "{WheelDown}"
+            Sleep 50
+        }
     }
 }
 
@@ -349,32 +361,32 @@ GetProtectionPrayerType(TaskName) {
 }
 
 KillSlayerMonsters(TaskName) {
-    global PrayerPosition, ProtectionPrayer, BuffPrayer, LoadoutPosition, FoodPosition
-    global lastBankedTime
+    global PrayerPosition, ProtectionPrayer, BuffPrayer, LoadoutPosition, FoodPosition, lastBankedTime
 
     currentPrayerSlot := PrayerPosition.Text
     currentFoodSlot := FoodPosition.Text
 
-    while !(ok := CheckForHealthBarNoFindText()) {
+    while !CheckForHealthBarNoFindText() {  ; Loop while health bar is not found
         CheckForAFKDetection()
         CheckForDisconnect()
-        if (CheckForSpawn()) {
-            return StartSlayer()
-        }
-        if (CheckForNoSlayerTask()) {
+        
+        if CheckForSpawn() || CheckForNoSlayerTask() {
             AddToLog("Slayer task finished, restarting...")
             return StartSlayer()
         }
+
         RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
-        if (CheckIfAlreadyUnderAttack()) {
-            FixClick(410, 335) ; Click Under yourself
+
+        if CheckIfAlreadyUnderAttack() {
+            FixClick(410, 335)  ; Click under yourself
             return true
         }
-        if (FindAndClickMobsWithVerify(GetColorsForMob(TaskName))) {
-            Sleep(1500)  ; Give time to engage
+
+        if FindAndClickMobsWithVerify(GetColorsForMob(TaskName)) {
+            Sleep(1500)  ; Give time to engage before retrying
+        } else {
+            Sleep(500)  ; Shorter delay if no mob was found
         }
-        Sleep(500)  ; Prevent excessive looping
-        break
     }
 }
