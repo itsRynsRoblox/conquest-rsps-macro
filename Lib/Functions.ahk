@@ -15,7 +15,7 @@ F4:: {
     TogglePause()
 }
 F5:: {
-    FixCamera()
+    CheckIfVenomed()
 }
 
 TogglePause(*) {
@@ -151,7 +151,7 @@ FindAndClickColor(targetColor, searchArea := [0, 0, GetWindowCenter(gameID).Widt
     ; Perform the pixel search
     if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, targetColor, 1)) {
         ; Color found, click on the detected coordinates
-        FixClick(foundX + 10, foundY + 5, "Left")
+        FixClick(foundX + 1, foundY, "Left")
         AddToLog("Color found and clicked at: X" foundX " Y" foundY)
         return true
 
@@ -196,17 +196,22 @@ FindAndClickMobs(targetColors, searchArea := [61, 73, 538, 389]) {
 FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000) {
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
 
+    ; Predefine the verification search area around the found target
+    verifyArea := [-25, -25, 25, 25]  ; Adjustable offset for verification
+
     for color in targetColors {
+        ; Perform a faster search for the target color
         if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
             MouseMove(foundX, foundY)
-            Sleep (700)
-            ; Perform secondary search for verification color in a wider area
-            if (PixelSearch(&verifyX, &verifyY, foundX - 25, foundY - 25, foundX + 25, foundY + 25, verifyColor, 2)) {
+            ; Perform the verification search for the verifyColor around the found target area
+            if (PixelSearch(&verifyX, &verifyY, foundX + verifyArea[1], foundY + verifyArea[2], foundX + verifyArea[3], foundY + verifyArea[4], verifyColor, 2)) {
                 FixClick(foundX, foundY, "Left")
-                AddToLog("Mob found and verified! Clicked at: X" foundX " Y" foundY)
+                AddToLog("✅ Mob found and verified! Clicked at: X" foundX " Y" foundY)
                 return true
             } else {
-                AddToLog("Color match found, but verification color not detected. Skipping click.")
+                if (debugMessages) {
+                    AddToLog("⚠ Color match found, but verification color not detected. Skipping click.")
+                }
             }
         }
     }
@@ -253,7 +258,7 @@ CheckForHealthBar() {
 }
 
 CheckForHealthBarNoFindText() {
-    searchArea := [7, 67, 128, 89]
+    searchArea := [7, 67, 128, 89] ;0x4B4539/0x1F722B
     ; Extract the search area boundaries
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
 
@@ -262,6 +267,7 @@ CheckForHealthBarNoFindText() {
         Sleep (100)
         return true
     }
+
     return false
 }
 
@@ -346,11 +352,7 @@ RestorePrayerIfNeeded(PrayerPosition) {
             clickCoords := ClickCoordsForPrayerPotion(PrayerPosition)
             AddToLog("Detected low prayer, restoring...")
             CheckAndOpenPanelIfNeeded("Inventory")
-            Sleep(500)
             FixClick(clickCoords.x, clickCoords.y) ; Click on prayer potion
-            Sleep 500
-            ;FixClick(700, 560) ; Close Inventory
-            ;Sleep(500)
         }
     }
 }
@@ -358,16 +360,12 @@ RestorePrayerIfNeeded(PrayerPosition) {
 RestoreHealthIfNeeded(FoodPosition) {
     foundX := foundY := 0
     if (AutoFoodBox.Value) {
-        if (PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFFFF00, 3) ; First color check
-            || PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFCA607, 3)) { ; Second color check
+        if (PixelSearch(&foundX, &foundY, 621, 78, 643, 99, 0xFFFF00, 3) ; First color check
+            || PixelSearch(&foundX, &foundY, 621, 78, 643, 99, 0xFCA607, 3)) { ; Second color check
             clickCoords := ClickCoordsForFood(FoodPosition)
             AddToLog("Detected low health, restoring...")
             CheckAndOpenPanelIfNeeded("Inventory")
-            Sleep(500)
             FixClick(clickCoords.x, clickCoords.y) ; Click on prayer potion
-            Sleep 500
-            FixClick(700, 560) ; Close Inventory
-            Sleep(500)
         }
     }
 }
@@ -412,14 +410,14 @@ BankItems(LoadoutPosition) {
     CheckForFrozenFragment()
     Sleep(500)
     Send("^b") ; Sends Control + B
-    Sleep(1000)
+    WaitForInterface("Bank")
     FixClick(525, 150) ; Click Preset
-    Sleep(1000)
+    Sleep(500)
     LoadPreset(LoadoutPosition) ; Click Selected Preset
     FixClick(130, 400) ; Load Preset
-    Sleep(1000)
+    Sleep(500)
     FixClick(537, 120) ; Close Preset
-    Sleep(1000)
+    Sleep(2000)
 }
 
 LoadPreset(LoadoutPosition) {
@@ -448,18 +446,10 @@ ReactivatePrayers(ProtectionPrayer, BuffPrayer) {
 
     ; Open PrayerTab if not already open
     CheckAndOpenPanelIfNeeded("PrayerTab")
-    Sleep(1000)
 
     ; Click the prayers
     ActivatePrayerIfInactive(ProtectionPrayer)
-    Sleep(1000)
-
     ActivatePrayerIfInactive(BuffPrayer)
-    Sleep(1000)
-
-    ; Close PrayerTab
-    FixClick(760, 580)
-    Sleep 1000
 }
 
 ClickCoordsForPrayer(ProtectionPrayer) {
@@ -490,23 +480,9 @@ CheckForFrozenFragment() {
     return false
 }
 
-CheckInCombat() {
-    loop {
-        Sleep(200)
-        ; Check for health bar
-        if (ok := FindText(&X, &Y, 0, 34, 138, 98, 0, 0, HealthBar)) {
-            AddToLog("Found Health Bar - In Combat")
-            Sleep(1000)
-            break
-        }
-        RestartStage()
-    }
-}
-
 CheckForSpawn() {
     ; Check for spawn booths
     if (ok := FindText(&X, &Y, 186, 177, 231, 230, 0, 0, InformationBooth)) {
-        AddToLog("Found in spawn, restarting...")
         return true
     }
     return false
@@ -715,51 +691,18 @@ CheckForRedOutline(coords) {
     }
 }
 
-CheckForMinionAndAttack() {
-    MinionCoords := [[275, 190], [575, 190]]  ; Coordinates for the minions
-    for index, coords in MinionCoords {
-        MouseMove(coords[1], coords[2])
-        Sleep(500)
-        if (CheckForRedOutline(coords)) {
-            AddToLog("The wyvern emerges from the shadows, eager for battle.")  
-            FixClick(coords[1], coords[2])
-            WaitForNoHealthBar()
-        } else {
-            AddToLog("The wyvern has vanished into the void... Awaiting its return.")
-            Sleep (1000)
-        }
-    }
-
-}
-
-CheckForZorkathThenAttack() {
-    BossCoords := [[430, 105]]  ; Coordinates for the boss
-    for index, coords in BossCoords {
-        MouseMove(coords[1], coords[2])
-        Sleep(500)
-        if (CheckForRedOutline(coords)) {
-            AddToLog("The air grows heavy... Zorkath has returned.")  
-            FixClick(coords[1], coords[2])
-            WaitForNoHealthBar()
-        } else {
-            AddToLog("Zorkath has vanished... but such darkness never stays away for long.")
-            Sleep (1000)
-        }
-    }
-}
-
 CheckForBossThenAttack(currentBoss) {
     BossCoords := [GetCoordsForBoss(currentBoss)]
     for index, coords in BossCoords {
         MouseMove(coords[1], coords[2])
-        Sleep(500)
         if (CheckForRedOutline(coords)) {
             AddToLog("The air grows heavy..." currentBoss " has returned...")  
             FixClick(coords[1], coords[2])
             WaitForNoHealthBar()
         } else {
-            AddToLog(currentBoss " has vanished... but such darkness never stays away...")
-            Sleep (1000)
+            if (debugMessages) {
+                AddToLog(currentBoss " was not found, could be dead...")
+            }
         }
     }
 }
@@ -799,6 +742,8 @@ GetMinionCoordsForBoss(currentBoss) {
 
 GetCoordsForBoss(currentBoss) {
     switch currentBoss {
+        case "Araxxor":
+            return [322, 201]
         case "Blood Moon":
             return [416, 283]
         case "Blue Moon":
@@ -825,7 +770,7 @@ TeleportToBoss(currentBoss) {
     AddToLog("Attempting to teleport to " currentBoss "...")
     bossCoords := ClickCoordsForBoss(currentBoss)
     FixClick(785, 190) ; Open Teleports
-    Sleep (1000)
+    WaitForInterface("Teleport")
     FixClick(255, 150) ; Click Bosses
     Sleep (1000)
 
@@ -939,6 +884,170 @@ MoveForYama() {
 MoveForAzzandra() {
     FixClickWithSleep(398, 125, 2500)
     FixClickWithSleep(420, 225, 2000) ;Click Boss Room #1
+}
+
+WaitForPixel(Name, timeoutAppear := 5000) {
+    startTime := A_TickCount  ; Get current time
+
+    ; **Wait for the interface to appear**
+    Loop {
+        if (SearchForPixel(Name)) { 
+            if (debugMessages) {
+                AddToLog("✅ " Name " detected, proceeding...")
+            }
+            return true  ; Interface found, exit loop
+        }
+        if ((A_TickCount - startTime) > timeoutAppear) {
+            if (debugMessages) {
+                AddToLog("⚠ " Name " was not found in time.")
+            }
+            return false  ; Exit if timeout reached (interface never opened)
+        }
+        Sleep 100  ; Fast checks for better responsiveness
+    }
+}
+
+WaitForInterface(interfaceName, timeoutAppear := 5000) {
+    startTime := A_TickCount  ; Get current time
+
+    ; **Wait for the interface to appear**
+    Loop {
+        if (CheckForInterface(interfaceName)) { 
+            if (debugMessages) {
+                AddToLog("✅ " interfaceName " detected, proceeding...")
+            }
+            return true  ; Interface found, exit loop
+        }
+        if ((A_TickCount - startTime) > timeoutAppear) {
+            if (debugMessages) {
+                AddToLog("⚠ " interfaceName " was not found in time.")
+            }
+            return false  ; Exit if timeout reached (interface never opened)
+        }
+        Sleep 100  ; Fast checks for better responsiveness
+    }
+}
+
+WaitFor(Name, timeoutAppear := 5000) {
+    startTime := A_TickCount  ; Get current time
+
+    ; **Wait for the interface to appear**
+    Loop {
+        if (SearchFor(Name)) { 
+            if (debugMessages) {
+                AddToLog("✅ " Name " detected, proceeding...")
+            }
+            return true  ; Interface found, exit loop
+        }
+        if ((A_TickCount - startTime) > timeoutAppear) {
+            if (debugMessages) {
+                AddToLog("⚠ " Name " was not found in time.")
+            }
+            return false  ; Exit if timeout reached (interface never opened)
+        }
+        Sleep 100  ; Fast checks for better responsiveness
+    }
+}
+
+TeleportHome() {
+    Send("^h") ; Teleports Home
+    WaitFor("Information Booth")
+    return StartSlayer()
+}
+
+SearchForPixel(Name) {
+    Pixels := Map()
+    Pixels["Venom"] := { coords: [621, 78, 643, 99], color: 0x254B22 }
+
+    Pixels["Prayer"] := { coords: [186, 177, 231, 230], color: 0x441812 }
+
+    Pixels["Magic"] := { coords: [655, 429, 677, 455], color: 0xB7A36D }
+    Pixels["Augory"] := { coords: [690, 470, 719, 493], color: 0xB7A36D }
+
+    Pixels["Melee"] := { coords: [730, 429, 753, 454], color: 0xB7A36D }
+    Pixels["Piety"] := { coords: [614, 470, 651, 492], color: 0xB7A36D }
+
+    Pixels["Ranged"] := { coords: [695, 433, 713, 453], color: 0xB7A36D }
+    Pixels["Rigour"] := { coords: [652, 469, 686, 497], color: 0xB7A36D }
+    
+    ; Check if the Pixel exists in the map
+    if !Pixels.Has(Name) {
+        AddToLog("Error: Couldn't find " Name "...")
+        Return false  ; Invalid Pixel name
+    }
+
+    coords := Pixels[Name].coords
+    color := Pixels[Name].color
+    x1 := coords[1], y1 := coords[2], x2 := coords[3], y2 := coords[4]
+
+    ; Perform the Pixel search
+    if (PixelSearch(&X, &Y, x1, y1, x2, y2, color)) {
+        if (debugMessages) {
+            AddToLog("Found " Name)
+        }
+        Return true  ; Pixel found
+    }
+
+    Return false  ; Pixel not found
+}
+
+SearchFor(Name) {
+    FindTexts := Map()
+    FindTexts["Information Booth"] := { coords: [186, 177, 231, 230], searchText: InformationBooth }
+    FindTexts["Brimstone Chest"] := { coords: [322, 293, 366, 328], searchText: BrimstoneChest }
+
+    ; Check if the InterfaceName exists in the map
+    if !FindTexts.Has(Name) {
+        AddToLog("Error: Couldn't find " Name "...")
+        Return false  ; Invalid interface name
+    }
+
+    coords := FindTexts[Name].coords
+    searchText := FindTexts[Name].searchText
+    x1 := coords[1], y1 := coords[2], x2 := coords[3], y2 := coords[4]
+
+    ; Perform the Find Text search
+    if (FindText(&X, &Y, x1, y1, x2, y2, 0, 0, searchText)) {
+        Return true  ; Interface found
+    }
+
+    Return false  ; Interface not found
+}
+
+CheckForInterface(InterfaceName) {
+    ; Define the mapping of interface names to their respective search areas and search texts
+    Interfaces := Map()
+    Interfaces["Bank"] := { coords: [219, 107, 375, 131], searchText: Bank }
+    Interfaces["Teleport"] := { coords: [229, 106, 370, 132], searchText: TeleportInterface }
+    Interfaces["Slayer"] := { coords: [612, 363, 703, 389], searchText: DonatorRank }
+
+    ; Check if the InterfaceName exists in the map
+    if !Interfaces.Has(InterfaceName) {
+        AddToLog("Error: Couldn't find " InterfaceName "...")
+        Return false  ; Invalid interface name
+    }
+
+    coords := Interfaces[InterfaceName].coords
+    searchText := Interfaces[InterfaceName].searchText
+    x1 := coords[1], y1 := coords[2], x2 := coords[3], y2 := coords[4]
+
+    ; Perform the Find Text search
+    if (FindText(&X, &Y, x1, y1, x2, y2, 0, 0, searchText)) {
+        Return true  ; Interface found
+    }
+
+    Return false  ; Interface not found
+}
+
+CheckIfVenomed() {
+    if (SearchForPixel("Venom")) {
+        AddToLog("You are affected by venom, curing...")
+        UseAntiVenom()
+    }
+}
+
+UseAntiVenom() {
+    FindAndClickColor(0x3F5047, [608, 294, 799, 553])
 }
 
 OpenGithub() {

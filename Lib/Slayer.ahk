@@ -3,24 +3,28 @@
 StartSlayer() {
     global LoadoutPosition
     currentLoadout := LoadoutPosition.Text
-    FixCamera() ; Fixes Camera Angle
-    Sleep(1000)
+
+    FixCamera()  ; Adjusts camera for better visibility
     AddToLog("💰 Preparing for the task by banking items...")
+    
     BankItems(currentLoadout)
-    Sleep(1000)
+
     CheckAndOpenPanelIfNeeded("PlayerPanel")
-    Sleep(1000)
+
     if (CheckForNoSlayerTask()) {
         TeleportToSlayerMaster()
-        Sleep(4500)
+        WaitFor("Brimstone Chest")
         GetTask()
     }
-    Sleep(1000)
+
     currentTask := DetectSlayerTask()
-    TeleportToSlayerTask(currentTask)
-    if (currentTask != "no task found") {
-        HandleMovement(currentTask)
+    if (currentTask = "no task found") {
+        AddToLog("⚠ No Slayer task detected. Restarting...")
+        return StartSlayer()  ; Restart if no task is detected
     }
+
+    TeleportToSlayerTask(currentTask)
+    HandleMovement(currentTask)
     ActivatePrayerForTask(currentTask)
     StartSlayerCombat(currentTask)
 }
@@ -98,7 +102,7 @@ TeleportToSlayerTask(currentTask) {
     AddToLog("Attempting to teleport to " currentTask "...")
     taskCoords := ClickCoordsForSlayerTask(currentTask)
     FixClick(785, 190) ; Open Teleports
-    Sleep (1000)
+    WaitForInterface("Teleport")
     FixClick(155, 150) ; Click Monsters
     Sleep (1000)
     if (ModeDropDown.Text = "Slayer") {
@@ -133,9 +137,8 @@ GetNewInstance(TaskName) {
 CheckForNoSlayerTask() {
     ; Check for completed slayer task
     CheckAndOpenPanelIfNeeded("PlayerPanel")
-    Sleep(1000)
+    WaitForInterface("Slayer")
     if (ok := FindText(&X, &Y, 661, 427, 742, 456, 0, 0, NoSlayerTask)) {
-        Sleep(500)
         return true
     }
     return false
@@ -313,10 +316,10 @@ MoveForPyrelord() {
 
 StartSlayerCombat(TaskName) {
     loop {
-        while !CheckForHealthBarNoFindText() {
-            Sleep(50)  ; Prevents excessive CPU usage while checking
+        if !CheckForHealthBarNoFindText() {  
             KillSlayerMonsters(TaskName)
         }
+        Sleep(50)  ; Prevents excessive CPU usage
     }
 }
 
@@ -373,12 +376,19 @@ KillSlayerMonsters(TaskName) {
     currentPrayerSlot := PrayerPosition.Text
     currentFoodSlot := FoodPosition.Text
 
+    mobColors := GetColorsForMob(TaskName)
+
     while !CheckForHealthBarNoFindText() {  ; Loop while health bar is not found
         CheckForAFKDetection()
         CheckForDisconnect()
         
-        if CheckForSpawn() || CheckForNoSlayerTask() {
+        if CheckForNoSlayerTask() {
             AddToLog("Slayer task finished, restarting...")
+            return TeleportHome()
+        }
+
+        if CheckForSpawn() {
+            AddToLog("Found in spawn, restarting...")
             return StartSlayer()
         }
 
@@ -386,10 +396,8 @@ KillSlayerMonsters(TaskName) {
         RestorePrayerIfNeeded(currentPrayerSlot)
         CheckIfAlreadyUnderAttack()
 
-        if FindAndClickMobsWithVerify(GetColorsForMob(TaskName)) {
+        if FindAndClickMobsWithVerify(mobColors) {
             WaitForNoHealthBar()
-        } else {
-            Sleep(500)  ; Shorter delay if no mob was found
         }
     }
 }

@@ -55,11 +55,14 @@ StartKilling(mode) {
 }
 
 StartAFK() {
-    global PrayerPosition
+    global PrayerPosition, FoodPosition
     currentPrayerSlot := PrayerPosition.Text
+    currentFoodSlot := FoodPosition.Text
     Loop {
         Sleep(1000)
+        CheckIfVenomed()
         RestorePrayerIfNeeded(currentPrayerSlot)
+        RestoreHealthIfNeeded(currentFoodSlot)
     }
 }
 
@@ -86,7 +89,6 @@ Fight() {
         CheckIfAlreadyUnderAttack()
         RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
-        Sleep(1500)
         if (AutoBankBox.Value) {
             if (timeElapsed >= BankTimer()) {
                 AddToLog("Bank Timer Reached - Banking Items...")
@@ -98,40 +100,10 @@ Fight() {
             }
         }
         if (ModeDropdown.Text = "Monsters") {
-            FindandClickMobs(GetColorsForMob(MonsterDropDown.Text))
-            Sleep(1500)
+            FindandClickMobsWithVerify(GetColorsForMob(MonsterDropDown.Text))
+            WaitForNoHealthBar()
         }
         break
-    }
-}
-
-StartMoonBossFight() {
-    global PrayerPosition, FoodPosition
-    currentPrayerSlot := PrayerPosition.Text
-    currentFoodSlot := FoodPosition.Text
-    while !(ok := CheckForHealthBarNoFindText()) {
-        while !(ok := FindText(&X, &Y, 584, 31, 803, 208, 0, 0, BlueMoonMinimap)) { ;720-150000, 88-150000, 720+150000, 88+150000
-            Sleep 2500
-        }
-        CheckForAFKDetection()
-        RestoreHealthIfNeeded(currentFoodSlot)
-        RestorePrayerIfNeeded(currentPrayerSlot)
-        FightMoonBoss()
-    }
-}
-
-FightMoonBoss() {
-    ; Kill Minions and Boss
-    MinionCoords := [[405, 460], [180, 255], [640, 250], [417, 233]]  ; Coordinates for the minions and boss
-    for index, coords in MinionCoords {
-        MouseMove(coords[1], coords[2])
-        Sleep(500)
-        if (CheckForRedOutline(coords)) {
-            FixClick(coords[1], coords[2])
-            WaitForNoHealthBar()
-        } else {
-            Sleep (1000)
-        }
     }
 }
 
@@ -178,8 +150,6 @@ FightBoss() {
         CheckForBossThenAttack(BossDropDown.Text)
         break
     }
-
-    Sleep (2000)
 
     if (BossDropDown.Text = "Zorkath") {
         ; Loop while health bar is present
