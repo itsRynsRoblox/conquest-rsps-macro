@@ -63,9 +63,15 @@ FixCamera() {
         Sleep 50
     }
     if (ModeDropdown.Text = "Bosses") {
-        if (BossDropDown.Text = "Eclipse Moon") {
+        if (BossDropDown.Text = "Eclipse Moon" or BossDropDown.Text = "Blood Moon" or BossDropDown.Text = "Blue Moon") {
             ; Zoom back out to max
             Loop 30 {
+                Send "{WheelDown}"
+                Sleep 50
+            }
+        } else {
+            ; Zoom back out smoothly
+            Loop 10 {
                 Send "{WheelDown}"
                 Sleep 50
             }
@@ -95,18 +101,19 @@ TeleportToSlayerTask(currentTask) {
     Sleep (1000)
     FixClick(155, 150) ; Click Monsters
     Sleep (1000)
-    if (SlayerDropDown.Text = "Hard") {
-        if (currentTask = "Galvek" or currentTask = "Tormented Demon") {
-            FixClick(225, 300)
-            Sleep (1000)
-        } else {
-            FixClick(225, 283)
-            Sleep (1000)
+    if (ModeDropDown.Text = "Slayer") {
+        if (SlayerDropDown.Text = "Hard") {
+            if (currentTask = "Galvek" or currentTask = "Tormented Demon") {
+                FixClick(225, 300)
+            } else {
+                FixClick(225, 283)
+            }
+            Sleep(1000)
         }
-    }
-    if (SlayerDropDown.Text = "Elite") {
-        FixClick(225, 385)
-        Sleep (1000)
+        else if (SlayerDropDown.Text = "Elite") {
+            FixClick(225, 385)
+            Sleep(1000)
+        }
     }
     FixClick(taskCoords.x, taskCoords.y)
     Sleep(1000)
@@ -377,14 +384,10 @@ KillSlayerMonsters(TaskName) {
 
         RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
-
-        if CheckIfAlreadyUnderAttack() {
-            FixClick(410, 335)  ; Click under yourself
-            return true
-        }
+        CheckIfAlreadyUnderAttack()
 
         if FindAndClickMobsWithVerify(GetColorsForMob(TaskName)) {
-            Sleep(1500)  ; Give time to engage before retrying
+            WaitForNoHealthBar()
         } else {
             Sleep(500)  ; Shorter delay if no mob was found
         }

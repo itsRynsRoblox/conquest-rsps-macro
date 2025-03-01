@@ -44,10 +44,8 @@ StartKilling(mode) {
     if (mode = "Bosses") {
         currentEntity := BossDropDown.Text
         AddToLog("Starting " . currentEntity)
-        if (currentEntity = "Polar Pup") {
-            TeleportToBoss(currentEntity)
-            HandleBossMovement(currentEntity)
-        }
+        TeleportToBoss(currentEntity)
+        HandleBossMovement(currentEntity)
     }
     else if (mode = "Monsters") {
         currentEntity := MonsterDropDown.Text
@@ -85,6 +83,7 @@ Fight() {
     while !(ok := CheckForHealthBarNoFindText()) {
         CheckForAFKDetection()
         CheckForDisconnect()
+        CheckIfAlreadyUnderAttack()
         RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
         Sleep(1500)
@@ -147,7 +146,9 @@ FightBoss() {
     timeElapsed := A_TickCount - lastBankedTime
 
     while !(ok := CheckForHealthBarNoFindText()) {
-        if (BossDropDown.Text = "Blue Moon") {
+        CheckForAFKDetection()
+        CheckForDisconnect()
+        /*if (BossDropDown.Text = "Blue Moon") {
             while !(ok := FindText(&X, &Y, 584, 31, 803, 208, 0, 0, BlueMoonMinimap)) { ;720-150000, 88-150000, 720+150000, 88+150000
                 CheckForAFKDetection()
                 MoveBackAndForth()
@@ -160,19 +161,17 @@ FightBoss() {
                 MoveBackAndForth()
                 Sleep 2500
             }
-        }
+        }*/
         if (AutoBankBox.Value) {
             if (timeElapsed >= BankTimer()) {
                 AddToLog("Bank Timer Reached - Banking Items...")
                 lastBankedTime := A_TickCount
-                BankItems(currentLoadout)
+                ;BankItems(currentLoadout)
                 AddToLog("Waiting " BankDelay.Text " until banking again.")
-                ReactivatePrayers(currentPrayer, currentBuffPrayer)
-                Sleep(1500)
+                ;ReactivatePrayers(currentPrayer, currentBuffPrayer)
+                ;Sleep(1500)
             }
         }
-        CheckForAFKDetection()
-        CheckForDisconnect()
         RestoreHealthIfNeeded(currentFoodSlot)
         RestorePrayerIfNeeded(currentPrayerSlot)
         CheckForMinionsThenAttack(BossDropDown.Text)
@@ -199,11 +198,7 @@ RestartStage() {
 
             switch ModeDropdown.Text {
                 case "Bosses":
-                    if (usingBossMovement) {
-                        TeleportToBoss(BossDropDown.Text)
-                        HandleBossMovement(BossDropDown.Text)
-                    }
-                    if (BossDropDown.Text = "Eclipse Moon") {
+                    if (BossDropDown.Text = "Eclipse Moon" or BossDropDown.Text = "Blood Moon" or BossDropDown.Text = "Blue Moon") {
                         Send("^h") ; Sends Control + B
                         Sleep(4000)
                         TeleportToBoss(BossDropDown.Text)

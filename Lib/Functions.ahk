@@ -12,8 +12,10 @@ F3:: {
     Reload()
 }
 F4:: {
-    FixClick(220, 210)
-    ;TogglePause()
+    TogglePause()
+}
+F5:: {
+    FixCamera()
 }
 
 TogglePause(*) {
@@ -200,9 +202,6 @@ FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verify
             Sleep (700)
             ; Perform secondary search for verification color in a wider area
             if (PixelSearch(&verifyX, &verifyY, foundX - 25, foundY - 25, foundX + 25, foundY + 25, verifyColor, 2)) {
-                global SuccessfulX, SuccessfulY  ; Allow storing the found position
-                SuccessfulX := foundX
-                SuccessfulY := foundY
                 FixClick(foundX, foundY, "Left")
                 AddToLog("Mob found and verified! Clicked at: X" foundX " Y" foundY)
                 return true
@@ -524,6 +523,8 @@ CheckForInactive() {
 CheckIfAlreadyUnderAttack() {
     ; Check for under attack text
     if (ok := FindText(&X, &Y, 9, 573, 493, 590, 0, 0, UnderAttack)) {
+        AddToLog("Already under attack, clicking under player...")
+        FixClick(410, 335)
         return true
     }
     return false
@@ -542,13 +543,36 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
     }
 }
 
-WaitForNoHealthBar() {
-    Sleep 1000
+WaitForNoHealthBar(timeoutAppear := 5000, timeoutDisappear := 10000) {
+    startTime := A_TickCount  ; Get current time
+
+    ; **Wait for the health bar to appear** (max wait: timeoutAppear ms)
     Loop {
-        if !(ok := CheckForHealthBarNoFindText()) {
-            Break  ; Exit loop when HP bar is gone
+        if (CheckForHealthBarNoFindText()) {
+            AddToLog("Health bar found, waiting for combat end...")
+            Break  ; Found the HP bar, now wait for it to disappear
         }
-        Sleep 1500  ; Check every 1.5 seconds
+        if ((A_TickCount - startTime) > timeoutAppear) {
+            AddToLog("Health bar not found, might be stuck")
+            if (ModeDropdown.Text = "Slayer") {
+                return StartSlayer()
+            }
+            if (ModeDropdown.Text = "Monster") {
+                return TeleportToSlayerTask(MonsterDropDown.Text)
+            }
+            return false  ; Exit if timeout reached (mob never appeared)
+        }
+        Sleep 100  ; Fast checks for better responsiveness
+    }
+
+    ; **Wait for the health bar to disappear**
+    startTime := A_TickCount  ; Reset timer
+    Loop {
+        if !(CheckForHealthBarNoFindText()) {
+            AddToLog("Health bar gone, hopefully out of combat...")
+            return true  ; HP bar is gone, return success
+        }
+        Sleep 100  ; Faster response when combat ends
     }
 }
 
@@ -730,11 +754,11 @@ CheckForBossThenAttack(currentBoss) {
         MouseMove(coords[1], coords[2])
         Sleep(500)
         if (CheckForRedOutline(coords)) {
-            AddToLog("The air grows heavy..." currentBoss " has returned.")  
+            AddToLog("The air grows heavy..." currentBoss " has returned...")  
             FixClick(coords[1], coords[2])
             WaitForNoHealthBar()
         } else {
-            AddToLog(currentBoss " has vanished... but such darkness never stays away for long.")
+            AddToLog(currentBoss " has vanished... but such darkness never stays away...")
             Sleep (1000)
         }
     }
@@ -763,8 +787,10 @@ GetMinionCoordsForBoss(currentBoss) {
     switch currentBoss {
         case "Zorkath":
             return [[275, 190], [575, 190]]
+        case "Blood Moon":
+            return [[408, 452], [232, 295], [565, 296], [408, 167]]
         case "Blue Moon":
-            return [[415, 415], [190, 210], [630, 210]]
+            return [[408, 452], [232, 295], [565, 296], [408, 167]]
         case "Eclipse Moon":
             return [[408, 452], [232, 295], [565, 296], [408, 167]]      
     }
@@ -773,16 +799,22 @@ GetMinionCoordsForBoss(currentBoss) {
 
 GetCoordsForBoss(currentBoss) {
     switch currentBoss {
+        case "Blood Moon":
+            return [416, 283]
         case "Blue Moon":
-            return [420, 200]
+            return [416, 283]
         case "Eclipse Moon":
-            return [416, 283]    
+            return [416, 283]
+        case "Magma Cerberus":
+            return [343, 308]     
         case "Tekton":
             return [400, 265]
         case "Zorkath":
             return [430, 105]
         case "Electric Demon":
             return [360, 450]
+        case "Yama":
+            return [423, 214]    
         case "Polar Pup":
             return [270, 250]
     }
@@ -798,7 +830,16 @@ TeleportToBoss(currentBoss) {
     Sleep (1000)
 
     bossList := ["Electric Demon", "Magma Cerberus", "Araxxor", "Zorkath", "Yama", "Azzandra", "Polar Pup"]
-    if bossList.Has(currentBoss) {
+
+    found := false
+    for boss in bossList {
+        if (boss = currentBoss) {
+            found := true
+            Break
+        }
+    }
+    
+    if (found) {
         FixClick(220, 380)
     } else {
         FixClick(220, 210)
@@ -807,7 +848,7 @@ TeleportToBoss(currentBoss) {
     FixClick(bossCoords.x, bossCoords.y)
     Sleep(1000)
     FixClick(350, 290) ; Click Teleport
-    Sleep(2500)
+    Sleep(3500)
 }
 
 ClickCoordsForBoss(currentBoss) {
@@ -831,10 +872,20 @@ HandleBossMovement(currentBoss) {
     Sleep(2000)
 
     switch currentBoss {
+        case "Blood Moon":
+            MoveForMoonBosses()
+        case "Blue Moon":
+            MoveForMoonBosses()
         case "Eclipse Moon":
             MoveForMoonBosses()
         case "Electric Demon":
             MoveForElectricDemon()
+        case "Tekton":
+            MoveForTekton()
+        case "Zorkath":
+            MoveForZorkath()
+        case "Magma Cerberus":
+            MoveForMagmaCerberus() 
         case "Polar Pup":
             MoveForPolarPup()
     }
@@ -842,8 +893,26 @@ HandleBossMovement(currentBoss) {
 }
 
 MoveForPolarPup() {
-    FixClick(710, 115) ; Click Teleport
+    FixClick(710, 115)
     Sleep(2500)
+}
+
+MoveForTekton() {
+    FixClick(400, 225) ;Click Lava Crater
+    Sleep(2500)
+    FixClick(420, 225) ;Click Boss Room #1
+    Sleep(4000)
+    FixClick(728, 95) ;Click Near Tekton
+    Sleep(1500)
+}
+
+MoveForElectricDemon() {
+    FixClick(422, 220) ;Click Boss Teleporter
+    Sleep(2500)
+    FixClick(420, 225) ;Click Boss Room #1
+    Sleep(2000)
+    FixClick(729, 66) ;Click Near Tekton
+    Sleep(5000)
 }
 
 MoveForMoonBosses() {
@@ -851,18 +920,25 @@ MoveForMoonBosses() {
     Sleep(2500)
 }
 
-MoveForElectricDemon() {
-    Loop 20 {
-        Send "{DOWN Down}"
-        Sleep 50
-    }
-    Send "{DOWN Up}"
-    Sleep (50)
-    ; Zoom in smoothly
-    Loop 5 {
-        Send "{WheelUp}"
-        Sleep 50
-    }
+MoveForMagmaCerberus() {
+    FixClickWithSleep(334, 268, 2000)
+    FixClickWithSleep(420, 225, 2500) ;Click Boss Room #1
+    FixClickWithSleep(727, 54, 5000)
+}
+
+MoveForZorkath() {
+    FixClickWithSleep(407, 189, 2500) ;Click Portal
+    FixClickWithSleep(420, 225, 2000) ;Click Boss Room #1
+}
+
+MoveForYama() {
+    FixClickWithSleep(393, 196, 2000)
+    FixClickWithSleep(420, 225, 2000) ;Click Boss Room #1
+}
+
+MoveForAzzandra() {
+    FixClickWithSleep(398, 125, 2500)
+    FixClickWithSleep(420, 225, 2000) ;Click Boss Room #1
 }
 
 OpenGithub() {

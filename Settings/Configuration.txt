@@ -1,8 +1,8 @@
 Mode=Bosses
-Boss=
+Boss=Electric Demon
 
 [AutoBanking]
-Banking=1
+Banking=0
 
 
 [AutoPrayer]
@@ -10,7 +10,7 @@ Praying=1
 
 
 [BankDelay]
-Delay=5
+Delay=1
 
 
 [FoodPosition]
