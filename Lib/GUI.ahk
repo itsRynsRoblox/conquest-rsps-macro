@@ -183,7 +183,7 @@ aaMainUI.SetFont("Bold s10 c" uiTheme[6])
 global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["AFK", "Bosses", "Monsters", "Minigames", "Slayer"])
 global BossDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Blood Moon", "Blue Moon", "Eclipse Moon", "Electric Demon", "Magma Cerberus", "Polar Pup", "Tekton", "Zorkath"])
 global SlayerDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Hard", "Elite"])
-global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Arcane Nagua", "Electric Wyrm", "Elysian Nagua", "Magma Beast", "Sarachnis", "Spectral Nagua", "Snow Imps","Tormented Demon", "Vanguards"])
+global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Shadow Nihil", "Arcane Nagua", "Electric Wyrm", "Elysian Nagua", "Magma Beast", "Sarachnis", "Spectral Nagua", "Snow Imps","Tormented Demon", "Vanguards"])
 global MinigameDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Doomcore"])
 global ConfirmButton := aaMainUI.Add("Button", "x1218 y53 w80 h25", "Confirm")
 

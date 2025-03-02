@@ -219,6 +219,50 @@ FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verify
     return false  ; No valid mob found
 }
 
+FindAndClickMobsWithVerifyRightClick(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000, healthBarColor := 0x6BC300) {
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+
+    ; Predefine the verification search area around the found target
+    verifyArea := [-25, -25, 25, 25]  ; Adjustable offset for verification
+
+    for color in targetColors {
+        ; Perform a faster search for the target color
+        if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
+            MouseMove(foundX, foundY)
+            
+            ; Perform the verification search for the verifyColor around the found target area
+            if (PixelSearch(&verifyX, &verifyY, foundX + verifyArea[1], foundY + verifyArea[2], foundX + verifyArea[3], foundY + verifyArea[4], verifyColor, 2)) {
+
+                ; Check if there is a health bar above the found NPC
+                healthBarX := foundX
+                healthBarY := foundY - 20  ; Adjust this value based on your game's UI
+                
+                if (PixelSearch(&barX, &barY, healthBarX - 15, healthBarY - 5, healthBarX + 15, healthBarY + 5, healthBarColor, 5)) {
+                    if (debugMessages) {
+                        AddToLog("⚠ Mob found, but a health bar detected. Skipping click.")
+                    }
+                    continue  ; Skip this mob since it has a health bar
+                }
+
+                ; If no health bar is found, proceed with attacking
+                FixClick(foundX, foundY, "Right")  ; Open interaction menu
+                AddToLog("✅ Mob found, verified, and has NO health bar! Right-clicked at: X" foundX " Y" foundY)
+
+                Sleep(100)  ; Small delay to allow menu to open
+                FixClick(foundX, foundY + 30, "Left")  ; Select attack option
+                
+                return true
+            } else {
+                if (debugMessages) {
+                    AddToLog("⚠ Color match found, but verification color not detected. Skipping click.")
+                }
+            }
+        }
+    }
+
+    return false  ; No valid mob found
+}
+
 FindAndClickImage(imagePath, searchArea := [0, 0, A_ScreenWidth, A_ScreenHeight]) {
 
     AddToLog(imagePath)
@@ -295,7 +339,7 @@ GetColorsForMob(mobName) {
         "Vanguards", [0xDD5009, 0xDD5009],
         "Electric Wyrm", [0x171D38, 0x171D38],
         "Magma Beast", [0x2D1003, 0x2D1003],
-        "Sarachnis", [0x812925, 0x6E221E], ;0x391411
+        "Sarachnis", [0x7C2823, 0x7C2823], ;0x812925/0x531A18
         "Galvek", [0x55120E, 0x55120E],
         "Tormented Demon", [0x985450, 0x8D5805],
         "Snow Imps", [0x1F54A6, 0x000000],
@@ -303,7 +347,7 @@ GetColorsForMob(mobName) {
         "Abyssal Kurask", [0x3D5B1D, 0x2E4316],
         "Fury Drake", [0x171414, 0xB30F06], ; Body / Red Glow
         "Night Beast", [0x1A1A26, 0x3D7175], ;Back / Glow Under
-        "Shadow Nihil", [0x402E56, 0x402E56],
+        "Shadow Nihil", [0x21182D, 0x21182D], ;0x21182D / 0x402E56
         "Pyrelord", [0xFF6332, 0xCB9139], ; Body / Ground Circle
         "Wyvern", [0x545F54, 0x4477AD], ; Zorkath Minion (0x545F54) 0x4A4241
         "Zorkath", [0x44AF78, 0x221E1E]
@@ -531,7 +575,7 @@ WaitForNoHealthBar(timeoutAppear := 5000, timeoutDisappear := 10000) {
         if ((A_TickCount - startTime) > timeoutAppear) {
             AddToLog("Health bar not found, might be stuck")
             if (ModeDropdown.Text = "Slayer") {
-                return StartSlayer()
+                return StartSlayer(false)
             }
             if (ModeDropdown.Text = "Monster") {
                 return TeleportToSlayerTask(MonsterDropDown.Text)

@@ -100,8 +100,9 @@ Fight() {
             }
         }
         if (ModeDropdown.Text = "Monsters") {
-            FindandClickMobsWithVerify(GetColorsForMob(MonsterDropDown.Text))
-            WaitForNoHealthBar()
+            if (FindandClickMobsWithVerify(GetColorsForMob(MonsterDropDown.Text))) {
+                WaitForNoHealthBar()
+            }
         }
         break
     }
@@ -154,8 +155,16 @@ FightBoss() {
     if (BossDropDown.Text = "Zorkath") {
         ; Loop while health bar is present
         while (CheckForHealthBarNoFindText()) {
-            LookForFireball()
-            Sleep 100
+                LookForFireball()
+                Sleep 100
+        }
+    }
+
+    if (BossDropDown.Text = "Araxxor") {
+        ; Loop while health bar is present
+        while (CheckForHealthBarNoFindText()) {
+                CheckIfVenomed()
+                Sleep 100
         }
     }
 }

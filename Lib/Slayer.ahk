@@ -1,13 +1,15 @@
 #Requires AutoHotkey v2.0
 
-StartSlayer() {
+StartSlayer(newTask := true) {
     global LoadoutPosition
     currentLoadout := LoadoutPosition.Text
 
-    FixCamera()  ; Adjusts camera for better visibility
-    AddToLog("💰 Preparing for the task by banking items...")
-    
-    BankItems(currentLoadout)
+    if (newTask) {
+        FixCamera()  ; Adjusts camera for better visibility
+        AddToLog("💰 Preparing for the task by banking items...")
+        
+        BankItems(currentLoadout)
+    }
 
     CheckAndOpenPanelIfNeeded("PlayerPanel")
 
