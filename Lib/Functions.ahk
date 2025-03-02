@@ -15,7 +15,10 @@ F4:: {
     TogglePause()
 }
 F5:: {
-    CheckIfVenomed()
+    FixCamera()
+}
+F6:: {
+
 }
 
 TogglePause(*) {
@@ -193,30 +196,47 @@ FindAndClickMobs(targetColors, searchArea := [61, 73, 538, 389]) {
     }
 }
 
-FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000) {
+FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000, retries := 5, retryDelay := 200) {
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+    verifyArea := [-25, -25, 25, 25]  ; Offset for verification
 
-    ; Predefine the verification search area around the found target
-    verifyArea := [-25, -25, 25, 25]  ; Adjustable offset for verification
+    loop retries {
+        for color in targetColors {
+            if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
+                MouseMove(foundX, foundY)
 
-    for color in targetColors {
-        ; Perform a faster search for the target color
-        if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
-            MouseMove(foundX, foundY)
-            ; Perform the verification search for the verifyColor around the found target area
-            if (PixelSearch(&verifyX, &verifyY, foundX + verifyArea[1], foundY + verifyArea[2], foundX + verifyArea[3], foundY + verifyArea[4], verifyColor, 2)) {
-                FixClick(foundX, foundY, "Left")
-                AddToLog("✅ Mob found and verified! Clicked at: X" foundX " Y" foundY)
-                return true
-            } else {
-                if (debugMessages) {
-                    AddToLog("⚠ Color match found, but verification color not detected. Skipping click.")
+                ; Verify the target is indeed a mob by checking for verifyColor around it
+                if (PixelSearch(&verifyX, &verifyY, foundX + verifyArea[1], foundY + verifyArea[2], foundX + verifyArea[3], foundY + verifyArea[4], verifyColor, 2)) {
+                    FixClick(foundX, foundY, "Left")
+                    AddToLog("✅ Mob found and verified! Clicked at: X" foundX " Y" foundY)
+                    return true
+                } else {
+                    if (debugMessages) {
+                        AddToLog("⚠ Color match found, but verification color not detected. Skipping click.")
+                    }
                 }
             }
         }
+
+        ; Retry delay before trying again
+        Sleep(retryDelay)
     }
 
-    return false  ; No valid mob found
+    ; Failure Handling - Define what happens if no mob is found
+    if (debugMessages) {
+        AddToLog("❌ Failed to find and verify a mob after " retries " attempts.")
+    }
+    RotateCamera()
+    return false
+}
+
+RotateCamera() {
+    SendInput ("{Left up}")
+    Sleep 200
+    SendInput ("{Left down}")
+    Sleep 750
+    SendInput ("{Left up}")
+    KeyWait "Left" ; Wait for key to be fully processed
 }
 
 FindAndClickMobsWithVerifyRightClick(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000, healthBarColor := 0x6BC300) {
@@ -532,14 +552,6 @@ CheckForSpawn() {
     return false
 }
 
-CheckForInactive() {
-    ; Check for inactive wave text
-    if (ok := FindText(&X, &Y, 391, 31, 446, 54, 0, 0, InactiveWave)) {
-        return true
-    }
-    return false
-}
-
 CheckIfAlreadyUnderAttack() {
     ; Check for under attack text
     if (ok := FindText(&X, &Y, 9, 573, 493, 590, 0, 0, UnderAttack)) {
@@ -563,24 +575,38 @@ ClickUntilGone(x, y, searchX1, searchY1, searchX2, searchY2, textToFind, offsetX
     }
 }
 
-WaitForNoHealthBar(timeoutAppear := 5000, timeoutDisappear := 10000) {
+WaitForNoHealthBar(timeoutAppear := 5000, timeoutDisappear := 10000, maxFails := 3) {
+    static failCount := 0  ; Tracks failed detections across multiple calls
     startTime := A_TickCount  ; Get current time
 
     ; **Wait for the health bar to appear** (max wait: timeoutAppear ms)
     Loop {
         if (CheckForHealthBarNoFindText()) {
-            AddToLog("Health bar found, waiting for combat end...")
+            AddToLog("✅ Health bar found, waiting for combat end...")
+            failCount := 0  ; Reset fail count because combat started properly
             Break  ; Found the HP bar, now wait for it to disappear
         }
         if ((A_TickCount - startTime) > timeoutAppear) {
-            AddToLog("Health bar not found, might be stuck")
-            if (ModeDropdown.Text = "Slayer") {
-                return StartSlayer(false)
+            failCount++  ; Increase fail count if no health bar is found
+
+            if !(ModeDropdown.Text = "Bosses") {
+                AddToLog("❌ Health bar not found after attacking. Fail count: " failCount "/" maxFails)
+                if (failCount >= maxFails) {
+                    AddToLog("⚠ Reached max failed attempts. Executing teleport/fail action.")
+    
+                    ; **Only teleport if maxFails is reached**
+                    if (ModeDropdown.Text = "Slayer") {
+                        return StartSlayer(false)
+                    }
+                    if (ModeDropdown.Text = "Monsters") {
+                        return TeleportToSlayerTask(MonsterDropDown.Text)
+                    }
+    
+                    return false  ; Prevent further teleport attempts if mode is unknown
+                }
             }
-            if (ModeDropdown.Text = "Monster") {
-                return TeleportToSlayerTask(MonsterDropDown.Text)
-            }
-            return false  ; Exit if timeout reached (mob never appeared)
+
+            return false  ; Just return false without teleporting if under maxFails
         }
         Sleep 100  ; Fast checks for better responsiveness
     }
@@ -589,8 +615,12 @@ WaitForNoHealthBar(timeoutAppear := 5000, timeoutDisappear := 10000) {
     startTime := A_TickCount  ; Reset timer
     Loop {
         if !(CheckForHealthBarNoFindText()) {
-            AddToLog("Health bar gone, hopefully out of combat...")
+            AddToLog("✅ Health bar gone, combat likely ended.")
             return true  ; HP bar is gone, return success
+        }
+        if ((A_TickCount - startTime) > timeoutDisappear) {
+            AddToLog("⚠ Health bar stayed too long, possible combat issue.")
+            return false
         }
         Sleep 100  ; Faster response when combat ends
     }
@@ -735,14 +765,73 @@ CheckForRedOutline(coords) {
     }
 }
 
+CheckForMobThenAttack() {
+    static lastMobDetectionTime := 0  ; Static variable to store the last successful detection time
+    currentTime := A_TickCount  ; Get current time in milliseconds
+
+    ; Skip the 12-minute check if no mob has been detected yet (lastMobDetectionTime = 0)
+    if (lastMobDetectionTime != 0 && (currentTime - lastMobDetectionTime) > 720000) {
+        AddToLog("❌ More than 12 minutes since last mob detection. Triggering backup method...")
+        StartSelectedMode()  ; Backup method if time exceeds 12 minutes
+        return  ; Exit early if backup method is triggered
+    }
+
+    ; Check for mobs at each saved coordinate
+    global savedCoords  ; Reference the saved coordinates array
+    mobFound := false  ; Flag to track if a mob is found at any coordinate
+
+    for index, coords in savedCoords {
+        MouseMove(coords[1], coords[2])  ; Move the mouse to the current coordinates
+
+        if (CheckForRedOutline(coords)) {
+            FixClick(coords[1], coords[2])  ; Click on the mob at the saved coordinates
+            WaitForNoHealthBar()  ; Wait until the health bar is gone (mob is dead or combat is over)
+
+            ; Update the last detection time upon successful mob detection
+            lastMobDetectionTime := currentTime
+            mobFound := true  ; Set flag to true since a mob was found and clicked
+            break  ; Exit loop after successful mob detection
+        } else {
+            if (debugMessages) {
+                AddToLog("Mob was not found at coords " coords[1] ", " coords[2] " ... could be dead or missing...")
+            }
+        }
+    }
+
+    ; If no mob was found at any of the saved coordinates
+    if (!mobFound) {
+        if (debugMessages) {
+            AddToLog("❌ Could not find mob at any of the saved coordinates.")
+        }
+    }
+}
+
+
+
+
 CheckForBossThenAttack(currentBoss) {
+    static lastBossDetectionTime := 0  ; Static variable to store the last successful detection time
+    currentTime := A_TickCount  ; Get current time in milliseconds
+
+    ; Skip the 12-minute check if no mob has been detected yet (lastMobDetectionTime = 0)
+    if (lastBossDetectionTime != 0 && (currentTime - lastBossDetectionTime) > 720000) {
+        AddToLog("❌ More than 12 minutes since last mob detection. Triggering backup method...")
+        StartSelectedMode()  ; Backup method if time exceeds 12 minutes
+        return  ; Exit early if backup method is triggered
+    }
+
     BossCoords := [GetCoordsForBoss(currentBoss)]
     for index, coords in BossCoords {
         MouseMove(coords[1], coords[2])
         if (CheckForRedOutline(coords)) {
-            AddToLog("The air grows heavy..." currentBoss " has returned...")  
+            if (currentBoss != "AFK") {
+                AddToLog("The air grows heavy... " currentBoss " has returned...") 
+            } 
             FixClick(coords[1], coords[2])
             WaitForNoHealthBar()
+            
+            ; Update the last detection time upon successful boss detection
+            lastBossDetectionTime := currentTime
         } else {
             if (debugMessages) {
                 AddToLog(currentBoss " was not found, could be dead...")
@@ -772,6 +861,8 @@ CheckForMinionsThenAttack(currentBoss) {
 
 GetMinionCoordsForBoss(currentBoss) {
     switch currentBoss {
+        case "Araxxor":
+            return [[176, 350], [668, 350]]
         case "Zorkath":
             return [[275, 190], [575, 190]]
         case "Blood Moon":
@@ -785,9 +876,12 @@ GetMinionCoordsForBoss(currentBoss) {
 }
 
 GetCoordsForBoss(currentBoss) {
+    global savedX, savedY
     switch currentBoss {
+        case "AFK":
+            return [savedX, savedY]
         case "Araxxor":
-            return [322, 201]
+            return [455, 219]
         case "Blood Moon":
             return [416, 283]
         case "Blue Moon":
@@ -1039,6 +1133,8 @@ SearchFor(Name) {
     FindTexts := Map()
     FindTexts["Information Booth"] := { coords: [186, 177, 231, 230], searchText: InformationBooth }
     FindTexts["Brimstone Chest"] := { coords: [322, 293, 366, 328], searchText: BrimstoneChest }
+    FindTexts["Compass"] := { coords: [620, 27, 669, 66], searchText: Compass }
+    FindTexts["Inactive Wave"] := { coords: [391, 31, 446, 54], searchText: InactiveWave }
 
     ; Check if the InterfaceName exists in the map
     if !FindTexts.Has(Name) {

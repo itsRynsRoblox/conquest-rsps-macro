@@ -7,13 +7,13 @@ StartSlayer(newTask := true) {
     if (newTask) {
         FixCamera()  ; Adjusts camera for better visibility
         AddToLog("💰 Preparing for the task by banking items...")
-        
         BankItems(currentLoadout)
     }
 
     CheckAndOpenPanelIfNeeded("PlayerPanel")
 
     if (CheckForNoSlayerTask()) {
+        FixCamera()  ; Adjusts camera for better visibility
         TeleportToSlayerMaster()
         WaitFor("Brimstone Chest")
         GetTask()
@@ -51,43 +51,59 @@ GetKeyForTask() {
 }
 
 FixCamera() {
-    ;CloseChat()
-    FixClick(650, 50) ; Face North Minimap
+    ; Face North Minimap
+    FixClick(650, 50)
     Sleep(1000)
     MouseMove(600, 50)
-    Sleep(1000) ;225 283
+    Sleep(1000) ; Move camera upwards
+
     ; Move Camera Upwards
-    Loop 20 {
-        Send "{UP Down}"
-        Sleep 50
-    }
-    Send "{UP Up}"
-    Sleep (50)
+    MoveCameraUp(20, 50)
+
     ; Zoom in smoothly
-    Loop 30 {
-        Send "{WheelUp}"
-        Sleep 50
+    ZoomIn(30, 50)
+
+    ; Check if we need to zoom out
+    ZoomOutBasedOnMode()
+}
+
+; Move camera upwards function
+MoveCameraUp(repeats, delay) {
+    Loop(repeats) {
+        Send("{UP Down}")
+        Sleep(delay)
     }
+    Send("{UP Up}")
+    Sleep(50)
+}
+
+; Zoom in function
+ZoomIn(repeats, delay) {
+    Loop(repeats) {
+        Send("{WheelUp}")
+        Sleep(delay)
+    }
+}
+
+; Zoom out based on the mode
+ZoomOutBasedOnMode() {
+    ; Default zoom out (smooth)
+    zoomOutRepeats := 10
+    zoomDelay := 50
+
     if (ModeDropdown.Text = "Bosses") {
         if (BossDropDown.Text = "Eclipse Moon" or BossDropDown.Text = "Blood Moon" or BossDropDown.Text = "Blue Moon") {
-            ; Zoom back out to max
-            Loop 30 {
-                Send "{WheelDown}"
-                Sleep 50
-            }
-        } else {
-            ; Zoom back out smoothly
-            Loop 10 {
-                Send "{WheelDown}"
-                Sleep 50
-            }
+            zoomOutRepeats := 30 ; Zoom out to max
         }
-    } else {
-        ; Zoom back out smoothly
-        Loop 10 {
-            Send "{WheelDown}"
-            Sleep 50
+        if (BossDropDown.Text = "Araxxor") {
+            zoomOutRepeats := 30 ; Zoom out to max
         }
+    }
+
+    ; Perform the zoom out
+    Loop(zoomOutRepeats) {
+        Send("{WheelDown}")
+        Sleep(zoomDelay)
     }
 }
 
@@ -102,6 +118,10 @@ TeleportToSlayerMaster() {
 
 TeleportToSlayerTask(currentTask) {
     AddToLog("Attempting to teleport to " currentTask "...")
+    if !SearchFor("Compass") {
+        FixClick(650, 50)
+        Sleep(500)
+    }
     taskCoords := ClickCoordsForSlayerTask(currentTask)
     FixClick(785, 190) ; Open Teleports
     WaitForInterface("Teleport")
@@ -128,9 +148,15 @@ TeleportToSlayerTask(currentTask) {
 }
 
 GetNewInstance(TaskName) {
-    Send("::newroom{Enter}")
-    Sleep(4500)
-    if (TaskName != "Pyrelord") {
+    minTries := 1  ; Minimum number of times to type ::newroom
+    maxTries := 3  ; Maximum number of times
+    attempts := Random(minTries, maxTries)  ; Generate a random number between min and max
+
+    if (TaskName = "Pyrelord") {
+        attempts := 1
+    }
+
+    Loop attempts {
         Send("::newroom{Enter}")
         Sleep(4500)
     }
@@ -311,8 +337,22 @@ MoveForShadowNihil() {
 }
 
 MoveForPyrelord() {
-    Fixclick(775, 110, "Left")
-    Sleep (5500)
+    ; Randomly choose between two sets of coordinates
+    if (Random(0, 1)) {  ; 50/50 chance
+        ; Slightly randomize the click position around (674, 107) by a small range
+        randomX := Random(674 - 3, 674 + 3)
+        randomY := Random(107 - 3, 107 + 3)
+        Fixclick(randomX, randomY, "Left")
+    } else {
+        ; Slightly randomize the click position around (775, 110) by a small range
+        randomX := Random(775 - 3, 775 + 3)
+        randomY := Random(110 - 3, 110 + 3)
+        Fixclick(randomX, randomY, "Left")
+    }
+
+    ; A subtle random sleep time (e.g., between 5300ms and 5700ms)
+    randomSleep := Random(5300, 5700)
+    Sleep(randomSleep)  ; Wait after the click
 }
 
 

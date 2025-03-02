@@ -5,7 +5,7 @@
 
 ; Basic Application Info
 global aaTitle := "Conquest Macro "
-global version := "v1.3"
+global version := "v1.4"
 global gameID := "ahk_exe Java.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
@@ -21,6 +21,10 @@ global StartTime := A_TickCount
 global currentTime := GetCurrentTime()
 ;Bank
 global lastBankedTime := A_TickCount
+;Custom Search Area
+global waitingForClick := false
+global savedX := 0, savedY := 0
+global savedCoords := []  ; Initialize an empty array to hold the coordinates
 ;Gui creation
 global uiBorders := []
 global uiBackgrounds := []
@@ -141,6 +145,10 @@ placementSaveText := aaMainUI.Add("Text", "x210 y642 w80 h20 +Center", "Save Con
 placementSaveBtn := aaMainUI.Add("Button", "x211 y662 w80 h20", "Save")
 placementSaveBtn.OnEvent("Click", SaveSettings)
 
+searchAreaText := aaMainUI.Add("Text", "x310 y642 w80 h20 +Center", "Search Area")
+searchAreaButton := aaMainUI.Add("Button", "x311 y662 w80 h20", "Set")
+searchAreaButton.OnEvent("Click", (*) => StartClickCapture())
+
 AutoPrayerText := aaMainUI.Add("Text", "x840 y560 w115 h20 +Center", "Auto Prayer")
 global AutoPrayerBox := aaMainUI.Add("Checkbox", "x850 y580 cffffff Checked +Center", "Enabled")
 
@@ -181,9 +189,9 @@ DiscordButton.OnEvent("Click", (*) => OpenDiscord())
 global modeSelectionGroup := aaMainUI.Add("GroupBox", "x808 y38 w500 h45 Background" uiTheme[2], "Mode Select")
 aaMainUI.SetFont("Bold s10 c" uiTheme[6])
 global ModeDropdown := aaMainUI.Add("DropDownList", "x818 y53 w140 h180 Choose0 +Center", ["AFK", "Bosses", "Monsters", "Minigames", "Slayer"])
-global BossDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Blood Moon", "Blue Moon", "Eclipse Moon", "Electric Demon", "Magma Cerberus", "Polar Pup", "Tekton", "Zorkath"])
+global BossDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Blood Moon", "Blue Moon", "Eclipse Moon", "Electric Demon", "Magma Cerberus", "Araxxor", "Tekton", "Zorkath", "Yama", "Polar Pup"])
 global SlayerDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Hard", "Elite"])
-global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Shadow Nihil", "Arcane Nagua", "Electric Wyrm", "Elysian Nagua", "Magma Beast", "Sarachnis", "Spectral Nagua", "Snow Imps","Tormented Demon", "Vanguards"])
+global MonsterDropDown := aaMainUI.Add("DropDownlist", "x968 y53 w150 h180 Choose0 +Center", ["Arcane Nagua", "Electric Wyrm", "Elysian Nagua", "Magma Beast", "Sarachnis", "Spectral Nagua", "Snow Imps","Tormented Demon", "Vanguards"])
 global MinigameDropDown := aaMainUI.Add("DropDownList", "x968 y53 w150 h180 Choose0 +Center", ["Doomcore"])
 global ConfirmButton := aaMainUI.Add("Button", "x1218 y53 w80 h25", "Confirm")
 
@@ -352,3 +360,21 @@ checkSizeTimer() {
     }
 }
 
+StartClickCapture() {
+    global waitingForClick
+    waitingForClick := true
+    ToolTip "Click anywhere to save coordinates..."
+    SetTimer () => ToolTip(), -2000  ; Hide tooltip after 2 sec
+}
+
+~LShift::
+{
+    global waitingForClick, savedCoords  ; Use a list to store multiple coordinates
+    if waitingForClick {
+        MouseGetPos &x, &y
+        waitingForClick := false
+        savedCoords.push([x, y])  ; Add the new coordinate pair to the list
+        ToolTip "Coordinates saved: " x ", " y
+        SetTimer () => ToolTip(), -2000  ; Hide tooltip after 2 sec
+    }
+}

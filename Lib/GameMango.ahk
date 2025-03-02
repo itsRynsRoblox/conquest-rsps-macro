@@ -63,6 +63,7 @@ StartAFK() {
         CheckIfVenomed()
         RestorePrayerIfNeeded(currentPrayerSlot)
         RestoreHealthIfNeeded(currentFoodSlot)
+        CheckForMobThenAttack()
     }
 }
 
@@ -192,9 +193,16 @@ RestartStage() {
 }
 
 ValidateMode() {
+    global savedX, savedY
     if (ModeDropdown.Text = "") {
         AddToLog("Please select a mode before starting the macro!")
         return false
+    }
+    if (ModeDropdown.Text = "AFK") {
+        if (savedCoords[1] = "") {  ; Check if there are no coordinates saved
+            AddToLog("Please set the search coordinates before starting the AFK mode!")
+            return false
+        }
     }
     if (!confirmClicked) {
         AddToLog("Please click the confirm button before starting the macro!")
@@ -231,11 +239,11 @@ HandleMinigame() {
     FixCamera()
     Loop {
         Sleep(1000)
-        if CheckForInactive() {
+        if SearchFor("Inactive Wave") {
             AddToLog("🕒 Inactive wave timer detected, verifying wave completion...")
             Sleep(2000)
             
-            if CheckForInactive() {
+            if SearchFor("Inactive Wave") {
                 AddToLog("🌊 Wave timer still inactive, initiating next wave...")
 
                 if (AutoBankBox.Value) {
