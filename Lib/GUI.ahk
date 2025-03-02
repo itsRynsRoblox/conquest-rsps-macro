@@ -2,10 +2,11 @@
 #SingleInstance Force
 #Include Image.ahk
 #Include Functions.ahk
+#Include AutoUpdates.ahk
 
 ; Basic Application Info
 global aaTitle := "Conquest Macro "
-global version := "v1.4"
+global version := "v1.5"
 global gameID := "ahk_exe Java.exe"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
@@ -25,6 +26,11 @@ global lastBankedTime := A_TickCount
 global waitingForClick := false
 global savedX := 0, savedY := 0
 global savedCoords := []  ; Initialize an empty array to hold the coordinates
+;Auto Updating
+global autoUpdateEnabled := true
+global repoOwner := "itsRynsRoblox"
+global repoName := "conquest-rsps-macro"
+global currentVersion := "1.4"
 ;Gui creation
 global uiBorders := []
 global uiBackgrounds := []

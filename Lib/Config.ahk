@@ -16,6 +16,7 @@ setupFilePath() {
 readInSettings() {
     global mode
     global AutoBankBox
+    global AutoFoodBox
     global BankDelay
     global FoodPosition
     global PrayerPosition
@@ -48,6 +49,7 @@ readInSettings() {
                 case "LoadoutSlot": LoadoutPosition.Value := parts[2] ; Set the dropdown value
                 case "Prayer": ProtectionPrayer.Value := parts[2]
                 case "Buff": BuffPrayer.Value := parts[2]
+                case "Eating": AutoFoodBox.Value := parts[2]
                 case "Praying": AutoPrayerBox.Value := parts[2]
             }
         }
@@ -65,6 +67,7 @@ SaveSettings(*) {
     global ProtectionPrayer
     global BuffPrayer
     global AutoPrayerBox
+    global AutoFoodBox
     global LoadoutPosition
 
     try {
@@ -88,6 +91,9 @@ SaveSettings(*) {
 
         content .= "`n`n[AutoPrayer]"
         content .= "`nPraying=" AutoPrayerBox.Value "`n"
+
+        content .= "`n`n[AutoFood]"
+        content .= "`nEating=" AutoFoodBox.Value "`n"
 
         content .= "`n`n[BankDelay]"
         content .= "`nDelay=" BankDelay.Value "`n"
