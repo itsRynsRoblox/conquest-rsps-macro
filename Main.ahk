@@ -11,4 +11,4 @@ SendMode "Event"
 #Include %A_ScriptDir%\Lib\Toggles.ahk
 #Include %A_ScriptDir%\Lib\Slayer.ahk
 #Include %A_ScriptDir%\Lib\OCR-main\Lib\OCR.ahk
-#Include %A_ScriptDir%\Lib\AutoUpdates.ahk
+#Include %A_ScriptDir%\Lib\UpdateChecker.ahk

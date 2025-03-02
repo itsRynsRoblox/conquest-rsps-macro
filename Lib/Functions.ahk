@@ -18,7 +18,7 @@ F5:: {
     FixCamera()
 }
 F6:: {
-
+    OpenGuide()
 }
 
 TogglePause(*) {

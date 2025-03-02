@@ -2,12 +2,16 @@
 #SingleInstance Force
 #Include Image.ahk
 #Include Functions.ahk
-#Include AutoUpdates.ahk
+#Include UpdateChecker.ahk
 
 ; Basic Application Info
 global aaTitle := "Conquest Macro "
-global version := "v1.5"
+global currentVersion := "1.5"
+global version := "v" . currentVersion
 global gameID := "ahk_exe Java.exe"
+;Update Checking
+global repoOwner := "itsRynsRoblox"
+global repoName := "conquest-rsps-macro"
 ;Coordinate and Positioning Variables
 global targetWidth := 816
 global targetHeight := 638
@@ -26,11 +30,6 @@ global lastBankedTime := A_TickCount
 global waitingForClick := false
 global savedX := 0, savedY := 0
 global savedCoords := []  ; Initialize an empty array to hold the coordinates
-;Auto Updating
-global autoUpdateEnabled := true
-global repoOwner := "itsRynsRoblox"
-global repoName := "conquest-rsps-macro"
-global currentVersion := "1.4"
 ;Gui creation
 global uiBorders := []
 global uiBackgrounds := []
@@ -52,7 +51,6 @@ global settingsGuiOpen := false
 global SettingsGUI := ""
 global currentOutputFile := A_ScriptDir "\Logs\LogFile.txt"
 global WebhookURLFile := "Settings\WebhookURL.txt"
-global DiscordUserIDFile := "Settings\DiscordUSERID.txt"
 global SendActivityLogsFile := "Settings\SendActivityLogs.txt"
 ;Custom Pictures
 GithubImage := "Images\github-logo.png"
@@ -92,24 +90,24 @@ global windowTitle := aaMainUI.Add("Text", "x10 y3 w1200 h29 +BackgroundTrans", 
 
 aaMainUI.Add("Text", "x805 y110 w558 h25 +Center +BackgroundTrans", "Activity Log") ;Process header
 aaMainUI.SetFont("norm s11 c" uiTheme[1]) ;Font
-global process1 := aaMainUI.Add("Text", "x810 y152 w538 h18 +BackgroundTrans c" uiTheme[7], "➤ Original Creator: Ryn") ;Processes
-global process2 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") ;Processes 
-global process3 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process4 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process5 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process6 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process7 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process8 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process9 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process10 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process11 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process12 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")
-global process13 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
-global process14 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
-global process15 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
-global process16 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
-global process17 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "") 
-global process18 := aaMainUI.Add("Text", "xp yp+22 w538 h18 +BackgroundTrans", "")  
+global process1 := aaMainUI.Add("Text", "x810 y152 w600 h18 +BackgroundTrans c" uiTheme[7], "➤ Original Creator: Ryn") ;Processes
+global process2 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "") ;Processes 
+global process3 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process4 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process5 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process6 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process7 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process8 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process9 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process10 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process11 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process12 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")
+global process13 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "") 
+global process14 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "") 
+global process15 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "") 
+global process16 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "") 
+global process17 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "") 
+global process18 := aaMainUI.Add("Text", "xp yp+22 w600 h18 +BackgroundTrans", "")  
 WinSetTransColor(uiTheme[5], aaMainUI) ;Game window box
 
 ;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS;--------------SETTINGS
@@ -383,4 +381,26 @@ StartClickCapture() {
         ToolTip "Coordinates saved: " x ", " y
         SetTimer () => ToolTip(), -2000  ; Hide tooltip after 2 sec
     }
+}
+
+OpenGuide(*) {
+    GuideGUI := Gui("+AlwaysOnTop")
+    GuideGUI.SetFont("s10 bold", "Segoe UI")
+    GuideGUI.Title := "Conquest Settings Guide"
+
+    GuideGUI.BackColor := "0c000a"
+    GuideGUI.MarginX := 20
+    GuideGUI.MarginY := 20
+
+    ; Add Guide content
+    GuideGUI.SetFont("s16 bold", "Segoe UI")
+
+    GuideGUI.Add("Text", "x0 w800 cWhite +Center", "- RuneLite Resolution: 816 x 638")
+
+    GuideGUI.Add("Text", "x0 w800 cWhite +Center", "- Entity Hider: Hide Dying NPCs")
+
+    GuideGUI.Add("Text", "x0 w800 cWhite +Center", "- Interact Hightlight: ")
+    GuideGUI.Add("Picture", "x200 w380   cWhite +Center", "Images\Hover_Color.png")
+
+    GuideGUI.Show("w800")
 }

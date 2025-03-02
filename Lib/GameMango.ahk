@@ -5,6 +5,8 @@ global stageStartTime := A_TickCount
 
 global SuccessfulX := 0, SuccessfulY := 0  ; Store initial coordinates
 
+CheckForUpdates()
+
 InitializeMacro() {
     if (!ValidateMode()) {
         return
