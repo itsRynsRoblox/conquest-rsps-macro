@@ -141,6 +141,10 @@ TeleportToSlayerTask(currentTask) {
             Sleep(1000)
         }
     }
+    if (currentTask = "no task found") {
+        AddToLog("⚠ No Slayer task detected. Restarting...")
+        return StartSlayer()  ; Restart if no task is detected
+    }
     FixClick(taskCoords.x, taskCoords.y)
     Sleep(1000)
     FixClick(350, 290) ; Click Teleport

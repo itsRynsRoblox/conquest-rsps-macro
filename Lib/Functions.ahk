@@ -393,45 +393,12 @@ GetColorsForMob(mobName) {
     return colors.Has(mobName) ? colors[mobName] : [0x000000, 0x000000]  ; Default fallback
 }
 
-ClickCoordsForPrayerPotion(PrayerPosition) {
-    switch PrayerPosition {
-        case "1": return { x: 635, y: 290 }
-        case "2": return { x: 685, y: 290 }
-        case "3": return { x: 735, y: 290 }
-        case "4": return { x: 785, y: 290 }
-        case "5": return { x: 635, y: 330 }
-        case "6": return { x: 685, y: 330 }
-        case "7": return { x: 735, y: 330 }
-        case "8": return { x: 785, y: 330 }
-        case "9": return { x: 635, y: 370 }
-        case "10": return { x: 685, y: 370 }
-        case "11": return { x: 735, y: 370 }
-        case "12": return { x: 785, y: 370 }
-        case "13": return { x: 635, y: 410 }
-        case "14": return { x: 685, y: 410 }
-        case "15": return { x: 735, y: 410 }
-        case "16": return { x: 785, y: 410 }
-        case "17": return { x: 635, y: 450 }
-        case "18": return { x: 685, y: 450 }
-        case "19": return { x: 735, y: 450 }
-        case "20": return { x: 785, y: 450 }
-        case "21": return { x: 635, y: 490 }
-        case "22": return { x: 685, y: 490 }
-        case "23": return { x: 735, y: 490 }
-        case "24": return { x: 785, y: 490 }
-        case "25": return { x: 635, y: 530 }
-        case "26": return { x: 685, y: 530 }
-        case "27": return { x: 735, y: 530 }
-        case "28": return { x: 785, y: 530 }
-    }
-}
-
 RestorePrayerIfNeeded(PrayerPosition) {
     foundX := foundY := 0
     if (AutoPrayerBox.Value) {
         if (PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFFFF00, 3) ; First color check
             || PixelSearch(&foundX, &foundY, 598, 124, 616, 135, 0xFCA607, 3)) { ; Second color check
-            clickCoords := ClickCoordsForPrayerPotion(PrayerPosition)
+            clickCoords := GetInventoryClickCoords(PrayerPosition)
             AddToLog("Detected low prayer, restoring...")
             CheckAndOpenPanelIfNeeded("Inventory")
             FixClick(clickCoords.x, clickCoords.y) ; Click on prayer potion
@@ -444,45 +411,24 @@ RestoreHealthIfNeeded(FoodPosition) {
     if (AutoFoodBox.Value) {
         if (PixelSearch(&foundX, &foundY, 596, 86, 616, 101, 0xFFFF00, 3) ; First color check
             || PixelSearch(&foundX, &foundY, 596, 86, 616, 101, 0xFCA607, 3)) { ; Second color check
-            clickCoords := ClickCoordsForFood(FoodPosition)
+            clickCoords := GetInventoryClickCoords(FoodPosition)
             AddToLog("Detected low health, restoring...")
             CheckAndOpenPanelIfNeeded("Inventory")
-            FixClick(clickCoords.x, clickCoords.y) ; Click on prayer potion
+            FixClick(clickCoords.x, clickCoords.y) ; Click on food
+            Sleep(500)
+            FixClick(clickCoords.x, clickCoords.y) ; Click on food
         }
     }
 }
 
-ClickCoordsForFood(FoodPosition) {
-    switch FoodPosition {
-        case "1": return { x: 635, y: 290 }
-        case "2": return { x: 685, y: 290 }
-        case "3": return { x: 735, y: 290 }
-        case "4": return { x: 785, y: 290 }
-        case "5": return { x: 635, y: 330 }
-        case "6": return { x: 685, y: 330 }
-        case "7": return { x: 735, y: 330 }
-        case "8": return { x: 785, y: 330 }
-        case "9": return { x: 635, y: 370 }
-        case "10": return { x: 685, y: 370 }
-        case "11": return { x: 735, y: 370 }
-        case "12": return { x: 785, y: 370 }
-        case "13": return { x: 635, y: 410 }
-        case "14": return { x: 685, y: 410 }
-        case "15": return { x: 735, y: 410 }
-        case "16": return { x: 785, y: 410 }
-        case "17": return { x: 635, y: 450 }
-        case "18": return { x: 685, y: 450 }
-        case "19": return { x: 735, y: 450 }
-        case "20": return { x: 785, y: 450 }
-        case "21": return { x: 635, y: 490 }
-        case "22": return { x: 685, y: 490 }
-        case "23": return { x: 735, y: 490 }
-        case "24": return { x: 785, y: 490 }
-        case "25": return { x: 635, y: 530 }
-        case "26": return { x: 685, y: 530 }
-        case "27": return { x: 735, y: 530 }
-        case "28": return { x: 785, y: 530 }
-    }
+GetInventoryClickCoords(Position) {
+    Row := Ceil(Position / 4) ; Determines the row (1-based index)
+    Col := Mod(Position - 1, 4) ; Determines the column (0-based index)
+
+    x := 635 + (Col * 50)
+    y := 315 + ((Row - 1) * 35)
+
+    return { x: x, y: y }
 }
 
 BankItems(LoadoutPosition) {
@@ -544,7 +490,7 @@ ClickCoordsForPrayer(ProtectionPrayer) {
 
 ClickCoordsForBuffPrayer(BuffPrayer) {
     switch BuffPrayer {
-        case "Augory": return { x: 710, y: 480 }
+        case "Augury": return { x: 710, y: 480 }
         case "Piety": return { x: 640, y: 480 }
         case "Rigour": return { x: 670, y: 480 }
     }
@@ -616,10 +562,6 @@ WaitForNoHealthBar(timeoutAppear := 5000, timeoutDisappear := 10000, maxFails :=
                     if (ModeDropdown.Text = "Slayer") {
                         return StartSlayer(false)
                     }
-                    if (ModeDropdown.Text = "Monsters") {
-                        return TeleportToSlayerTask(MonsterDropDown.Text)
-                    }
-    
                     return false  ; Prevent further teleport attempts if mode is unknown
                 }
             }
@@ -730,7 +672,7 @@ CheckAndOpenPanelIfNeeded(panel) {
 ActivatePrayerIfInactive(prayer) {
     Prayers := Map()
     Prayers["Magic"] := { coords: [655, 429, 677, 455], clickCoords : [670, 440] }
-    Prayers["Augory"] := { coords: [690, 470, 719, 493], clickCoords : [710, 480] }
+    Prayers["Augury"] := { coords: [690, 470, 719, 493], clickCoords : [710, 480] }
 
     Prayers["Melee"] := { coords: [730, 429, 753, 454], clickCoords : [750, 440] }
     Prayers["Piety"] := { coords: [614, 470, 651, 492], clickCoords : [640, 480] }
@@ -1118,7 +1060,7 @@ SearchForPixel(Name) {
     Pixels["Prayer"] := { coords: [186, 177, 231, 230], color: 0x441812 }
 
     Pixels["Magic"] := { coords: [655, 429, 677, 455], color: 0xB7A36D }
-    Pixels["Augory"] := { coords: [690, 470, 719, 493], color: 0xB7A36D }
+    Pixels["Augury"] := { coords: [690, 470, 719, 493], color: 0xB7A36D }
 
     Pixels["Melee"] := { coords: [730, 429, 753, 454], color: 0xB7A36D }
     Pixels["Piety"] := { coords: [614, 470, 651, 492], color: 0xB7A36D }
