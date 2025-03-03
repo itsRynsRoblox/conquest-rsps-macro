@@ -196,39 +196,57 @@ FindAndClickMobs(targetColors, searchArea := [61, 73, 538, 389]) {
     }
 }
 
-FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000, retries := 5, retryDelay := 200) {
+FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000, maxRetries := 5, retryDelay := 200, maxRotations := 3) {
     x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
     verifyArea := [-25, -25, 25, 25]  ; Offset for verification
 
-    loop retries {
-        for color in targetColors {
-            if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
-                MouseMove(foundX, foundY)
+    rotationCount := 0  ; Track how many times we've rotated the camera
 
-                ; Verify the target is indeed a mob by checking for verifyColor around it
-                if (PixelSearch(&verifyX, &verifyY, foundX + verifyArea[1], foundY + verifyArea[2], foundX + verifyArea[3], foundY + verifyArea[4], verifyColor, 2)) {
-                    FixClick(foundX, foundY, "Left")
-                    AddToLog("✅ Mob found and verified! Clicked at: X" foundX " Y" foundY)
-                    return true
-                } else {
-                    if (debugMessages) {
-                        AddToLog("⚠ Color match found, but verification color not detected. Skipping click.")
+    loop {
+        retryCount := 0  ; Reset retries at the start of each rotation attempt
+
+        while (retryCount < maxRetries) {  ; Retry up to maxRetries times before rotating
+            for color in targetColors {
+                if (PixelSearch(&foundX, &foundY, x1, y1, x2, y2, color, 0)) {
+                    MouseMove(foundX, foundY)
+
+                    ; Verify the target is indeed a mob by checking for verifyColor around it
+                    if (PixelSearch(&verifyX, &verifyY, foundX + verifyArea[1], foundY + verifyArea[2], foundX + verifyArea[3], foundY + verifyArea[4], verifyColor, 2)) {
+                        FixClick(foundX, foundY, "Left")
+                        AddToLog("✅ Mob found and verified! Clicked at: X" foundX " Y" foundY)
+
+                        rotationCount := 0  ; Reset rotation count on success
+                        return true  ; Stop function on success
+                    } else {
+                        if (debugMessages) {
+                            AddToLog("⚠ Color match found, but verification color not detected. Skipping click.")
+                        }
                     }
                 }
             }
+
+            retryCount++  ; Increment retry count
+            Sleep(retryDelay)
         }
 
-        ; Retry delay before trying again
-        Sleep(retryDelay)
-    }
+        ; Failure Handling - Rotate camera and try again
+        if (debugMessages) {
+            AddToLog("❌ Failed to find and verify a mob after " maxRetries " attempts. Rotating camera...")
+        }
+        RotateCamera()
+        rotationCount++
 
-    ; Failure Handling - Define what happens if no mob is found
-    if (debugMessages) {
-        AddToLog("❌ Failed to find and verify a mob after " retries " attempts.")
+        ; If we've rotated the camera too many times, trigger the backup method
+        if (rotationCount >= 10) {
+            if (debugMessages) {
+                AddToLog("❌ No mobs found after " maxRotations " camera rotations. Triggering backup method...")
+            }
+            StartSelectedMode()
+            return false
+        }
     }
-    RotateCamera()
-    return false
 }
+
 
 RotateCamera() {
     SendInput ("{Left up}")
@@ -424,8 +442,8 @@ RestorePrayerIfNeeded(PrayerPosition) {
 RestoreHealthIfNeeded(FoodPosition) {
     foundX := foundY := 0
     if (AutoFoodBox.Value) {
-        if (PixelSearch(&foundX, &foundY, 621, 78, 643, 99, 0xFFFF00, 3) ; First color check
-            || PixelSearch(&foundX, &foundY, 621, 78, 643, 99, 0xFCA607, 3)) { ; Second color check
+        if (PixelSearch(&foundX, &foundY, 596, 86, 616, 101, 0xFFFF00, 3) ; First color check
+            || PixelSearch(&foundX, &foundY, 596, 86, 616, 101, 0xFCA607, 3)) { ; Second color check
             clickCoords := ClickCoordsForFood(FoodPosition)
             AddToLog("Detected low health, restoring...")
             CheckAndOpenPanelIfNeeded("Inventory")

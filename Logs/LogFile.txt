@@ -1139,3 +1139,246 @@ Starting Doomcore minigame 00:26
 ==Conquest Macro v1.4==
   Start Time: [12h.00m.30s]
 Configuration settings loaded successfully 00:00
+
+==Conquest Macro v1.5==
+  Start Time: [19h.32m.12s]
+Configuration settings loaded successfully 00:00
+You are using the latest version. 00:01
+Selected Slayer mode 00:03
+Please make sure your Runelite resolution is 816 x 638 00:03
+?? Preparing for the task by banking items... 00:09
+Checking for Frozen Fragments... 00:10
+Attemping to teleport to the slayer master... 00:23
+Attemping to get a Elite task... 00:26
+Detected task: Night Beast 00:30
+Attempting to teleport to Night Beast... 00:30
+Executing Movement for: Night Beast 00:38
+Reactivating prayers... 00:55
+? Mob found and verified! Clicked at: X445 Y182 00:58
+? Health bar found, waiting for combat end... 00:59
+? Health bar gone, combat likely ended. 01:08
+? Mob found and verified! Clicked at: X433 Y235 01:08
+? Health bar found, waiting for combat end... 01:09
+? Health bar gone, combat likely ended. 01:17
+? Mob found and verified! Clicked at: X439 Y117 01:18
+? Health bar found, waiting for combat end... 01:18
+? Health bar stayed too long, possible combat issue. 01:28
+? Mob found and verified! Clicked at: X439 Y138 01:29
+? Health bar not found after attacking. Fail count: 1/3 01:34
+Macro Paused 01:35
+Macro Resumed 01:42
+? Mob found and verified! Clicked at: X539 Y207 01:43
+? Health bar found, waiting for combat end... 01:43
+? Health bar gone, combat likely ended. 01:47
+? Mob found and verified! Clicked at: X476 Y119 01:48
+? Health bar found, waiting for combat end... 01:49
+? Health bar stayed too long, possible combat issue. 01:59
+Detected low prayer, restoring... 01:59
+? Mob found and verified! Clicked at: X522 Y202 02:00
+? Health bar found, waiting for combat end... 02:01
+? Health bar gone, combat likely ended. 02:10
+? Mob found and verified! Clicked at: X437 Y117 02:11
+? Health bar found, waiting for combat end... 02:12
+? Health bar gone, combat likely ended. 02:17
+? Mob found and verified! Clicked at: X431 Y285 02:18
+? Health bar found, waiting for combat end... 02:18
+? Health bar stayed too long, possible combat issue. 02:29
+? Mob found and verified! Clicked at: X495 Y122 02:30
+? Health bar found, waiting for combat end... 02:31
+? Health bar gone, combat likely ended. 02:41
+? Mob found and verified! Clicked at: X561 Y235 02:41
+? Health bar found, waiting for combat end... 02:42
+? Health bar gone, combat likely ended. 02:51
+? Mob found and verified! Clicked at: X417 Y287 02:52
+? Health bar not found after attacking. Fail count: 1/3 02:57
+Detected low prayer, restoring... 02:57
+? Mob found and verified! Clicked at: X475 Y275 02:59
+? Health bar not found after attacking. Fail count: 2/3 03:04
+? Mob found and verified! Clicked at: X407 Y429 03:05
+? Health bar found, waiting for combat end... 03:06
+
+==Conquest Macro v1.5==
+  Start Time: [19h.35m.25s]
+Configuration settings loaded successfully 00:00
+
+==Conquest Macro v1.6==
+  Start Time: [19h.44m.44s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:20
+Please make sure your Runelite resolution is 816 x 638 00:20
+Starting Sarachnis 00:24
+? Mob found and verified! Clicked at: X481 Y34 00:25
+? Health bar not found after attacking. Fail count: 1/3 00:31
+? Mob found and verified! Clicked at: X532 Y73 00:32
+? Health bar not found after attacking. Fail count: 2/3 00:37
+? Mob found and verified! Clicked at: X303 Y57 00:38
+? Health bar not found after attacking. Fail count: 3/3 00:43
+? Reached max failed attempts. Executing teleport/fail action. 00:43
+Attempting to teleport to Sarachnis... 00:43
+
+==Conquest Macro v1.6==
+  Start Time: [19h.45m.33s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:24
+Please make sure your Runelite resolution is 816 x 638 00:24
+Starting Sarachnis 00:25
+
+==Conquest Macro v1.6==
+  Start Time: [19h.46m.18s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+
+==Conquest Macro v1.6==
+  Start Time: [19h.47m.04s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Sarachnis 00:05
+
+==Conquest Macro v1.6==
+  Start Time: [19h.47m.14s]
+Configuration settings loaded successfully 00:00
+
+==Conquest Macro v1.6==
+  Start Time: [19h.47m.24s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Sarachnis 00:05
+
+==Conquest Macro v1.6==
+  Start Time: [19h.47m.43s]
+Configuration settings loaded successfully 00:00
+
+==Conquest Macro v1.6==
+  Start Time: [19h.48m.18s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:08
+Please make sure your Runelite resolution is 816 x 638 00:08
+Starting Sarachnis 00:08
+
+==Conquest Macro v1.6==
+  Start Time: [19h.48m.36s]
+Configuration settings loaded successfully 00:00
+
+==Conquest Macro v1.6==
+  Start Time: [19h.48m.54s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Sarachnis 00:04
+Count: 5 00:04
+Count: 5 00:04
+Count: 5 00:05
+Count: 5 00:05
+Count: 5 00:05
+Count: 5 00:05
+Count: 5 00:05
+Count: 5 00:05
+Count: 5 00:06
+Count: 5 00:06
+Count: 5 00:07
+Count: 5 00:07
+Count: 5 00:07
+Count: 5 00:08
+Count: 5 00:08
+Count: 5 00:08
+Count: 5 00:08
+Count: 5 00:08
+Count: 5 00:08
+Count: 5 00:08
+Count: 5 00:10
+Count: 5 00:10
+Count: 5 00:10
+Count: 5 00:10
+Count: 5 00:11
+Count: 5 00:11
+Count: 5 00:11
+Count: 5 00:11
+Count: 5 00:11
+Count: 5 00:11
+Count: 5 00:13
+Count: 5 00:13
+Count: 5 00:13
+Count: 5 00:13
+Count: 5 00:13
+Count: 5 00:13
+Count: 5 00:14
+Count: 5 00:14
+Count: 5 00:14
+Count: 5 00:14
+Count: 5 00:15
+Count: 5 00:15
+Count: 5 00:16
+Count: 5 00:16
+Count: 5 00:16
+Count: 5 00:16
+Count: 5 00:16
+Count: 5 00:16
+Count: 5 00:17
+Count: 5 00:17
+Count: 5 00:18
+Count: 5 00:18
+
+==Conquest Macro v1.6==
+  Start Time: [19h.49m.13s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+
+==Conquest Macro v1.6==
+  Start Time: [19h.49m.58s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Sarachnis 00:04
+Starting Sarachnis 00:11
+Starting Sarachnis 00:17
+
+==Conquest Macro v1.6==
+  Start Time: [19h.50m.18s]
+Configuration settings loaded successfully 00:00
+
+==Conquest Macro v1.6==
+  Start Time: [19h.50m.49s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+Selected Sarachnis 00:04
+Please make sure your Runelite resolution is 816 x 638 00:04
+Starting Sarachnis 00:05
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:06
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:08
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:10
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:12
+? Color match found, but verification color not detected. Skipping click. 00:14
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:15
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:17
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:19
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:21
+? Mob found and verified! Clicked at: X51 Y46 00:22
+? Health bar not found after attacking. Fail count: 1/3 00:28
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:29
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:31
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:33
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:35
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:38
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:40
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:42
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:44
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:46
+? Color match found, but verification color not detected. Skipping click. 00:48
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:49
+? No mobs found after 3 camera rotations. Triggering backup method... 00:50
+Starting Sarachnis 00:50
+? Failed to find and verify a mob after 5 attempts. Rotating camera... 00:51
+
+==Conquest Macro v1.6==
+  Start Time: [19h.51m.41s]
+Configuration settings loaded successfully 00:00
+?? Update available! Current: 1.6 ? Latest: 1.5 00:01

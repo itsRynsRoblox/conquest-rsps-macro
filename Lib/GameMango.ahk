@@ -65,6 +65,7 @@ StartAFK() {
         CheckIfVenomed()
         RestorePrayerIfNeeded(currentPrayerSlot)
         RestoreHealthIfNeeded(currentFoodSlot)
+        CheckIfAlreadyUnderAttack()
         CheckForMobThenAttack()
     }
 }

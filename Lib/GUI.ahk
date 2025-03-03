@@ -6,7 +6,7 @@
 
 ; Basic Application Info
 global aaTitle := "Conquest Macro "
-global currentVersion := "1.5"
+global currentVersion := "1.6"
 global version := "v" . currentVersion
 global gameID := "ahk_exe Java.exe"
 ;Update Checking
