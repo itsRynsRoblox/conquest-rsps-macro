@@ -1157,3 +1157,97 @@ OpenGithub() {
 OpenDiscord() {
     Run("https://discord.gg/6DWgB9XMTV")
 }
+
+FindAndClickMobsWithVerifySpiral(targetColors, searchArea := [0, 28, 589, 469], verifyColor := 0xFFFF0000, maxRetries := 5, retryDelay := 200, maxRotations := 3) {
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+    centerX := (x1 + x2) // 2
+    centerY := (y1 + y2) // 2
+    verifyArea := [-25, -25, 25, 25]
+
+    rotationCount := 0
+
+    loop {
+        retryCount := 0  
+
+        while (retryCount < maxRetries) {  
+            for color in targetColors {
+                if (PixelSearchSpiral(&foundX, &foundY, centerX, centerY, x1, y1, x2, y2, color, 0)) {
+                    MouseMove(foundX, foundY)
+
+                    ; Verify the mob is real
+                    if (PixelSearch(&verifyX, &verifyY, foundX + verifyArea[1], foundY + verifyArea[2], foundX + verifyArea[3], foundY + verifyArea[4], verifyColor, 2)) {
+                        FixClick(foundX, foundY, "Left")
+                        AddToLog("✅ Mob found and verified! Clicked at: X" foundX " Y" foundY)
+
+                        rotationCount := 0  
+                        return true  
+                    } else {
+                        if (debugMessages) {
+                            AddToLog("⚠ Color match found, but verification failed. Skipping.")
+                        }
+                    }
+                }
+            }
+
+            retryCount++  
+            Sleep(retryDelay)
+        }
+
+        ; **Failure Handling - Rotate Camera**
+        if (debugMessages) {
+            AddToLog("❌ No mobs found after " maxRetries " attempts. Rotating camera...")
+        }
+        RotateCamera()
+        rotationCount++
+
+        ; **Fail completely after too many rotations**
+        if (rotationCount >= maxRotations) {
+            if (debugMessages) {
+                AddToLog("❌ No mobs found after " maxRotations " camera rotations. Stopping search.")
+            }
+            StartSelectedMode()
+            return false
+        }
+    }
+}
+
+PixelSearchSpiral(&outX, &outY, centerX, centerY, x1, y1, x2, y2, color, variation) {
+    stepSize := 10  ; Controls how tightly the spiral expands
+    maxRadius := Max(x2 - centerX, centerX - x1, y2 - centerY, centerY - y1)
+
+    directions := [[0, 1], [1, 0], [0, -1], [-1, 0]]  ; Down, Right, Up, Left
+    dirIndex := 1  ; AutoHotkey uses 1-based arrays
+
+    x := centerX, y := centerY
+    radius := stepSize
+
+    while (radius <= maxRadius) {
+        Loop (radius * 2 // stepSize + 1) {  ; Cover each side of the expanding square
+            ; Ensure within bounds
+            if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
+                if (PixelSearch(&outX, &outY, x - 5, y - 5, x + 5, y + 5, color, variation)) {
+                    return true  ; Found a match
+                }
+            }
+
+            ; Move in current direction
+            x += directions[dirIndex][1] * stepSize
+            y += directions[dirIndex][2] * stepSize
+        }
+
+        ; Change direction (Right → Down → Left → Up)
+        dirIndex := Mod(dirIndex, 4) + 1  
+
+        ; Increase radius every 2 turns
+        if (dirIndex == 1 || dirIndex == 3) {
+            radius += stepSize
+        }
+
+        ; **Exit if radius exceeds the max limit**
+        if (radius > maxRadius) {
+            break
+        }
+    }
+
+    return false  ; No match found, allows failure logic to trigger
+}
