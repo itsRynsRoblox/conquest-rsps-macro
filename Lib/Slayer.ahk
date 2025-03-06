@@ -19,11 +19,14 @@ StartSlayer(newTask := true) {
         GetTask()
     }
 
-    currentTask := DetectSlayerTask()
-    if (currentTask = "no task found") {
+    Sleep(2000)
+
+    if (CheckForNoSlayerTask()) {
         AddToLog("⚠ No Slayer task detected. Restarting...")
-        return StartSlayer()  ; Restart if no task is detected
+        return StartSlayer()
     }
+    
+    currentTask := DetectSlayerTask()
 
     TeleportToSlayerTask(currentTask)
     HandleMovement(currentTask)
@@ -32,13 +35,24 @@ StartSlayer(newTask := true) {
 }
 
 GetTask() {
-    AddToLog("Attemping to get a " SlayerDropDown.Text " task...")
+    AddToLog("Attempting to get a " SlayerDropDown.Text " task...")
     FixClick(405, 305, "Right") ; Right Click Slayer Master
     Sleep(1000)
     FixClick(390, 345)
     Sleep(1000)
-    SendInput(GetKeyForTask()) ; Choose Slayer Task
-    Sleep(1000)
+
+    taskKey := GetKeyForTask()
+    Loop 3 {  ; Retry up to 3 times if needed
+        SendInput(taskKey) ; Choose Slayer Task
+        Sleep(500)
+        if (DetectSlayerTask() != "no task found") {
+            AddToLog("✅ Slayer task received successfully.")
+            return
+        }
+        AddToLog("⚠ Failed to retrieve Slayer task. Retrying...")
+    }
+
+    AddToLog("❌ Failed to get a Slayer task after multiple attempts.")
 }
 
 GetKeyForTask() {
@@ -153,14 +167,27 @@ TeleportToSlayerTask(currentTask) {
 
 GetNewInstance(TaskName) {
     minTries := 1  ; Minimum number of times to type ::newroom
-    maxTries := 3  ; Maximum number of times
+    maxTries := SlayerDropDown.Text = "Elite" ? 2 : 3  ; Maximum number of times
     attempts := Random(minTries, maxTries)  ; Generate a random number between min and max
 
     if (TaskName = "Pyrelord") {
         attempts := 1
     }
 
+    if (TaskName = "Fury Drake") {
+        attempts := 2
+    }
+
+    if (TaskName = "Abyssal Kurask") {
+        attempts := 2
+    }
+
+    if (TaskName = "Night Beast") {
+        attempts := 2
+    }
+
     Loop attempts {
+        Send("{Backspace 3}")  ; Backspace 3 times
         Send("::newroom{Enter}")
         Sleep(4500)
     }

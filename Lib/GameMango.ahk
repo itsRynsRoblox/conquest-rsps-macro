@@ -3,8 +3,6 @@
 global macroStartTime := A_TickCount
 global stageStartTime := A_TickCount
 
-global SuccessfulX := 0, SuccessfulY := 0  ; Store initial coordinates
-
 CheckForUpdates()
 
 InitializeMacro() {
@@ -125,20 +123,6 @@ FightBoss() {
     while !(ok := CheckForHealthBarNoFindText()) {
         CheckForAFKDetection()
         CheckForDisconnect()
-        /*if (BossDropDown.Text = "Blue Moon") {
-            while !(ok := FindText(&X, &Y, 584, 31, 803, 208, 0, 0, BlueMoonMinimap)) { ;720-150000, 88-150000, 720+150000, 88+150000
-                CheckForAFKDetection()
-                MoveBackAndForth()
-                Sleep 2500
-            }
-        }
-        if (BossDropDown.Text = "Eclipse Moon") {
-            while !(ok := FindText(&X, &Y, 673, 50, 777, 157, 0, 0, EclipseMoonMinimap)) { ;720-150000, 88-150000, 720+150000, 88+150000
-                CheckForAFKDetection()
-                MoveBackAndForth()
-                Sleep 2500
-            }
-        }*/
         if (AutoBankBox.Value) {
             if (timeElapsed >= BankTimer()) {
                 AddToLog("Bank Timer Reached - Banking Items...")

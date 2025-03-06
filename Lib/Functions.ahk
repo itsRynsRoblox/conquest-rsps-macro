@@ -241,6 +241,7 @@ FindAndClickMobsWithVerify(targetColors, searchArea := [0, 28, 589, 469], verify
             if (debugMessages) {
                 AddToLog("❌ No mobs found after " maxRotations " camera rotations. Triggering backup method...")
             }
+            retryCount := 0
             StartSelectedMode()
             return false
         }
@@ -705,7 +706,6 @@ ActivatePrayerIfInactive(prayer) {
 }
 
 MoveBackAndForth() {
-    global SuccessfulX, SuccessfulY
     baseX := 400
     baseY := 335
 
@@ -1031,7 +1031,8 @@ WaitFor(Name, timeoutAppear := 5000) {
 
     ; **Wait for the interface to appear**
     Loop {
-        if (SearchFor(Name)) { 
+        if (SearchFor(Name)) {
+            Sleep(2000)
             if (debugMessages) {
                 AddToLog("✅ " Name " detected, proceeding...")
             }

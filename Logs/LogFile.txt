@@ -1382,3 +1382,7 @@ Starting Sarachnis 00:50
   Start Time: [19h.51m.41s]
 Configuration settings loaded successfully 00:00
 ?? Update available! Current: 1.6 ? Latest: 1.5 00:01
+
+==Conquest Macro v1.7==
+  Start Time: [9h.27m.33s]
+Configuration settings loaded successfully 00:00
